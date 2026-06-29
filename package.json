@@ -1,8 +1,8 @@
 {
-  "name": "puyo-puyo-ipad",
+  "name": "ipad-games",
   "version": "1.0.0",
   "private": true,
-  "description": "iPad向けタッチ操作対応のぷよぷよ（静的サイト）",
+  "description": "iPad向けタッチ操作対応ゲーム集（ぷよぷよ・テトリス／静的サイト）",
   "scripts": {
     "dev": "npx serve .",
     "start": "npx serve ."
