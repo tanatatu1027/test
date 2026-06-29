@@ -1,8 +1,8 @@
 {
-  "name": "tetris-ipad",
+  "name": "puyo-puyo-ipad",
   "version": "1.0.0",
   "private": true,
-  "description": "iPad向けタッチ操作対応のテトリス（静的サイト）",
+  "description": "iPad向けタッチ操作対応のぷよぷよ（静的サイト）",
   "scripts": {
     "dev": "npx serve .",
     "start": "npx serve ."

@@ -162,9 +162,13 @@ body {
 
 .controls {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   padding: 14px 12px;
+}
+
+.ctrl.wide {
+  grid-column: 1 / -1;
 }
 
 .ctrl {

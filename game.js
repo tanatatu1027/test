@@ -1,541 +1,511 @@
-"use strict";
+/* ぷよぷよ for iPad — タッチ操作対応の静的ぷよぷよ */
+(() => {
+  "use strict";
 
-// ---- Board configuration ----
-const COLS = 10;
-const ROWS = 20;
+  // ===== 盤面定義 =====
+  const COLS = 6;
+  const ROWS = 12;          // 表示する行数
+  const HIDDEN = 1;         // 上部の隠し行（出現スペース）
+  const TOTAL_ROWS = ROWS + HIDDEN;
+  const SPAWN_COL = 2;      // 軸ぷよの出現列
 
-// Tetromino definitions (SRS spawn states) and colors.
-const SHAPES = {
-  I: [[0, 1], [1, 1], [2, 1], [3, 1]],
-  O: [[1, 0], [2, 0], [1, 1], [2, 1]],
-  T: [[1, 0], [0, 1], [1, 1], [2, 1]],
-  S: [[1, 0], [2, 0], [0, 1], [1, 1]],
-  Z: [[0, 0], [1, 0], [1, 1], [2, 1]],
-  J: [[0, 0], [0, 1], [1, 1], [2, 1]],
-  L: [[2, 0], [0, 1], [1, 1], [2, 1]],
-};
+  // 色（0 は空）
+  const COLORS = [
+    null,
+    "#ff4d6d", // 1 赤
+    "#36d399", // 2 緑
+    "#3aa0ff", // 3 青
+    "#ffd23f", // 4 黄
+    "#b072ff", // 5 紫
+  ];
+  const NUM_COLORS = 4; // 使用する色数（1..NUM_COLORS）
 
-const COLORS = {
-  I: "#2ee6e6",
-  O: "#f4d03f",
-  T: "#a569bd",
-  S: "#52be80",
-  Z: "#ec7063",
-  J: "#5dade2",
-  L: "#e59866",
-};
+  // ===== DOM =====
+  const boardCanvas = document.getElementById("board");
+  const bctx = boardCanvas.getContext("2d");
+  const nextCanvas = document.getElementById("next");
+  const nctx = nextCanvas.getContext("2d");
+  const scoreEl = document.getElementById("score");
+  const chainEl = document.getElementById("chain");
+  const bestEl = document.getElementById("best");
+  const overlay = document.getElementById("overlay");
+  const overlayTitle = document.getElementById("overlay-title");
+  const overlayText = document.getElementById("overlay-text");
+  const startBtn = document.getElementById("start-btn");
 
-const TYPES = Object.keys(SHAPES);
+  // ===== 状態 =====
+  let grid;            // [TOTAL_ROWS][COLS] 0 または色番号
+  let cell = 32;       // 1マスのピクセルサイズ（描画時に算出）
+  let current = null;  // 操作中のぷよペア
+  let nextPair = null; // 次のペア
+  let score = 0;
+  let bestScore = Number(localStorage.getItem("puyo_best") || 0);
+  let maxChain = 0;
+  let running = false;
+  let gameOver = false;
 
-// ---- Canvas / DOM ----
-const boardCanvas = document.getElementById("board");
-const bctx = boardCanvas.getContext("2d");
-const nextCanvas = document.getElementById("next");
-const nctx = nextCanvas.getContext("2d");
-const holdCanvas = document.getElementById("hold");
-const hctx = holdCanvas.getContext("2d");
+  // 落下タイマー
+  let dropTimer = 0;
+  const DROP_INTERVAL = 700; // 通常落下間隔(ms)
+  const SOFT_INTERVAL = 50;  // ソフト中
+  let softDropping = false;
+  let lastTime = 0;
 
-const scoreEl = document.getElementById("score");
-const linesEl = document.getElementById("lines");
-const levelEl = document.getElementById("level");
-const overlay = document.getElementById("overlay");
-const overlayTitle = document.getElementById("overlay-title");
-const overlayText = document.getElementById("overlay-text");
-const startBtn = document.getElementById("start-btn");
+  // 連鎖アニメーション制御
+  let resolving = false;
 
-let cell = 24; // pixel size of one cell, computed responsively
+  bestEl.textContent = bestScore;
 
-// ---- Game state ----
-let grid, current, nextQueue, holdType, canHold;
-let score, lines, level;
-let dropInterval, dropTimer, lastTime;
-let running = false;
-let paused = false;
-let rafId = null;
+  // ===== ユーティリティ =====
+  function emptyGrid() {
+    return Array.from({ length: TOTAL_ROWS }, () => new Array(COLS).fill(0));
+  }
 
-function emptyGrid() {
-  return Array.from({ length: ROWS }, () => Array(COLS).fill(null));
-}
+  function randColor() {
+    return 1 + Math.floor(Math.random() * NUM_COLORS);
+  }
 
-// 7-bag randomizer
-let bag = [];
-function nextFromBag() {
-  if (bag.length === 0) {
-    bag = [...TYPES];
-    for (let i = bag.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [bag[i], bag[j]] = [bag[j], bag[i]];
+  function makePair() {
+    return { axis: randColor(), child: randColor() };
+  }
+
+  // 回転状態 rot: 0=child上, 1=child右, 2=child下, 3=child左
+  function childOffset(rot) {
+    switch (rot & 3) {
+      case 0: return { dx: 0, dy: -1 };
+      case 1: return { dx: 1, dy: 0 };
+      case 2: return { dx: 0, dy: 1 };
+      case 3: return { dx: -1, dy: 0 };
     }
   }
-  return bag.pop();
-}
 
-function makePiece(type) {
-  return {
-    type,
-    cells: SHAPES[type].map(([x, y]) => [x, y]),
-    x: type === "I" || type === "O" ? 3 : 3,
-    y: 0,
-  };
-}
-
-// Rotate cells around a center. Uses a simple bounding-box rotation that
-// works well for casual play (clockwise / counter-clockwise).
-function rotateCells(cells, type, dir) {
-  if (type === "O") return cells.map((c) => [...c]);
-  // I uses a 4x4 box, others a 3x3 box.
-  const size = type === "I" ? 4 : 3;
-  return cells.map(([x, y]) => {
-    if (dir > 0) return [size - 1 - y, x];
-    return [y, size - 1 - x];
-  });
-}
-
-function collides(piece, grid, offX = 0, offY = 0, cells = piece.cells) {
-  for (const [cx, cy] of cells) {
-    const x = piece.x + cx + offX;
-    const y = piece.y + cy + offY;
-    if (x < 0 || x >= COLS || y >= ROWS) return true;
-    if (y >= 0 && grid[y][x]) return true;
-  }
-  return false;
-}
-
-function spawn(type) {
-  current = makePiece(type);
-  current.y = -1;
-  // If it collides immediately -> game over.
-  if (collides(current, grid)) {
-    gameOver();
-    return;
-  }
-  canHold = true;
-}
-
-function lockPiece() {
-  for (const [cx, cy] of current.cells) {
-    const x = current.x + cx;
-    const y = current.y + cy;
-    if (y >= 0) grid[y][x] = current.type;
-  }
-  clearLines();
-  const type = nextQueue.shift();
-  nextQueue.push(nextFromBag());
-  spawn(type);
-}
-
-function clearLines() {
-  let cleared = 0;
-  for (let y = ROWS - 1; y >= 0; y--) {
-    if (grid[y].every((c) => c)) {
-      grid.splice(y, 1);
-      grid.unshift(Array(COLS).fill(null));
-      cleared++;
-      y++; // recheck the same row index
+  function spawn() {
+    const pair = nextPair || makePair();
+    nextPair = makePair();
+    current = {
+      x: SPAWN_COL,
+      y: HIDDEN, // 軸ぷよを最上段（表示先頭行）に配置
+      rot: 0,
+      axis: pair.axis,
+      child: pair.child,
+    };
+    drawNext();
+    // 出現位置が埋まっていたらゲームオーバー
+    if (!valid(current.x, current.y, current.rot)) {
+      endGame();
     }
   }
-  if (cleared > 0) {
-    const points = [0, 100, 300, 500, 800][cleared] * level;
-    score += points;
-    lines += cleared;
-    level = Math.floor(lines / 10) + 1;
-    dropInterval = Math.max(80, 1000 - (level - 1) * 80);
-    updateStats();
-  }
-}
 
-function move(dx, dy) {
-  if (!running || paused) return false;
-  if (!collides(current, grid, dx, dy)) {
-    current.x += dx;
-    current.y += dy;
-    return true;
+  function childPos(c) {
+    const o = childOffset(c.rot);
+    return { x: c.x + o.dx, y: c.y + o.dy };
   }
-  return false;
-}
 
-function rotate(dir) {
-  if (!running || paused) return;
-  const rotated = rotateCells(current.cells, current.type, dir);
-  // Wall kicks: try a few horizontal/vertical nudges.
-  const kicks = [0, -1, 1, -2, 2];
-  for (const kx of kicks) {
-    if (!collides(current, grid, kx, 0, rotated)) {
-      current.cells = rotated;
-      current.x += kx;
+  function inBounds(x, y) {
+    return x >= 0 && x < COLS && y >= 0 && y < TOTAL_ROWS;
+  }
+
+  function isFree(x, y) {
+    // 上方向の隠し行ははみ出し許容
+    if (y < 0) return x >= 0 && x < COLS;
+    return inBounds(x, y) && grid[y][x] === 0;
+  }
+
+  function valid(x, y, rot) {
+    const o = childOffset(rot);
+    const cx = x + o.dx;
+    const cy = y + o.dy;
+    return isFree(x, y) && isFree(cx, cy);
+  }
+
+  // ===== 操作 =====
+  function move(dx) {
+    if (!current || resolving) return;
+    if (valid(current.x + dx, current.y, current.rot)) {
+      current.x += dx;
+    }
+  }
+
+  function rotate(dir) {
+    if (!current || resolving) return;
+    const newRot = (current.rot + dir + 4) & 3;
+    // 通常回転
+    if (valid(current.x, current.y, newRot)) {
+      current.rot = newRot;
       return;
     }
-    if (!collides(current, grid, kx, -1, rotated)) {
-      current.cells = rotated;
-      current.x += kx;
+    // 壁蹴り：左右にずらして再試行
+    for (const kick of [-1, 1, -2, 2]) {
+      if (valid(current.x + kick, current.y, newRot)) {
+        current.x += kick;
+        current.rot = newRot;
+        return;
+      }
+    }
+    // 上方向へのずらし（床際での回転）
+    if (valid(current.x, current.y - 1, newRot)) {
       current.y -= 1;
-      return;
+      current.rot = newRot;
     }
   }
-}
 
-function softDrop() {
-  if (move(0, 1)) {
-    score += 1;
-    updateStats();
-    dropTimer = 0;
-  }
-}
-
-function hardDrop() {
-  if (!running || paused) return;
-  let dist = 0;
-  while (!collides(current, grid, 0, 1)) {
-    current.y += 1;
-    dist++;
-  }
-  score += dist * 2;
-  updateStats();
-  lockPiece();
-  dropTimer = 0;
-}
-
-function hold() {
-  if (!running || paused || !canHold) return;
-  const cur = current.type;
-  if (holdType === null) {
-    holdType = cur;
-    const type = nextQueue.shift();
-    nextQueue.push(nextFromBag());
-    spawn(type);
-  } else {
-    const swap = holdType;
-    holdType = cur;
-    spawn(swap);
-  }
-  canHold = false;
-  drawHold();
-}
-
-// ---- Rendering ----
-function resize() {
-  const wrap = boardCanvas.parentElement;
-  const availH = wrap.clientHeight || window.innerHeight * 0.6;
-  // Fit by height primarily; cell is integer for crisp grid.
-  const maxCellByH = Math.floor(availH / ROWS);
-  const maxCellByW = Math.floor((window.innerWidth * 0.6) / COLS);
-  cell = Math.max(12, Math.min(maxCellByH, maxCellByW, 40));
-  boardCanvas.width = COLS * cell;
-  boardCanvas.height = ROWS * cell;
-  draw();
-}
-
-function drawCell(ctx, x, y, type, size, alpha = 1) {
-  const color = COLORS[type];
-  ctx.globalAlpha = alpha;
-  ctx.fillStyle = color;
-  ctx.fillRect(x * size, y * size, size, size);
-  // bevel
-  ctx.globalAlpha = alpha * 0.35;
-  ctx.fillStyle = "#ffffff";
-  ctx.fillRect(x * size, y * size, size, size * 0.18);
-  ctx.fillStyle = "#000000";
-  ctx.fillRect(x * size, y * size + size * 0.82, size, size * 0.18);
-  ctx.globalAlpha = 1;
-  ctx.strokeStyle = "rgba(0,0,0,0.35)";
-  ctx.lineWidth = 1;
-  ctx.strokeRect(x * size + 0.5, y * size + 0.5, size - 1, size - 1);
-}
-
-function draw() {
-  bctx.clearRect(0, 0, boardCanvas.width, boardCanvas.height);
-  // grid lines
-  bctx.strokeStyle = "rgba(255,255,255,0.04)";
-  bctx.lineWidth = 1;
-  for (let x = 1; x < COLS; x++) {
-    bctx.beginPath();
-    bctx.moveTo(x * cell + 0.5, 0);
-    bctx.lineTo(x * cell + 0.5, ROWS * cell);
-    bctx.stroke();
-  }
-  for (let y = 1; y < ROWS; y++) {
-    bctx.beginPath();
-    bctx.moveTo(0, y * cell + 0.5);
-    bctx.lineTo(COLS * cell, y * cell + 0.5);
-    bctx.stroke();
+  function softDrop(on) {
+    softDropping = on;
   }
 
-  // settled blocks
-  for (let y = 0; y < ROWS; y++) {
+  function hardDrop() {
+    if (!current || resolving) return;
+    while (valid(current.x, current.y + 1, current.rot)) {
+      current.y += 1;
+    }
+    lockPair();
+  }
+
+  // ペアを盤面へ固定
+  function lockPair() {
+    if (!current) return;
+    const cp = childPos(current);
+    if (current.y >= 0) grid[current.y][current.x] = current.axis;
+    if (cp.y >= 0) grid[cp.y][cp.x] = current.child;
+    current = null;
+    resolveBoard();
+  }
+
+  // ===== 重力・消去・連鎖 =====
+  function applyGravity() {
+    let moved = false;
     for (let x = 0; x < COLS; x++) {
-      if (grid[y][x]) drawCell(bctx, x, y, grid[y][x], cell);
+      let write = TOTAL_ROWS - 1;
+      for (let y = TOTAL_ROWS - 1; y >= 0; y--) {
+        if (grid[y][x] !== 0) {
+          if (write !== y) {
+            grid[write][x] = grid[y][x];
+            grid[y][x] = 0;
+            moved = true;
+          }
+          write--;
+        }
+      }
     }
+    return moved;
   }
 
-  if (current) {
-    // ghost piece
-    let ghostY = 0;
-    while (!collides(current, grid, 0, ghostY + 1)) ghostY++;
-    for (const [cx, cy] of current.cells) {
-      const gy = current.y + cy + ghostY;
-      if (gy >= 0) drawCell(bctx, current.x + cx, gy, current.type, cell, 0.22);
+  // 4つ以上つながった色を探して消す。消したぷよ数と色種類数を返す
+  function clearGroups() {
+    const seen = Array.from({ length: TOTAL_ROWS }, () => new Array(COLS).fill(false));
+    const toClear = [];
+    const colorsCleared = new Set();
+
+    for (let y = 0; y < TOTAL_ROWS; y++) {
+      for (let x = 0; x < COLS; x++) {
+        if (grid[y][x] === 0 || seen[y][x]) continue;
+        const color = grid[y][x];
+        const group = [];
+        const stack = [[x, y]];
+        seen[y][x] = true;
+        while (stack.length) {
+          const [cx, cy] = stack.pop();
+          group.push([cx, cy]);
+          const nbrs = [[cx + 1, cy], [cx - 1, cy], [cx, cy + 1], [cx, cy - 1]];
+          for (const [nx, ny] of nbrs) {
+            if (inBounds(nx, ny) && !seen[ny][nx] && grid[ny][nx] === color) {
+              seen[ny][nx] = true;
+              stack.push([nx, ny]);
+            }
+          }
+        }
+        if (group.length >= 4) {
+          toClear.push(...group);
+          colorsCleared.add(color);
+        }
+      }
     }
-    // active piece
-    for (const [cx, cy] of current.cells) {
-      const y = current.y + cy;
-      if (y >= 0) drawCell(bctx, current.x + cx, y, current.type, cell);
+
+    for (const [cx, cy] of toClear) grid[cy][cx] = 0;
+    return { count: toClear.length, colors: colorsCleared.size };
+  }
+
+  // 連鎖ボーナステーブル（簡易版）
+  const CHAIN_BONUS = [0, 8, 16, 32, 64, 96, 128, 160, 192, 224, 256, 288, 320, 352, 384, 416, 448, 480, 512];
+  const COLOR_BONUS = [0, 0, 3, 6, 12, 24];
+
+  // 盤面を落ち着かせて連鎖処理（アニメーション付き）
+  function resolveBoard() {
+    resolving = true;
+    let chain = 0;
+
+    function step() {
+      applyGravity();
+      const { count, colors } = clearGroups();
+      if (count > 0) {
+        chain++;
+        // スコア計算
+        const chainBonus = CHAIN_BONUS[Math.min(chain, CHAIN_BONUS.length - 1)];
+        const colorBonus = COLOR_BONUS[Math.min(colors, COLOR_BONUS.length - 1)];
+        let bonus = chainBonus + colorBonus;
+        if (bonus < 1) bonus = 1;
+        score += count * 10 * bonus;
+        if (chain > maxChain) maxChain = chain;
+        updateHud(chain);
+        draw();
+        // 連鎖が続くか少し待つ
+        setTimeout(step, 220);
+      } else {
+        // 連鎖終了
+        applyGravity();
+        draw();
+        resolving = false;
+        finalizeTurn();
+      }
     }
+
+    step();
   }
-}
 
-function drawMini(ctx, canvas, type, originY = 0) {
-  const size = 22;
-  if (!type) return;
-  const cells = SHAPES[type];
-  const xs = cells.map((c) => c[0]);
-  const ys = cells.map((c) => c[1]);
-  const minX = Math.min(...xs);
-  const maxX = Math.max(...xs);
-  const minY = Math.min(...ys);
-  const maxY = Math.max(...ys);
-  const w = (maxX - minX + 1) * size;
-  const h = (maxY - minY + 1) * size;
-  const offX = (canvas.width - w) / 2 / size - minX;
-  const offY = originY + (96 - h) / 2 / size - minY;
-  for (const [cx, cy] of cells) {
-    drawCell(ctx, cx + offX, cy + offY, type, size);
-  }
-}
-
-function drawNext() {
-  nctx.clearRect(0, 0, nextCanvas.width, nextCanvas.height);
-  for (let i = 0; i < 3 && i < nextQueue.length; i++) {
-    drawMini(nctx, nextCanvas, nextQueue[i], i * 96 / 22);
-  }
-}
-
-function drawHold() {
-  hctx.clearRect(0, 0, holdCanvas.width, holdCanvas.height);
-  drawMini(hctx, holdCanvas, holdType, 0);
-}
-
-function updateStats() {
-  scoreEl.textContent = score;
-  linesEl.textContent = lines;
-  levelEl.textContent = level;
-}
-
-// ---- Game loop ----
-function loop(time) {
-  if (!running) return;
-  rafId = requestAnimationFrame(loop);
-  if (paused) {
-    lastTime = time;
-    return;
-  }
-  const delta = time - lastTime;
-  lastTime = time;
-  dropTimer += delta;
-  if (dropTimer >= dropInterval) {
+  function finalizeTurn() {
+    if (score > bestScore) {
+      bestScore = score;
+      localStorage.setItem("puyo_best", String(bestScore));
+      bestEl.textContent = bestScore;
+    }
+    if (gameOver) return;
+    spawn();
     dropTimer = 0;
-    if (!move(0, 1)) {
-      lockPiece();
+  }
+
+  // ===== ゲーム進行 =====
+  function update(dt) {
+    if (!running || resolving || !current) return;
+    dropTimer += dt;
+    const interval = softDropping ? SOFT_INTERVAL : DROP_INTERVAL;
+    if (dropTimer >= interval) {
+      dropTimer = 0;
+      if (valid(current.x, current.y + 1, current.rot)) {
+        current.y += 1;
+      } else {
+        lockPair();
+      }
     }
   }
-  draw();
-  drawNext();
-}
 
-function startGame() {
-  grid = emptyGrid();
-  bag = [];
-  nextQueue = [nextFromBag(), nextFromBag(), nextFromBag()];
-  holdType = null;
-  canHold = true;
-  score = 0;
-  lines = 0;
-  level = 1;
-  dropInterval = 1000;
-  dropTimer = 0;
-  lastTime = performance.now();
-  running = true;
-  paused = false;
-  updateStats();
-  drawHold();
-  spawn(nextQueue.shift());
-  nextQueue.push(nextFromBag());
-  overlay.classList.add("hidden");
-  if (rafId) cancelAnimationFrame(rafId);
-  rafId = requestAnimationFrame(loop);
-}
-
-function gameOver() {
-  running = false;
-  overlayTitle.textContent = "ゲームオーバー";
-  overlayText.textContent = `スコア: ${score} / ライン: ${lines}`;
-  startBtn.textContent = "もう一度";
-  overlay.classList.remove("hidden");
-}
-
-// ---- Input: buttons ----
-function handleAction(action) {
-  switch (action) {
-    case "left":
-      move(-1, 0);
-      break;
-    case "right":
-      move(1, 0);
-      break;
-    case "rotate":
-      rotate(1);
-      break;
-    case "softdrop":
-      softDrop();
-      break;
-    case "harddrop":
-      hardDrop();
-      break;
-    case "hold":
-      hold();
-      break;
+  function loop(t) {
+    const dt = t - lastTime;
+    lastTime = t;
+    if (running) {
+      update(dt);
+      draw();
+    }
+    requestAnimationFrame(loop);
   }
-  draw();
-}
 
-document.querySelectorAll(".ctrl").forEach((btn) => {
-  const action = btn.dataset.action;
-  // Use pointerdown for snappy response; prevent the synthetic click/zoom.
-  btn.addEventListener(
-    "pointerdown",
-    (e) => {
+  // ===== 描画 =====
+  function resize() {
+    const wrap = boardCanvas.parentElement;
+    const availH = wrap.clientHeight || window.innerHeight * 0.7;
+    const availW = wrap.clientWidth || window.innerWidth * 0.6;
+    const cellH = Math.floor(availH / ROWS);
+    const cellW = Math.floor(availW / COLS);
+    cell = Math.max(16, Math.min(cellH, cellW));
+    const dpr = window.devicePixelRatio || 1;
+    boardCanvas.width = COLS * cell * dpr;
+    boardCanvas.height = ROWS * cell * dpr;
+    boardCanvas.style.width = COLS * cell + "px";
+    boardCanvas.style.height = ROWS * cell + "px";
+    bctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    draw();
+  }
+
+  function drawPuyo(ctx, gx, gy, color, size) {
+    if (!color) return;
+    const r = size / 2;
+    const cx = gx + r;
+    const cy = gy + r;
+    const grad = ctx.createRadialGradient(cx - r * 0.3, cy - r * 0.3, r * 0.2, cx, cy, r);
+    grad.addColorStop(0, "#ffffff");
+    grad.addColorStop(0.25, COLORS[color]);
+    grad.addColorStop(1, COLORS[color]);
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r * 0.9, 0, Math.PI * 2);
+    ctx.fill();
+    // 目
+    ctx.fillStyle = "#fff";
+    const eo = r * 0.32;
+    const er = r * 0.22;
+    ctx.beginPath();
+    ctx.arc(cx - eo, cy - r * 0.1, er, 0, Math.PI * 2);
+    ctx.arc(cx + eo, cy - r * 0.1, er, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = "#222";
+    ctx.beginPath();
+    ctx.arc(cx - eo, cy - r * 0.05, er * 0.5, 0, Math.PI * 2);
+    ctx.arc(cx + eo, cy - r * 0.05, er * 0.5, 0, Math.PI * 2);
+    ctx.fill();
+  }
+
+  function draw() {
+    const w = COLS * cell;
+    const h = ROWS * cell;
+    bctx.clearRect(0, 0, w, h);
+    // 背景
+    bctx.fillStyle = "#0a0b18";
+    bctx.fillRect(0, 0, w, h);
+    bctx.strokeStyle = "rgba(255,255,255,0.05)";
+    bctx.lineWidth = 1;
+    for (let x = 0; x <= COLS; x++) {
+      bctx.beginPath();
+      bctx.moveTo(x * cell, 0);
+      bctx.lineTo(x * cell, h);
+      bctx.stroke();
+    }
+    for (let y = 0; y <= ROWS; y++) {
+      bctx.beginPath();
+      bctx.moveTo(0, y * cell);
+      bctx.lineTo(w, y * cell);
+      bctx.stroke();
+    }
+    // 固定ぷよ（隠し行は描かない）
+    for (let y = HIDDEN; y < TOTAL_ROWS; y++) {
+      for (let x = 0; x < COLS; x++) {
+        if (grid[y][x]) {
+          drawPuyo(bctx, x * cell, (y - HIDDEN) * cell, grid[y][x], cell);
+        }
+      }
+    }
+    // 操作中ペア
+    if (current) {
+      const cp = childPos(current);
+      if (current.y >= HIDDEN) drawPuyo(bctx, current.x * cell, (current.y - HIDDEN) * cell, current.axis, cell);
+      if (cp.y >= HIDDEN) drawPuyo(bctx, cp.x * cell, (cp.y - HIDDEN) * cell, current.child, cell);
+    }
+  }
+
+  function drawNext() {
+    const size = 56;
+    nextCanvas.width = size;
+    nextCanvas.height = size * 2;
+    nctx.clearRect(0, 0, nextCanvas.width, nextCanvas.height);
+    if (!nextPair) return;
+    drawPuyo(nctx, (nextCanvas.width - size) / 2, 0, nextPair.child, size);
+    drawPuyo(nctx, (nextCanvas.width - size) / 2, size, nextPair.axis, size);
+  }
+
+  function updateHud(chain) {
+    scoreEl.textContent = score;
+    chainEl.textContent = chain || 0;
+  }
+
+  // ===== ゲーム開始・終了 =====
+  function startGame() {
+    grid = emptyGrid();
+    score = 0;
+    maxChain = 0;
+    gameOver = false;
+    resolving = false;
+    current = null;
+    nextPair = makePair();
+    updateHud(0);
+    overlay.classList.add("hidden");
+    running = true;
+    resize();
+    spawn();
+  }
+
+  function endGame() {
+    gameOver = true;
+    running = false;
+    current = null;
+    overlayTitle.textContent = "ゲームオーバー";
+    overlayText.innerHTML = `スコア: ${score}　最大連鎖: ${maxChain}<br />もう一度挑戦しよう！`;
+    startBtn.textContent = "リトライ";
+    overlay.classList.remove("hidden");
+  }
+
+  // ===== 入力 =====
+  const actions = {
+    left: () => move(-1),
+    right: () => move(1),
+    rotateCw: () => rotate(1),
+    rotateCcw: () => rotate(-1),
+    drop: () => hardDrop(),
+  };
+
+  document.querySelectorAll(".ctrl").forEach((btn) => {
+    const action = btn.dataset.action;
+    const handler = (e) => {
       e.preventDefault();
-      handleAction(action);
-    },
-    { passive: false }
-  );
-});
+      if (actions[action]) actions[action]();
+    };
+    btn.addEventListener("touchstart", handler, { passive: false });
+    btn.addEventListener("mousedown", handler);
+  });
 
-startBtn.addEventListener("click", startGame);
-
-// ---- Input: keyboard (for desktop testing) ----
-window.addEventListener("keydown", (e) => {
-  if (!running) {
-    if (e.key === "Enter" || e.key === " ") startGame();
-    return;
-  }
-  switch (e.key) {
-    case "ArrowLeft":
-      handleAction("left");
-      break;
-    case "ArrowRight":
-      handleAction("right");
-      break;
-    case "ArrowDown":
-      handleAction("softdrop");
-      break;
-    case "ArrowUp":
-    case "x":
-      handleAction("rotate");
-      break;
-    case " ":
-      e.preventDefault();
-      handleAction("harddrop");
-      break;
-    case "Shift":
-    case "c":
-      handleAction("hold");
-      break;
-    case "p":
-      paused = !paused;
-      break;
-  }
-});
-
-// ---- Input: swipe gestures on the board ----
-let touchStart = null;
-let lastMoveX = 0;
-let lastMoveY = 0;
-let moved = false;
-
-boardCanvas.addEventListener(
-  "pointerdown",
-  (e) => {
-    if (!running) {
-      startGame();
-      return;
+  // キーボード（PC確認用）
+  document.addEventListener("keydown", (e) => {
+    if (!running) return;
+    switch (e.key) {
+      case "ArrowLeft": move(-1); break;
+      case "ArrowRight": move(1); break;
+      case "ArrowUp": case "x": rotate(1); break;
+      case "z": rotate(-1); break;
+      case "ArrowDown": softDrop(true); break;
+      case " ": e.preventDefault(); hardDrop(); break;
     }
-    touchStart = { x: e.clientX, y: e.clientY, t: performance.now() };
-    lastMoveX = e.clientX;
-    lastMoveY = e.clientY;
-    moved = false;
-  },
-  { passive: true }
-);
+  });
+  document.addEventListener("keyup", (e) => {
+    if (e.key === "ArrowDown") softDrop(false);
+  });
 
-boardCanvas.addEventListener(
-  "pointermove",
-  (e) => {
-    if (!touchStart) return;
-    const stepX = cell * 1.1;
-    const stepY = cell * 1.1;
-    // Horizontal incremental moves
-    while (e.clientX - lastMoveX > stepX) {
-      handleAction("right");
-      lastMoveX += stepX;
-      moved = true;
-    }
-    while (lastMoveX - e.clientX > stepX) {
-      handleAction("left");
-      lastMoveX -= stepX;
-      moved = true;
-    }
-    // Downward incremental soft drop
-    while (e.clientY - lastMoveY > stepY) {
-      handleAction("softdrop");
-      lastMoveY += stepY;
-      moved = true;
-    }
-  },
-  { passive: true }
-);
+  // 盤面スワイプ操作
+  let touchStart = null;
+  boardCanvas.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    const t = e.touches[0];
+    touchStart = { x: t.clientX, y: t.clientY, t: Date.now(), moved: false };
+  }, { passive: false });
 
-boardCanvas.addEventListener(
-  "pointerup",
-  (e) => {
-    if (!touchStart) return;
-    const dx = e.clientX - touchStart.x;
-    const dy = e.clientY - touchStart.y;
-    const dt = performance.now() - touchStart.t;
-    const dist = Math.hypot(dx, dy);
-    if (!moved && dist < cell * 0.6 && dt < 250) {
-      // tap -> rotate
-      handleAction("rotate");
-    } else if (!moved && dy > cell * 3 && dt < 220 && Math.abs(dx) < dy) {
-      // fast swipe down -> hard drop
-      handleAction("harddrop");
-    } else if (dy < -cell * 2 && Math.abs(dx) < Math.abs(dy)) {
-      // swipe up -> hold
-      handleAction("hold");
+  boardCanvas.addEventListener("touchmove", (e) => {
+    if (!touchStart || !running || resolving) return;
+    e.preventDefault();
+    const t = e.touches[0];
+    const dx = t.clientX - touchStart.x;
+    const dy = t.clientY - touchStart.y;
+    const threshold = cell * 0.8;
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > threshold) {
+      move(dx > 0 ? 1 : -1);
+      touchStart.x = t.clientX;
+      touchStart.moved = true;
+    } else if (dy > threshold) {
+      softDrop(true);
+      touchStart.y = t.clientY;
+      touchStart.moved = true;
+    }
+  }, { passive: false });
+
+  boardCanvas.addEventListener("touchend", (e) => {
+    e.preventDefault();
+    softDrop(false);
+    if (touchStart && !touchStart.moved) {
+      const dt = Date.now() - touchStart.t;
+      if (dt < 250) {
+        if (!running && !gameOver) startGame();
+        else if (running) rotate(1); // タップで回転
+      }
     }
     touchStart = null;
-  },
-  { passive: true }
-);
+  }, { passive: false });
 
-// Prevent double-tap zoom and pull-to-refresh interfering with play.
-document.addEventListener(
-  "touchmove",
-  (e) => {
-    if (running) e.preventDefault();
-  },
-  { passive: false }
-);
+  startBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    startGame();
+  });
 
-window.addEventListener("resize", resize);
-window.addEventListener("orientationchange", () => setTimeout(resize, 200));
+  window.addEventListener("resize", resize);
+  window.addEventListener("orientationchange", () => setTimeout(resize, 200));
 
-// Initial paint
-grid = emptyGrid();
-nextQueue = [];
-holdType = null;
-score = 0;
-lines = 0;
-level = 1;
-resize();
-updateStats();
-overlay.classList.remove("hidden");
+  // 初期化
+  grid = emptyGrid();
+  resize();
+  drawNext();
+  requestAnimationFrame(loop);
+})();

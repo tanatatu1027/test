@@ -9,7 +9,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="theme-color" content="#0f1020" />
-  <title>テトリス for iPad</title>
+  <title>ぷよぷよ for iPad</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -20,29 +20,22 @@
         <span id="score" class="value">0</span>
       </div>
       <div class="stat">
-        <span class="label">LINES</span>
-        <span id="lines" class="value">0</span>
+        <span class="label">CHAIN</span>
+        <span id="chain" class="value">0</span>
       </div>
       <div class="stat">
-        <span class="label">LEVEL</span>
-        <span id="level" class="value">1</span>
+        <span class="label">BEST</span>
+        <span id="best" class="value">0</span>
       </div>
     </header>
 
     <main class="play-area">
-      <div class="side">
-        <div class="panel">
-          <span class="label">HOLD</span>
-          <canvas id="hold" width="96" height="96"></canvas>
-        </div>
-      </div>
-
       <div class="board-wrap">
         <canvas id="board"></canvas>
-        <div id="overlay" class="overlay hidden">
+        <div id="overlay" class="overlay">
           <div class="overlay-card">
-            <h1 id="overlay-title">テトリス</h1>
-            <p id="overlay-text">画面をタップ、またはスタートで開始</p>
+            <h1 id="overlay-title">ぷよぷよ</h1>
+            <p id="overlay-text">同じ色を4つつなげて消そう！<br />画面をタップ、またはスタートで開始</p>
             <button id="start-btn" class="btn">スタート</button>
           </div>
         </div>
@@ -51,18 +44,17 @@
       <div class="side">
         <div class="panel">
           <span class="label">NEXT</span>
-          <canvas id="next" width="96" height="288"></canvas>
+          <canvas id="next" width="64" height="128"></canvas>
         </div>
       </div>
     </main>
 
     <footer class="controls">
       <button class="ctrl" data-action="left" aria-label="左へ移動">◀</button>
-      <button class="ctrl" data-action="rotate" aria-label="回転">⟳</button>
+      <button class="ctrl" data-action="rotateCcw" aria-label="左回転">↺</button>
+      <button class="ctrl" data-action="rotateCw" aria-label="右回転">↻</button>
       <button class="ctrl" data-action="right" aria-label="右へ移動">▶</button>
-      <button class="ctrl" data-action="hold" aria-label="ホールド">HOLD</button>
-      <button class="ctrl" data-action="softdrop" aria-label="ソフトドロップ">▼</button>
-      <button class="ctrl wide" data-action="harddrop" aria-label="ハードドロップ">DROP</button>
+      <button class="ctrl wide" data-action="drop" aria-label="落とす">DROP</button>
     </footer>
   </div>
 
