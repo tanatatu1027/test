@@ -1,0 +1,1173 @@
+<title>お金の森 株のしくみ教室 〜高校生からわかる、株と経済のつながり〜</title>
+<style>
+/* ============================================================
+   お金の森 株のしくみ教室 — 実用マネー本スタイル
+   紙の本の世界観（クリーム紙×パステル）に固定した意図的な単一テーマ。
+   ダークモード時は「机」(外周背景)だけ暗くし、紙面は紙のまま。
+   ============================================================ */
+:root{
+  --desk:#ded9e8;          /* 机＝ページ外背景（淡い藤色） */
+  --paper:#fffdf5;         /* 紙面 */
+  --ink:#4a3626;           /* 本文の焦げ茶 */
+  --ink-soft:#7a6350;
+  --title:#c9356e;         /* 見出しの紅色 */
+  --accent:#f0a63c;        /* オレンジ */
+  --green:#7bbf8e;
+  --green-pale:#e3f2e6;
+  --blue:#7eb8d9;
+  --blue-pale:#e2f0f7;
+  --pink-pale:#fbe4ec;
+  --purple-pale:#ece7f6;
+  --cream:#fdf3d9;
+  --line:#5b4636;
+  --bubble-t:#fdf0dc;      /* 先生の吹き出し */
+  --bubble-s:#eef5ea;      /* 生徒の吹き出し */
+  --shadow:0 4px 14px rgba(74,54,38,.10);
+}
+@media (prefers-color-scheme: dark){
+  :root{ --desk:#2c2836; --shadow:0 4px 14px rgba(0,0,0,.35); }
+}
+:root[data-theme="dark"]{ --desk:#2c2836; --shadow:0 4px 14px rgba(0,0,0,.35); }
+:root[data-theme="light"]{ --desk:#ded9e8; --shadow:0 4px 14px rgba(74,54,38,.10); }
+
+*{ box-sizing:border-box; }
+body{
+  margin:0; background:var(--desk); color:var(--ink);
+  font-family:"Hiragino Maru Gothic ProN","Hiragino Kaku Gothic ProN","BIZ UDPGothic","Yu Gothic UI","Meiryo",sans-serif;
+  line-height:1.9; font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+main{ max-width:900px; margin:0 auto; padding:28px 14px 60px; }
+
+.page{
+  background:var(--paper); border-radius:18px; box-shadow:var(--shadow);
+  padding:34px 34px 40px; margin:0 0 28px;
+}
+@media (max-width:640px){ .page{ padding:22px 16px 28px; } }
+p{ margin:0 0 1em; }
+strong{ color:#a8264f; }
+.marker{ background:linear-gradient(transparent 60%, #c8ecc0 60%); font-weight:700; }
+.small{ font-size:.82em; color:var(--ink-soft); }
+ul,ol{ padding-left:1.4em; margin:0 0 1em; }
+li{ margin:.25em 0; }
+
+/* ---------- 表紙 ---------- */
+.cover{
+  position:relative; overflow:hidden; text-align:center;
+  background:
+    repeating-conic-gradient(from 0deg at 50% 42%, #e3dcf2 0deg 12deg, #f7f4fc 12deg 24deg);
+  border-radius:18px; box-shadow:var(--shadow); margin-bottom:28px;
+  padding:48px 20px 0;
+}
+.cover .band{
+  display:inline-block; background:#6f5fa8; color:#fff; border-radius:999px;
+  padding:6px 22px; font-weight:700; letter-spacing:.1em; margin-bottom:14px;
+  box-shadow:0 3px 0 rgba(74,54,38,.25);
+}
+.cover h1{
+  margin:.1em 0 .1em; font-size:clamp(36px,7.4vw,68px); line-height:1.2;
+  color:var(--title); letter-spacing:.03em; text-wrap:balance; font-weight:900;
+  text-shadow:3px 3px 0 #fff, -3px 3px 0 #fff, 3px -3px 0 #fff, -3px -3px 0 #fff, 0 6px 0 rgba(201,53,110,.18);
+}
+.cover .series{ font-size:clamp(15px,2.6vw,20px); font-weight:900; color:#6f5fa8; margin-bottom:4px; letter-spacing:.14em; }
+.cover .subtitle{ font-size:clamp(14px,2.4vw,19px); font-weight:700; color:var(--ink); margin-bottom:6px; }
+.cover .author{ font-weight:700; color:var(--ink-soft); margin-bottom:8px; }
+.cover .bottom{ background:#cfe3ee; margin:26px -20px 0; padding:22px 20px 26px; }
+.cover .powers{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:12px; }
+.cover .power{
+  background:#fff; border:2px solid var(--line); border-radius:14px;
+  padding:8px 14px; font-weight:700; font-size:14px; min-width:130px;
+}
+.cover .power b{ display:block; font-size:16px; }
+.p1 b{color:#c9356e}.p2 b{color:#2f8f5b}.p3 b{color:#3d7fb5}.p4 b{color:#b06a10}
+.cover .catch{ font-size:clamp(17px,3.2vw,25px); font-weight:900; color:#7a4a12; margin:0; }
+
+/* ---------- 章バナー ---------- */
+.chapter-banner{
+  display:flex; align-items:center; gap:14px;
+  border-radius:14px; padding:12px 18px; margin:0 0 22px;
+  color:#fff; font-weight:900; font-size:clamp(18px,3vw,23px); letter-spacing:.02em;
+}
+.chapter-banner .no{
+  background:rgba(255,255,255,.92); color:inherit; border-radius:10px;
+  padding:2px 12px; font-size:.75em; line-height:1.6; white-space:nowrap;
+}
+.c-green{ background:#63a877; } .c-green .no{ color:#2f7a4a; }
+.c-orange{ background:#e89a3c; } .c-orange .no{ color:#b06a10; }
+.c-pink{ background:#e0698f; } .c-pink .no{ color:#c23a68; }
+.c-blue{ background:#6da9cc; } .c-blue .no{ color:#3d7fb5; }
+.c-purple{ background:#9b8ec4; } .c-purple .no{ color:#6f5fa8; }
+
+h2.lesson-title{
+  font-size:clamp(20px,3.6vw,27px); color:var(--ink); margin:0 0 4px; font-weight:900;
+  text-wrap:balance;
+}
+.lesson-lead{ color:var(--title); font-weight:700; font-size:14px; margin-bottom:2px; }
+.do-line{
+  display:flex; align-items:center; gap:10px; background:var(--pink-pale);
+  border-radius:999px; padding:8px 18px; font-weight:900; color:#a8264f;
+  margin:14px 0 22px; font-size:15px;
+}
+.do-line .arrow{ color:#e0698f; }
+
+h3.bar{
+  display:flex; align-items:center; gap:10px;
+  background:linear-gradient(#f6c9d8,#f1b3c9); color:#8c1d46;
+  border-radius:999px; padding:8px 20px; font-size:17px; margin:34px 0 16px;
+  font-weight:900;
+}
+h3.bar.g{ background:linear-gradient(#cde9d4,#b5dec1); color:#256b41; }
+h3.bar.b{ background:linear-gradient(#cfe6f4,#b7d9ee); color:#2c6b96; }
+h3.bar.y{ background:linear-gradient(#fbe3ae,#f6d488); color:#8a5a07; }
+h3.bar.v{ background:linear-gradient(#ddd4f0,#cbbfe8); color:#584a8f; }
+h4{ color:#a8264f; font-size:16px; margin:1.4em 0 .5em; }
+
+/* ---------- 会話 ---------- */
+.talk{ display:flex; gap:12px; margin:14px 0; align-items:flex-start; }
+.talk .face{
+  flex:0 0 64px; width:64px; height:64px; border-radius:50%;
+  background:#fff; border:2.5px solid var(--line); overflow:hidden;
+}
+.talk .face svg{ width:100%; height:100%; display:block; }
+.talk .bubble{
+  position:relative; border-radius:16px; padding:12px 18px; max-width:640px;
+  font-weight:600;
+}
+.talk.t .bubble{ background:var(--bubble-t); }
+.talk.s{ flex-direction:row-reverse; }
+.talk.s .bubble{ background:var(--bubble-s); }
+.talk.t .bubble::before{
+  content:""; position:absolute; left:-9px; top:22px;
+  border:9px solid transparent; border-right-color:var(--bubble-t); border-left:0;
+}
+.talk.s .bubble::before{
+  content:""; position:absolute; right:-9px; top:22px;
+  border:9px solid transparent; border-left-color:var(--bubble-s); border-right:0;
+}
+.talk .bubble p:last-child{ margin-bottom:0; }
+.name-tag{ font-size:11px; font-weight:900; color:var(--ink-soft); text-align:center; margin-top:2px; }
+
+/* ---------- 図解ボックス・表 ---------- */
+.info{ background:var(--cream); border-radius:14px; padding:18px 20px; margin:18px 0; }
+.info.green{ background:var(--green-pale); }
+.info.blue{ background:var(--blue-pale); }
+.info.purple{ background:var(--purple-pale); }
+.info-title{
+  display:inline-block; background:#fff; border:2px solid var(--accent);
+  color:#b06a10; border-radius:999px; padding:2px 16px; font-weight:900;
+  font-size:14px; margin-bottom:10px;
+}
+.table-wrap{ overflow-x:auto; margin:16px 0; }
+table{
+  border-collapse:collapse; width:100%; min-width:520px; background:#fff;
+  font-size:14.5px; border:2px solid var(--line); border-radius:8px;
+}
+th,td{ border:1.5px solid #c9b8a5; padding:9px 12px; text-align:left; vertical-align:top; }
+thead th{ background:#8c6f52; color:#fff; font-weight:900; }
+tbody th{ background:var(--cream); font-weight:900; white-space:nowrap; }
+td.num{ text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+tr.hl td, tr.hl th{ background:#fdeaf1; }
+
+.point-list{ list-style:none; padding:0; margin:0 0 1em; }
+.point-list li{ position:relative; padding-left:34px; margin:.6em 0; font-weight:700; }
+.point-list li::before{
+  content:"✔"; position:absolute; left:0; top:0;
+  width:24px; height:24px; border-radius:50%; background:var(--green); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-size:13px;
+}
+.warn-list li::before{ content:"！"; background:#e06060; }
+
+.fig{ margin:20px 0; text-align:center; }
+.fig svg{ max-width:100%; height:auto; }
+.fig-cap{ font-size:12.5px; color:var(--ink-soft); margin-top:6px; }
+
+.summary{
+  background:var(--green-pale); border:2.5px dashed var(--green);
+  border-radius:14px; padding:16px 20px; margin:26px 0 4px;
+}
+.summary .stitle{ font-weight:900; color:#256b41; margin-bottom:6px; }
+.qa{ margin:20px 0; }
+.qa .q{
+  display:flex; gap:10px; align-items:flex-start; font-weight:900; color:#8c1d46;
+  margin-bottom:8px;
+}
+.qa .q .chip{ background:#e0698f; color:#fff; border-radius:8px; padding:1px 10px; font-size:13px; white-space:nowrap; margin-top:3px; }
+.qa .a{ background:var(--cream); border-radius:12px; padding:12px 16px; margin-left:12px; }
+.qa .a p:last-child{ margin-bottom:0; }
+
+.toc-row{ display:flex; align-items:baseline; gap:8px; margin:.45em 0; font-weight:700; }
+.toc-row .dots{ flex:1; border-bottom:2px dotted #c9b8a5; transform:translateY(-4px); }
+.toc-step{ border-radius:10px; color:#fff; font-weight:900; padding:6px 14px; margin:20px 0 8px; }
+.colophon{ color:var(--ink-soft); font-size:12.5px; }
+.colophon p{ margin:0 0 .5em; }
+</style>
+
+<!-- ============ キャラクターSVG定義 ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- フク先生（フクロウ・角帽） -->
+    <g id="fuku-base">
+      <ellipse cx="50" cy="60" rx="34" ry="32" fill="#c08a52" stroke="#5b4636" stroke-width="3"/>
+      <path d="M28 40 Q22 26 32 30 Q36 33 38 38 Z" fill="#c08a52" stroke="#5b4636" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M72 40 Q78 26 68 30 Q64 33 62 38 Z" fill="#c08a52" stroke="#5b4636" stroke-width="3" stroke-linejoin="round"/>
+      <ellipse cx="50" cy="70" rx="22" ry="18" fill="#f6e7c9" stroke="#5b4636" stroke-width="2.5"/>
+      <path d="M18 62 Q10 74 22 82 Q28 74 26 64 Z" fill="#a9743f" stroke="#5b4636" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M82 62 Q90 74 78 82 Q72 74 74 64 Z" fill="#a9743f" stroke="#5b4636" stroke-width="2.5" stroke-linejoin="round"/>
+      <rect x="22" y="16" width="56" height="9" rx="3" fill="#3d3d4d" stroke="#5b4636" stroke-width="2.5"/>
+      <path d="M50 6 L86 18 L50 30 L14 18 Z" fill="#4a4a5e" stroke="#5b4636" stroke-width="2.5" stroke-linejoin="round"/>
+      <line x1="72" y1="20" x2="80" y2="34" stroke="#e0a52f" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="81" cy="37" r="4" fill="#e0a52f"/>
+    </g>
+    <symbol id="fuku" viewBox="0 0 100 100">
+      <use href="#fuku-base"/>
+      <circle cx="40" cy="52" r="10.5" fill="#fff" stroke="#5b4636" stroke-width="2.5"/>
+      <circle cx="60" cy="52" r="10.5" fill="#fff" stroke="#5b4636" stroke-width="2.5"/>
+      <circle cx="41.5" cy="53" r="4.2" fill="#33241a"/>
+      <circle cx="58.5" cy="53" r="4.2" fill="#33241a"/>
+      <circle cx="43" cy="51.4" r="1.4" fill="#fff"/>
+      <circle cx="60" cy="51.4" r="1.4" fill="#fff"/>
+      <path d="M46 64 L54 64 L50 71 Z" fill="#f0a63c" stroke="#5b4636" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M42 76 Q50 81 58 76" fill="none" stroke="#5b4636" stroke-width="2.2" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="fuku-wink" viewBox="0 0 100 100">
+      <use href="#fuku-base"/>
+      <circle cx="40" cy="52" r="10.5" fill="#fff" stroke="#5b4636" stroke-width="2.5"/>
+      <circle cx="60" cy="52" r="10.5" fill="#fff" stroke="#5b4636" stroke-width="2.5"/>
+      <circle cx="41.5" cy="53" r="4.2" fill="#33241a"/>
+      <path d="M54 53 Q60 49 66 53" fill="none" stroke="#33241a" stroke-width="3" stroke-linecap="round"/>
+      <path d="M46 64 L54 64 L50 71 Z" fill="#f0a63c" stroke="#5b4636" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M41 75 Q50 83 59 75" fill="none" stroke="#5b4636" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M84 46 l4 -8 M90 52 l8 -4 M88 60 l9 1" stroke="#e0a52f" stroke-width="2.6" stroke-linecap="round"/>
+    </symbol>
+    <!-- コリスくん（リス） -->
+    <g id="koris-base">
+      <path d="M70 30 Q94 24 92 52 Q91 74 72 80 Q80 62 72 46 Z" fill="#d9813f" stroke="#5b4636" stroke-width="3" stroke-linejoin="round"/>
+      <circle cx="46" cy="56" r="32" fill="#e8a25e" stroke="#5b4636" stroke-width="3"/>
+      <path d="M26 32 Q20 16 36 24 Q40 27 40 32 Z" fill="#e8a25e" stroke="#5b4636" stroke-width="2.8" stroke-linejoin="round"/>
+      <path d="M62 30 Q70 15 74 30 Q70 33 64 34 Z" fill="#e8a25e" stroke="#5b4636" stroke-width="2.8" stroke-linejoin="round"/>
+      <ellipse cx="46" cy="68" rx="19" ry="15" fill="#f9ecd4" stroke="#5b4636" stroke-width="2.4"/>
+    </g>
+    <symbol id="koris" viewBox="0 0 100 100">
+      <use href="#koris-base"/>
+      <circle cx="36" cy="50" r="4" fill="#33241a"/>
+      <circle cx="56" cy="50" r="4" fill="#33241a"/>
+      <circle cx="37.4" cy="48.6" r="1.3" fill="#fff"/>
+      <circle cx="57.4" cy="48.6" r="1.3" fill="#fff"/>
+      <ellipse cx="46" cy="59" rx="3.4" ry="2.6" fill="#5b4636"/>
+      <path d="M40 66 Q46 71 52 66" fill="none" stroke="#5b4636" stroke-width="2.2" stroke-linecap="round"/>
+      <circle cx="30" cy="60" r="4.5" fill="#f3b7a0" opacity=".8"/>
+      <circle cx="62" cy="60" r="4.5" fill="#f3b7a0" opacity=".8"/>
+    </symbol>
+    <symbol id="koris-odoroki" viewBox="0 0 100 100">
+      <use href="#koris-base"/>
+      <circle cx="36" cy="50" r="6" fill="#fff" stroke="#33241a" stroke-width="2.4"/>
+      <circle cx="56" cy="50" r="6" fill="#fff" stroke="#33241a" stroke-width="2.4"/>
+      <circle cx="36" cy="50" r="2.2" fill="#33241a"/>
+      <circle cx="56" cy="50" r="2.2" fill="#33241a"/>
+      <ellipse cx="46" cy="60" rx="3.2" ry="2.4" fill="#5b4636"/>
+      <ellipse cx="46" cy="69" rx="4.5" ry="5.5" fill="#7a4a2a"/>
+      <path d="M74 20 l4 -10 M82 26 l8 -6 M84 38 l10 -2" stroke="#e06060" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="koris-yorokobi" viewBox="0 0 100 100">
+      <use href="#koris-base"/>
+      <path d="M30 50 Q36 44 42 50" fill="none" stroke="#33241a" stroke-width="3" stroke-linecap="round"/>
+      <path d="M50 50 Q56 44 62 50" fill="none" stroke="#33241a" stroke-width="3" stroke-linecap="round"/>
+      <ellipse cx="46" cy="59" rx="3.4" ry="2.6" fill="#5b4636"/>
+      <path d="M38 65 Q46 74 54 65" fill="#7a4a2a" stroke="#5b4636" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="29" cy="61" r="5" fill="#f3b7a0" opacity=".85"/>
+      <circle cx="63" cy="61" r="5" fill="#f3b7a0" opacity=".85"/>
+      <path d="M76 22 l5 -9 M84 30 l9 -4" stroke="#f0a63c" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <!-- どんぐり・株券・コイン -->
+    <symbol id="donguri" viewBox="0 0 40 48">
+      <path d="M8 18 Q8 40 20 44 Q32 40 32 18 Z" fill="#c98d4b" stroke="#5b4636" stroke-width="2.4" stroke-linejoin="round"/>
+      <path d="M5 18 Q5 8 20 8 Q35 8 35 18 Q28 21 20 21 Q12 21 5 18 Z" fill="#8a5a2b" stroke="#5b4636" stroke-width="2.4" stroke-linejoin="round"/>
+      <line x1="20" y1="8" x2="20" y2="2" stroke="#5b4636" stroke-width="2.6" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="kabuken" viewBox="0 0 60 44">
+      <rect x="2" y="2" width="56" height="40" rx="5" fill="#fdf3d9" stroke="#5b4636" stroke-width="2.6"/>
+      <rect x="8" y="8" width="44" height="28" rx="3" fill="none" stroke="#c9356e" stroke-width="1.6" stroke-dasharray="3 3"/>
+      <text x="30" y="27" font-size="12" font-weight="bold" fill="#c9356e" text-anchor="middle">株</text>
+    </symbol>
+    <symbol id="coin" viewBox="0 0 40 40">
+      <circle cx="20" cy="20" r="17" fill="#f6d488" stroke="#b8860b" stroke-width="2.6"/>
+      <text x="20" y="27" font-size="17" font-weight="bold" fill="#8a5a07" text-anchor="middle">¥</text>
+    </symbol>
+    <symbol id="build" viewBox="0 0 60 60">
+      <rect x="10" y="8" width="40" height="48" rx="3" fill="#cfe6f4" stroke="#5b4636" stroke-width="2.6"/>
+      <g fill="#fffdf5" stroke="#5b4636" stroke-width="1.6">
+        <rect x="17" y="15" width="10" height="8"/><rect x="33" y="15" width="10" height="8"/>
+        <rect x="17" y="28" width="10" height="8"/><rect x="33" y="28" width="10" height="8"/>
+      </g>
+      <rect x="25" y="42" width="10" height="14" fill="#8c6f52" stroke="#5b4636" stroke-width="1.8"/>
+    </symbol>
+  </defs>
+</svg>
+
+<main>
+
+<!-- ================= 表紙 ================= -->
+<section class="cover">
+  <div class="band">株は、社会のしくみでできている</div>
+  <div class="series">お金の森　番外編②</div>
+  <h1>株のしくみ教室</h1>
+  <div class="subtitle">高校生からわかる、株と経済のつながり</div>
+  <div class="author">フク先生と学ぶ　◆　もりの経済教室</div>
+  <svg viewBox="0 0 340 150" width="330" style="max-width:80%" role="img" aria-label="表紙イラスト：会社のビルと株券、フク先生とコリスくん">
+    <ellipse cx="170" cy="150" rx="180" ry="24" fill="#b9aede"/>
+    <use href="#build" x="30" y="40" width="90" height="90"/>
+    <use href="#kabuken" x="112" y="60" width="60" height="44"/>
+    <use href="#coin" x="128" y="104" width="30" height="30"/>
+    <use href="#fuku-wink" x="164" y="26" width="106" height="106"/>
+    <use href="#koris-yorokobi" x="256" y="60" width="84" height="84"/>
+  </svg>
+  <div class="bottom">
+    <p class="catch">株価・決算・金利・為替・ニュース——<br>バラバラだった知識が、1本の線でつながる！</p>
+    <div class="powers">
+      <div class="power p1"><b>しくみ</b>株式会社と株主の権利</div>
+      <div class="power p2"><b>モノサシ</b>株価・時価総額・PER</div>
+      <div class="power p3"><b>つながり</b>金利・為替・景気と株</div>
+      <div class="power p4"><b>こころ</b>投資家心理のワナ</div>
+    </div>
+    <p style="margin:14px 0 0;font-weight:700;font-size:14px">『チャートと板の教室』と合わせて読めば、株の教養はひととおり完成！</p>
+  </div>
+</section>
+
+<!-- ================= はじめに・目次 ================= -->
+<section class="page">
+  <h2 class="lesson-title">はじめに 〜「株価が上がった」の、その先へ〜</h2>
+  <p>ニュースでは毎日のように「日経平均が値上がりしました」「円安が進んでいます」「日銀が利上げを決めました」と流れてきます。でも——</p>
+  <p style="text-align:center;font-weight:900;font-size:1.1em">「で、それって何がどうなった話なの？」</p>
+  <p>そう思ったこと、ありませんか。じつはこれらのニュースは、ぜんぶ<strong>1本の線でつながって</strong>います。株とは何か。株価はなぜ動くのか。金利や為替はどう効いてくるのか。そのつながりが見えると、経済ニュースは「知らない人たちの話」から「自分に関係のある物語」に変わります。</p>
+  <p>この本は、『お金の森』シリーズの番外編第2弾。チャートや板の「画面の読み方」ではなく、その奥にある<span class="marker">「株そのもののしくみ」と「経済とのつながり」</span>を、フク先生とコリスくんが根っこから解説します。</p>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>先生、チャートは読めるようになったんですけど……そもそも「株」って、なんで存在してるんですか？ だれが何のために作ったんだろうって。</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>それはええ質問じゃ。じつは株のしくみは、<strong>約400年前の船乗りたちの大冒険</strong>から生まれたんじゃよ。そこから話を始めよう。</p></div>
+  </div>
+
+</section>
+
+<section class="page">
+  <h2 class="lesson-title">目次 -Contents-</h2>
+  <div class="toc-step c-green chapter-banner" style="margin-top:18px"><span class="no">1限〜3限</span>株のしくみ編</div>
+  <div class="toc-row"><span>1時間目　株って何？ — 会社を「みんなで持つ」発明</span><span class="dots"></span></div>
+  <div class="toc-row"><span>2時間目　株価はなぜ動く？ — 人気投票と成績表のあいだ</span><span class="dots"></span></div>
+  <div class="toc-row"><span>3時間目　株価の見方 — 「500円の株」は安いのか？（時価総額・単元・分割）</span><span class="dots"></span></div>
+  <div class="toc-step c-orange chapter-banner"><span class="no">4限〜5限</span>会社を見るモノサシ編</div>
+  <div class="toc-row"><span>4時間目　決算 — 会社の通知表の読み方</span><span class="dots"></span></div>
+  <div class="toc-row"><span>5時間目　PER・PBR・配当利回り — 割安・割高のモノサシ</span><span class="dots"></span></div>
+  <div class="toc-step c-blue chapter-banner"><span class="no">6限〜8限</span>経済とのつながり編</div>
+  <div class="toc-row"><span>6時間目　金利と株価 — 「お金のレンタル料」が上がると株が下がる理由</span><span class="dots"></span></div>
+  <div class="toc-row"><span>7時間目　為替と株価 — 円安・円高はだれの味方？</span><span class="dots"></span></div>
+  <div class="toc-row"><span>8時間目　景気とニュース — 日経平均・S&amp;P500・経済指標の歩き方</span><span class="dots"></span></div>
+  <div class="toc-step c-pink chapter-banner"><span class="no">9限〜11限</span>イベントと落とし穴編</div>
+  <div class="toc-row"><span>9時間目　配当と株主優待 — 「権利確定日」のしくみ</span><span class="dots"></span></div>
+  <div class="toc-row"><span>10時間目　株の数が変わる日 — 自社株買い・増資・IPO</span><span class="dots"></span></div>
+  <div class="toc-row"><span>11時間目　信用取引とインサイダー — 近づく前に知るべき危険</span><span class="dots"></span></div>
+  <div class="toc-step c-purple chapter-banner"><span class="no">12限〜放課後</span>こころと情報編</div>
+  <div class="toc-row"><span>12時間目　投資家心理 — 脳はお金にだまされる</span><span class="dots"></span></div>
+  <div class="toc-row"><span>放課後　情報源の歩き方／Q&amp;A／結論リスト</span><span class="dots"></span></div>
+</section>
+
+<!-- ================= 1時間目 株とは ================= -->
+<section class="page">
+  <div class="chapter-banner c-green"><span class="no">1時間目</span>株って何？ — 会社を「みんなで持つ」発明</div>
+  <p class="lesson-lead">はじまりは400年前の大航海</p>
+  <h2 class="lesson-title">株は「会社の持ち分」を小さく分けた券</h2>
+  <div class="do-line"><span>この授業でわかること</span><span class="arrow">▶▶</span><span>株・株主・株式会社の関係と、株主の4つの権利</span></div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>昔々、17世紀のオランダでの。アジアまで船で香辛料を買い付けに行けば大もうけできたんじゃが、船の旅は難破や海賊で<strong>失敗したら全財産がパー</strong>という大ばくちじゃった。そこで人類は考えた。<span class="marker">「じゃあ、大勢でお金を出し合って、もうけも損も出した分だけ分け合えばいい」</span>。この発明が株式会社（世界初は東インド会社と言われる）で、出し合った持ち分を小さく分けた券が<strong>株式（株）</strong>なんじゃ。</p></div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 260" width="660" role="img" aria-label="株式会社のしくみ図。株主がお金を出し、会社は株を渡す。会社は事業でもうけて、株主に配当などを返す">
+      <text x="330" y="24" font-size="15" font-weight="bold" fill="#4a3626" text-anchor="middle">株式会社のしくみ（お金と株の交換）</text>
+      <g font-size="13.5" font-weight="bold" fill="#4a3626" text-anchor="middle">
+        <rect x="40" y="70" width="150" height="120" rx="14" fill="#e3f2e6" stroke="#2f7a4a" stroke-width="2.5"/>
+        <text x="115" y="95">株主（出す人）</text>
+        <use href="#koris-yorokobi" x="85" y="104" width="60" height="60"/>
+        <text x="115" y="182" font-size="11.5" fill="#2f5c3d">あなたも100株買えば株主！</text>
+        <rect x="470" y="70" width="150" height="120" rx="14" fill="#cfe6f4" stroke="#2c6b96" stroke-width="2.5"/>
+        <text x="545" y="95">会社（集める側）</text>
+        <use href="#build" x="515" y="104" width="60" height="60"/>
+        <text x="545" y="182" font-size="11.5" fill="#2c5f8f">工場を建てたり人を雇ったり</text>
+      </g>
+      <path d="M196 105 L464 105" stroke="#c9356e" stroke-width="4" marker-end="url(#arrK)"/>
+      <path d="M464 150 L196 150" stroke="#e0a52f" stroke-width="4" marker-end="url(#arrY)"/>
+      <defs>
+        <marker id="arrK" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#c9356e"/></marker>
+        <marker id="arrY" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#e0a52f"/></marker>
+      </defs>
+      <use href="#coin" x="300" y="72" width="30" height="30"/>
+      <text x="330" y="96" font-size="12.5" font-weight="bold" fill="#c9356e" text-anchor="start">お金を出す（出資）</text>
+      <use href="#kabuken" x="296" y="158" width="52" height="38"/>
+      <text x="356" y="176" font-size="12.5" font-weight="bold" fill="#8a5a07" text-anchor="start">株を渡す＋もうけを分ける</text>
+      <text x="330" y="240" font-size="12.5" fill="#7a6350" text-anchor="middle">銀行からの「借金」と違い、出資は返さなくてよいお金。そのかわり会社は株主のものになる</text>
+    </svg>
+  </div>
+
+  <h3 class="bar g">株主になると手に入る「4つのごほうび」</h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th style="width:170px">権利</th><th>内容</th></tr></thead>
+    <tbody>
+      <tr><th>① 値上がり益</th><td>買った時より株価が上がったところで売れば、差額がもうけ（キャピタルゲイン）。</td></tr>
+      <tr><th>② 配当金</th><td>会社がもうけの一部を株主に現金で分けてくれる（インカムゲイン）。年1〜2回が多い。</td></tr>
+      <tr><th>③ 株主優待</th><td>自社製品や割引券をくれる日本独特の制度。ぜんぶの会社にあるわけではない。</td></tr>
+      <tr><th>④ 議決権</th><td>株主総会で会社の重要な決定に1株（1単元）＝1票で参加できる。<strong>株主は会社の「オーナーの一人」</strong>だから。</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris-odoroki"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>株を買う＝会社のオーナーの一員になる、ってことだったんだ！ ギャンブルの札を買うのとは違うんですね。</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku-wink"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>そこが今日いちばん大事なところじゃ。株の裏には必ず<strong>本物の会社と、働く人と、商売</strong>がある。じゃから株式投資の本質は「値動きを当てるゲーム」ではなく、<span class="marker">「応援したい会社の商売に、お金で参加すること」</span>なんじゃよ。ちなみに株主の責任は出したお金の範囲まで（有限責任）。会社が倒産しても、借金の取り立てが株主に来ることはないで安心せい。</p></div>
+  </div>
+</section>
+
+<!-- ================= 2時間目 株価はなぜ動く ================= -->
+<section class="page">
+  <div class="chapter-banner c-green"><span class="no">2時間目</span>株価はなぜ動く？ — 人気投票と成績表のあいだ</div>
+  <p class="lesson-lead">値段を決めるのは、社長ではない</p>
+  <h2 class="lesson-title">株価を動かす2つのエンジン「業績」と「期待」</h2>
+  <div class="do-line"><span>この授業でわかること</span><span class="arrow">▶▶</span><span>「いい会社なのに株価が下がる」謎が解ける</span></div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>株価って、会社が「うちの株は今日から600円です」って決めてるんですか？</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>ちがうんじゃ。株価を決めるのは<strong>市場に集まる無数の買いたい人・売りたい人のせめぎ合い</strong>——『チャートと板の教室』でやった、あの板じゃな。では、人々は何を見て「買いたい」「売りたい」と思うのか。大きく分けて2つ。<span class="marker">①会社のもうけ（業績）</span>と、<span class="marker">②これからへの期待や不安</span>じゃ。</p></div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 250" width="660" role="img" aria-label="株価を動かす2つのエンジンの図。短期では人気投票（期待・ニュース・気分）、長期では成績表（業績）が株価を決める">
+      <text x="330" y="26" font-size="15" font-weight="bold" fill="#4a3626" text-anchor="middle">株価 ＝ 短期は「人気投票」、長期は「体重計」</text>
+      <g font-size="13" font-weight="bold">
+        <rect x="40" y="50" width="270" height="150" rx="14" fill="#fbe4ec" stroke="#c23a68" stroke-width="2.5"/>
+        <text x="175" y="78" text-anchor="middle" fill="#a8264f">短期の株価を動かすもの</text>
+        <text x="60" y="106" fill="#4a3626">・ニュース、うわさ、SNSの話題</text>
+        <text x="60" y="132" fill="#4a3626">・みんなの気分（強気／弱気）</text>
+        <text x="60" y="158" fill="#4a3626">・大口投資家の売り買い</text>
+        <text x="175" y="188" text-anchor="middle" fill="#c23a68">→ 毎日の上下は、ほぼ「人気投票」</text>
+        <rect x="350" y="50" width="270" height="150" rx="14" fill="#e3f2e6" stroke="#2f7a4a" stroke-width="2.5"/>
+        <text x="485" y="78" text-anchor="middle" fill="#256b41">長期の株価を決めるもの</text>
+        <text x="370" y="106" fill="#4a3626">・売上と利益が伸びているか</text>
+        <text x="370" y="132" fill="#4a3626">・商売のしくみは強いか</text>
+        <text x="370" y="158" fill="#4a3626">・社会に必要とされ続けるか</text>
+        <text x="485" y="188" text-anchor="middle" fill="#2f7a4a">→ 何年もたてば「実力」に落ち着く</text>
+      </g>
+      <text x="330" y="236" font-size="12.5" fill="#7a6350" text-anchor="middle">投資の神様たちの格言：「市場は短期的には投票機、長期的には体重計」（ベンジャミン・グレアム）</text>
+    </svg>
+  </div>
+
+  <h3 class="bar g">「いい決算なのに株価が下がる」ナゾ</h3>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>ここが初心者最大のつまずきポイントじゃ。株価は「良いか悪いか」ではなく、<strong>「みんなの予想と比べてどうだったか」</strong>で動く。テストで90点を取っても、まわりが「あの子は100点のはず」と思っとったら「あれ？」となるじゃろ。株も同じでの、<span class="marker">利益2倍のニュースでも、市場が3倍を予想していれば株価は下がる</span>。期待はすでに株価に「織り込まれて」いるからじゃ。</p></div>
+  </div>
+
+  <div class="info green">
+    <div class="info-title">ここがポイント</div>
+    <ul class="point-list" style="margin:0">
+      <li>株価はだれかが決める値段ではなく、売買のせめぎ合いの結果</li>
+      <li>短期の値動きは人気投票。長期の株価は業績（実力）に近づく</li>
+      <li>ニュースの良し悪しより「予想と比べてどうか」で動く（織り込み済み）</li>
+      <li>だから長期投資家は、毎日の人気投票ではなく実力の成長を見る</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 3時間目 株価の見方 ================= -->
+<section class="page">
+  <div class="chapter-banner c-green"><span class="no">3時間目</span>株価の見方 — 「500円の株」は安いのか？</div>
+  <p class="lesson-lead">初心者が最初にかんちがいするところ</p>
+  <h2 class="lesson-title">会社の値段は「株価×株の数」＝時価総額</h2>
+  <div class="do-line"><span>この授業でわかること</span><span class="arrow">▶▶</span><span>株価の数字だけでは会社を比べられない理由</span></div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>株価500円の会社と5万円の会社なら、5万円のほうが100倍りっぱな大企業……ですよね？</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>それが、まったくの誤解なんじゃ。ピザを思い浮かべてほしい。同じ大きさのピザでも、<strong>8枚に切るか、100枚に切るかで1切れの値段は変わる</strong>じゃろ。株価は「1切れの値段」にすぎん。会社まるごとの値段は、<span class="marker">株価 × 発行している株の数 ＝ 時価総額（じかそうがく）</span>で見るんじゃよ。</p></div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 270" width="660" role="img" aria-label="時価総額の比較図。株価500円でも発行株数40億株のA社は時価総額2兆円、株価5万円でも発行株数100万株のB社は500億円で、A社の方がはるかに大きい">
+      <text x="330" y="26" font-size="15" font-weight="bold" fill="#4a3626" text-anchor="middle">どっちが「大きい会社」？</text>
+      <g font-size="13.5" font-weight="bold" text-anchor="middle">
+        <rect x="50" y="46" width="260" height="180" rx="14" fill="#e3f2e6" stroke="#2f7a4a" stroke-width="2.5"/>
+        <text x="180" y="74" fill="#256b41">A社：株価 500円</text>
+        <text x="180" y="98" fill="#4a3626" font-size="12.5">発行株数 40億株</text>
+        <circle cx="180" cy="150" r="44" fill="#8fce9f" stroke="#2f7a4a" stroke-width="3"/>
+        <text x="180" y="212" fill="#256b41" font-size="14.5">時価総額 2兆円！</text>
+        <rect x="350" y="46" width="260" height="180" rx="14" fill="#fdf3d9" stroke="#b06a10" stroke-width="2.5"/>
+        <text x="480" y="74" fill="#8a5a07">B社：株価 50,000円</text>
+        <text x="480" y="98" fill="#4a3626" font-size="12.5">発行株数 100万株</text>
+        <circle cx="480" cy="150" r="14" fill="#f6d488" stroke="#b06a10" stroke-width="3"/>
+        <text x="480" y="212" fill="#8a5a07" font-size="14.5">時価総額 500億円</text>
+      </g>
+      <text x="330" y="256" font-size="12.5" fill="#7a6350" text-anchor="middle">株価はA社の100分の1でも、会社の大きさはA社が40倍。株価の数字くらべに意味はない！</text>
+    </svg>
+  </div>
+
+  <h3 class="bar g">セットで覚える「株の単位」の話</h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th style="width:170px">用語</th><th>意味</th></tr></thead>
+    <tbody>
+      <tr><th>単元株（たんげんかぶ）</th><td>日本株の売買は原則<strong>100株セット</strong>。株価2,000円なら最低20万円必要、ということ。</td></tr>
+      <tr><th>単元未満株（ミニ株）</th><td>ネット証券のサービスで<strong>1株から</strong>買えるしくみ。数百円〜数千円で有名企業の株主になれる。高校生世代のお試しにぴったり。</td></tr>
+      <tr><th>株式分割</th><td>1株を2株や5株に割って、1株の値段を下げること。<strong>ピザの切れ数を増やすだけ</strong>なので、持っている価値の合計は変わらない。買いやすくなるので人気が出ることはある。</td></tr>
+      <tr><th>値がさ株／低位株</th><td>1株の値段が高い株／安い株の呼び名。くり返すが、<strong>高い＝優良、安い＝お買い得ではない</strong>。</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku-wink"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>ニュースで「時価総額世界一の企業」と聞いたら、それは「1切れの値段」ではなく「ピザまるごとの値段」が世界一という意味じゃ。会社を比べるときは、<strong>まず時価総額</strong>。これが株を見る目の第一歩じゃよ。</p></div>
+  </div>
+</section>
+
+<!-- ================= 4時間目 決算 ================= -->
+<section class="page">
+  <div class="chapter-banner c-orange"><span class="no">4時間目</span>決算 — 会社の通知表の読み方</div>
+  <p class="lesson-lead">株価がいちばん動く日</p>
+  <h2 class="lesson-title">3か月に1度やってくる「成績発表」</h2>
+  <div class="do-line"><span>この授業でわかること</span><span class="arrow">▶▶</span><span>売上・利益の違いと、決算発表で株価が動くしくみ</span></div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>上場企業には、3か月ごとに成績を発表する義務がある。これが<strong>決算（四半期決算）</strong>じゃ。通知表にあたる書類が「決算短信」での、発表の瞬間に株価が大きく動くことも珍しくない。まずは通知表の科目——<span class="marker">売上と利益の違い</span>から押さえよう。</p></div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 240" width="660" role="img" aria-label="売上高から費用を引いて利益が残る流れの図。たこ焼き屋の例で売上100万円、材料費や人件費など80万円、利益20万円">
+      <text x="330" y="26" font-size="15" font-weight="bold" fill="#4a3626" text-anchor="middle">たこ焼き屋で覚える「売上」と「利益」</text>
+      <g font-size="13.5" font-weight="bold" text-anchor="middle">
+        <rect x="40" y="56" width="170" height="130" rx="12" fill="#cfe6f4" stroke="#2c6b96" stroke-width="2.5"/>
+        <text x="125" y="86" fill="#2c5f8f">売上高</text>
+        <text x="125" y="112" fill="#4a3626" font-size="12.5">お客さんが払った</text>
+        <text x="125" y="132" fill="#4a3626" font-size="12.5">お金の合計</text>
+        <text x="125" y="164" fill="#2c5f8f" font-size="15">100万円</text>
+        <text x="236" y="128" font-size="22" fill="#4a3626">−</text>
+        <rect x="262" y="56" width="170" height="130" rx="12" fill="#fbe4ec" stroke="#c23a68" stroke-width="2.5"/>
+        <text x="347" y="86" fill="#a8264f">費用</text>
+        <text x="347" y="112" fill="#4a3626" font-size="12.5">タコ・粉・屋台代</text>
+        <text x="347" y="132" fill="#4a3626" font-size="12.5">バイト代・広告費…</text>
+        <text x="347" y="164" fill="#a8264f" font-size="15">80万円</text>
+        <text x="458" y="128" font-size="22" fill="#4a3626">＝</text>
+        <rect x="484" y="56" width="136" height="130" rx="12" fill="#e3f2e6" stroke="#2f7a4a" stroke-width="2.5"/>
+        <text x="552" y="86" fill="#256b41">利益</text>
+        <text x="552" y="112" fill="#4a3626" font-size="12.5">最後に残る</text>
+        <text x="552" y="132" fill="#4a3626" font-size="12.5">本当のもうけ</text>
+        <text x="552" y="164" fill="#256b41" font-size="15">20万円</text>
+      </g>
+      <text x="330" y="222" font-size="12.5" fill="#7a6350" text-anchor="middle">売上が大きくても、費用がかさめば利益は小さい。投資家が最後に見るのは「利益」とその伸び</text>
+    </svg>
+  </div>
+
+  <h3 class="bar y">決算でチェックする4点セット</h3>
+  <ul class="point-list">
+    <li><strong>売上高</strong> — 商売の規模。伸びているか？</li>
+    <li><strong>営業利益</strong> — 本業のもうけ。ここが会社の実力</li>
+    <li><strong>純利益</strong> — 税金なども払って最後に残ったもうけ。配当の原資</li>
+    <li><strong>来期の見通し（ガイダンス）</strong> — 会社自身による来年の予想。<strong>株価はしばしば過去の成績より「これから」に反応する</strong></li>
+  </ul>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>「上方修正」「下方修正」ってニュースで聞くのは何ですか？</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>会社が年度の途中で「思ったよりもうかりそう（上方修正）」「ダメそう（下方修正）」と予想を修正することじゃ。2時間目を思い出してごらん。株価は「予想との差」で動く。じゃから修正の発表は、決算そのものと同じくらい株価を動かすんじゃよ。<strong>自分の持ち株の決算日をカレンダーに入れておく</strong>——これだけで一人前の株主じゃ。</p></div>
+  </div>
+</section>
+
+<!-- ================= 5時間目 指標 ================= -->
+<section class="page">
+  <div class="chapter-banner c-orange"><span class="no">5時間目</span>PER・PBR・配当利回り — 割安・割高のモノサシ</div>
+  <p class="lesson-lead">「今の株価は高すぎ？」に答える道具</p>
+  <h2 class="lesson-title">3つのモノサシで株価を「はかる」</h2>
+  <div class="do-line"><span>この授業でわかること</span><span class="arrow">▶▶</span><span>ニュースに出るPER・PBR・利回りの意味がわかる</span></div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>3時間目で「株価の数字そのものに意味はない」と学んだの。では何と比べれば高い・安いが言えるのか。答えは<strong>会社のもうけや財産と比べる</strong>こと。代表のモノサシが3つある。ぜんぶ<span class="marker">わり算</span>じゃから、こわがらんでええ。</p></div>
+  </div>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th style="width:150px">モノサシ</th><th>計算</th><th>ざっくり意味</th></tr></thead>
+    <tbody>
+      <tr class="hl"><th>PER<br>（株価収益率）</th><td>株価 ÷ 1株あたり利益</td><td><strong>「もうけの何年分の値段か」</strong>。PER15倍＝今の利益ペースで15年分。日本株の平均はだいたい15倍前後。成長期待が大きい会社ほど高くなる。</td></tr>
+      <tr><th>PBR<br>（株価純資産倍率）</th><td>株価 ÷ 1株あたり純資産</td><td><strong>「会社の持ち物と比べて何倍か」</strong>。1倍を割ると「会社を解散して財産を分けた方がマシ」な水準とされ、割安のサインとして注目される。</td></tr>
+      <tr><th>配当利回り</th><td>年間配当 ÷ 株価 × 100</td><td><strong>「値段に対して毎年何%の配当がもらえるか」</strong>。株価1,000円で配当40円なら4%。</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 230" width="660" role="img" aria-label="PERのイメージ図。同じ100万円の利益を生む屋台でも、1500万円で売られていればPER15倍、3000万円ならPER30倍">
+      <text x="330" y="26" font-size="15" font-weight="bold" fill="#4a3626" text-anchor="middle">PER ＝「元が取れるまで何年？」</text>
+      <g font-size="13" font-weight="bold" text-anchor="middle">
+        <rect x="60" y="50" width="240" height="140" rx="12" fill="#e3f2e6" stroke="#2f7a4a" stroke-width="2.5"/>
+        <text x="180" y="78" fill="#256b41">屋台A：値段1,500万円</text>
+        <text x="180" y="104" fill="#4a3626" font-size="12.5">毎年のもうけ100万円</text>
+        <text x="180" y="140" fill="#256b41" font-size="16">PER 15倍</text>
+        <text x="180" y="168" fill="#4a3626" font-size="12">15年で元が取れる</text>
+        <rect x="360" y="50" width="240" height="140" rx="12" fill="#fbe4ec" stroke="#c23a68" stroke-width="2.5"/>
+        <text x="480" y="78" fill="#a8264f">屋台B：値段3,000万円</text>
+        <text x="480" y="104" fill="#4a3626" font-size="12.5">毎年のもうけ100万円</text>
+        <text x="480" y="140" fill="#a8264f" font-size="16">PER 30倍</text>
+        <text x="480" y="168" fill="#4a3626" font-size="12">30年かかる＝それだけ期待が乗っている</text>
+      </g>
+      <text x="330" y="216" font-size="12.5" fill="#7a6350" text-anchor="middle">Bが「損」とは限らない。「来年はもうけが3倍になる」と皆が期待するなら高いPERにも理由がある</text>
+    </svg>
+  </div>
+
+  <div class="info">
+    <div class="info-title">モノサシを使うときの3つの注意</div>
+    <ul class="warn-list point-list" style="margin:0">
+      <li>PERは<strong>業種によって「ふつう」が違う</strong>。IT企業と銀行を同じPERで比べない。比べるなら同業他社や、その会社の過去と</li>
+      <li>配当利回りが異常に高い株は、<strong>株価が急落しているだけ</strong>のことがある（利回りのワナ）。配当が続くかは業績次第</li>
+      <li>モノサシは「買う理由」ではなく「調べるきっかけ」。<strong>数字が安い理由を必ず探る</strong>のがプロの姿勢</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 6時間目 金利 ================= -->
+<section class="page">
+  <div class="chapter-banner c-blue"><span class="no">6時間目</span>金利と株価 — 「お金のレンタル料」が上がると株が下がる理由</div>
+  <p class="lesson-lead">ニュース最頻出！「日銀が利上げ」の意味</p>
+  <h2 class="lesson-title">金利は経済ぜんたいの「重力」</h2>
+  <div class="do-line"><span>この授業でわかること</span><span class="arrow">▶▶</span><span>「利上げで株安」の3つの理屈と、中央銀行の役割</span></div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>「日銀が利上げして株価が下落」ってニュース、何がどうつながってるのか、さっぱりです……。</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>金利とは<strong>「お金のレンタル料」</strong>じゃ。日本銀行（日銀）やアメリカのFRBといった中央銀行は、このレンタル料の基準（政策金利）を上げ下げして、経済の熱をコントロールしとる。<span class="marker">景気が過熱してインフレがひどい→利上げで冷ます。景気が冷えこむ→利下げで温める</span>。エアコンの温度調節みたいなもんじゃな。</p></div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 250" width="660" role="img" aria-label="金利と株価のシーソー図。金利が上がる側に傾くと株価側が下がる">
+      <text x="330" y="26" font-size="15" font-weight="bold" fill="#4a3626" text-anchor="middle">金利と株価は、シーソーの関係になりやすい</text>
+      <line x1="120" y1="90" x2="540" y2="150" stroke="#8c6f52" stroke-width="8" stroke-linecap="round"/>
+      <path d="M330 120 L306 176 L354 176 Z" fill="#c98d4b" stroke="#5b4636" stroke-width="3" stroke-linejoin="round"/>
+      <g font-size="14" font-weight="bold" text-anchor="middle">
+        <rect x="64" y="40" width="120" height="44" rx="10" fill="#cfe6f4" stroke="#2c6b96" stroke-width="2.5"/>
+        <text x="124" y="68" fill="#2c5f8f">金利 ⬆</text>
+        <rect x="484" y="100" width="120" height="44" rx="10" fill="#fbe4ec" stroke="#c23a68" stroke-width="2.5"/>
+        <text x="544" y="128" fill="#a8264f">株価 ⬇</text>
+      </g>
+      <g font-size="12.5" font-weight="bold" fill="#4a3626">
+        <text x="70" y="216">理由① 会社の借金の利息が重くなり、もうけが減る</text>
+        <text x="70" y="238">理由② 預金や債券でも利息がつくので「危険をおかしてまで株を買わなくても」となる</text>
+      </g>
+    </svg>
+    <div class="fig-cap">理由③ 住宅ローンなどの負担が増え、人々が買い物を控える → 会社の売上にも響く。<br>※ あくまで「なりやすい」関係。景気が強ければ利上げでも株が上がる局面はある。</div>
+  </div>
+
+  <h3 class="bar b">覚えておきたい登場人物</h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th style="width:160px">名前</th><th>役割</th></tr></thead>
+    <tbody>
+      <tr><th>日本銀行（日銀）</th><td>日本の中央銀行。政策金利を決める会合（金融政策決定会合）を年8回開く。総裁の発言ひとつで市場が動く。</td></tr>
+      <tr><th>FRB</th><td>アメリカの中央銀行にあたる組織。<strong>世界の金利の親分</strong>で、FRBの利上げ・利下げは日本株にも大きく影響する。</td></tr>
+      <tr><th>長期金利</th><td>国が10年お金を借りるときの利率（10年国債の利回り）が代表。住宅ローンの固定金利などの基準になる。</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku-wink"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>「金利は株にとっての重力」と言った投資家がおる（ウォーレン・バフェット）。重力が強い（金利が高い）ほど、株価は浮き上がりにくい。<strong>ニュースで「利上げ」「利下げ」と聞いたら、重力が変わったんだな</strong>と思えばええんじゃよ。</p></div>
+  </div>
+</section>
+
+<!-- ================= 7時間目 為替 ================= -->
+<section class="page">
+  <div class="chapter-banner c-blue"><span class="no">7時間目</span>為替と株価 — 円安・円高はだれの味方？</div>
+  <p class="lesson-lead">「1ドル=150円」の読み方から</p>
+  <h2 class="lesson-title">為替は「円の値札」。会社によって効き方が逆になる</h2>
+  <div class="do-line"><span>この授業でわかること</span><span class="arrow">▶▶</span><span>円安で得する会社・損する会社の見分け方</span></div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>そもそも「1ドル＝100円が150円になると円安」っていうのが、逆じゃないの？って思っちゃいます。数字は増えてるのに「安い」って……。</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>みんなそこでつまずくんじゃ（笑）。主語を「円」にして考えてごらん。前は100円出せば1ドルと交換できたのに、今は150円出さんと交換してもらえん。つまり<strong>円の力（価値）が弱くなった＝円安</strong>じゃ。ドルというジュースの値段が、100円から150円に値上がりしたと考えてもええな。</p></div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 280" width="660" role="img" aria-label="円安の影響の図。輸出企業は海外で稼いだドルを円に替えると増えるので追い風、輸入企業は仕入れが高くなるので逆風">
+      <text x="330" y="26" font-size="15" font-weight="bold" fill="#4a3626" text-anchor="middle">円安（1ドル100円→150円）が起きると…</text>
+      <g font-size="13" font-weight="bold">
+        <rect x="40" y="46" width="285" height="190" rx="14" fill="#e3f2e6" stroke="#2f7a4a" stroke-width="2.5"/>
+        <text x="182" y="74" text-anchor="middle" fill="#256b41">輸出する会社（車・機械など）</text>
+        <text x="58" y="102" fill="#4a3626">アメリカで車を売って</text>
+        <text x="58" y="126" fill="#4a3626">1万ドルの売上</text>
+        <text x="58" y="158" fill="#2f7a4a">円に替えると…</text>
+        <text x="58" y="186" fill="#256b41" font-size="15">100万円 → 150万円に！</text>
+        <text x="182" y="222" text-anchor="middle" fill="#2f7a4a">同じ商売でも円での利益が増える＝追い風</text>
+        <rect x="345" y="46" width="285" height="190" rx="14" fill="#fbe4ec" stroke="#c23a68" stroke-width="2.5"/>
+        <text x="487" y="74" text-anchor="middle" fill="#a8264f">輸入する会社（食品・電力など）</text>
+        <text x="363" y="102" fill="#4a3626">海外から小麦を仕入れる</text>
+        <text x="363" y="126" fill="#4a3626">代金は1万ドル</text>
+        <text x="363" y="158" fill="#c23a68">円で払うと…</text>
+        <text x="363" y="186" fill="#a8264f" font-size="15">100万円 → 150万円に！</text>
+        <text x="487" y="222" text-anchor="middle" fill="#c23a68">仕入れコストが跳ね上がる＝逆風</text>
+      </g>
+      <text x="330" y="266" font-size="12.5" fill="#7a6350" text-anchor="middle">円高になると、この矢印がそっくり逆になる。「円安＝日本株ぜんぶに良い」ではない！</text>
+    </svg>
+  </div>
+
+  <h3 class="bar b">投資家として知っておく為替の3ポイント</h3>
+  <ul class="point-list">
+    <li>円安は輸出企業・海外で稼ぐ企業に追い風。だから自動車株などが多い日経平均は<strong>円安で上がりやすい</strong>クセがある</li>
+    <li>円安は輸入品・エネルギーを値上がりさせ、<strong>家計には向かい風</strong>。株と生活で立場が逆になる</li>
+    <li>外国株や全世界型の投資信託には<strong>為替リスク</strong>がある。株価が同じでも、円高になれば円での価値は目減りする（逆もまたしかり）</li>
+  </ul>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>為替は金利とも繋がっとる。<strong>金利の高い通貨にお金は集まりやすい</strong>。アメリカの金利が高く日本が低ければ、ドルが買われて円安に——6時間目と7時間目は、じつはひとつの物語なんじゃよ。</p></div>
+  </div>
+</section>
+
+<!-- ================= 8時間目 景気とニュース ================= -->
+<section class="page">
+  <div class="chapter-banner c-blue"><span class="no">8時間目</span>景気とニュース — 日経平均・S&amp;P500・経済指標の歩き方</div>
+  <p class="lesson-lead">これでニュースが「読める」ようになる</p>
+  <h2 class="lesson-title">経済ニュース、最初に覚える固有名詞たち</h2>
+  <div class="do-line"><span>この授業でわかること</span><span class="arrow">▶▶</span><span>株価指数の意味と、景気に強い株・弱い株の区別</span></div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>「日経平均、3日続伸」——この日経平均のような<strong>株価指数</strong>は、たくさんの株価をまとめた<span class="marker">「市場全体の体温計」</span>じゃ。クラス全員のテストの平均点みたいなもんでの、1社の点数より全体の調子がわかる。主要な体温計を覚えてしまおう。</p></div>
+  </div>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th style="width:150px">指数</th><th>中身</th><th>ひとこと</th></tr></thead>
+    <tbody>
+      <tr><th>日経平均株価</th><td>日本の代表225社の株価平均</td><td>ニュースの主役。値がさ株の影響を受けやすい</td></tr>
+      <tr><th>TOPIX</th><td>東証プライム市場のほぼ全社を時価総額で加重</td><td>日本市場の実力をより正確に映す</td></tr>
+      <tr><th>NYダウ</th><td>米国の名門30社</td><td>世界でいちばん有名な体温計</td></tr>
+      <tr><th>S&amp;P500</th><td>米国の代表500社</td><td>米国株投資の基準。インデックス投資の主役</td></tr>
+      <tr><th>ナスダック総合</th><td>ハイテク企業中心の市場全体</td><td>IT・成長株の体温計。金利に敏感</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+</section>
+
+<section class="page">
+  <div class="chapter-banner c-blue"><span class="no">8時間目 つづき</span>景気の波と、株の「性格」</div>
+  <div class="fig">
+    <svg viewBox="0 0 660 240" width="660" role="img" aria-label="景気の波の図。好況と不況が波のように繰り返し、景気敏感株は波と一緒に大きく動き、ディフェンシブ株は波に強い">
+      <path d="M40 120 Q120 40 200 120 T360 120 T520 120 T680 120" fill="none" stroke="#8c6f52" stroke-width="3.5"/>
+      <g font-size="13" font-weight="bold" fill="#4a3626" text-anchor="middle">
+        <text x="120" y="52" fill="#c9356e">好況（景気がいい）</text>
+        <text x="280" y="196" fill="#2c5f8f">不況（景気が悪い）</text>
+        <text x="440" y="52" fill="#c9356e">また好況</text>
+      </g>
+      <text x="330" y="230" font-size="13" font-weight="bold" fill="#4a3626" text-anchor="middle">景気は波。数年〜10年ほどの周期で、良い時期と悪い時期をくり返してきた</text>
+    </svg>
+  </div>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th style="width:180px">タイプ</th><th>代表的な業種</th><th>性格</th></tr></thead>
+    <tbody>
+      <tr><th>景気敏感株</th><td>自動車、機械、鉄鋼、半導体、旅行</td><td>好況で大もうけ、不況で大きく落ちこむ。<strong>波乗りタイプ</strong></td></tr>
+      <tr><th>ディフェンシブ株</th><td>食品、薬、電気・ガス、通信</td><td>不況でもみんな使うので業績が安定。<strong>守りタイプ</strong></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="info blue">
+    <div class="info-title">市場が注目する「経済指標」カレンダー</div>
+    <p style="margin:0 0 .6em">決まった日に発表される経済の統計を<strong>経済指標</strong>と呼び、発表直後は市場が大きく動くことがあります。有名どころは——</p>
+    <ul class="point-list" style="margin:0">
+      <li><strong>消費者物価指数（CPI）</strong> — モノの値段がどれだけ上がったか＝インフレの体温計。金利の先読みに直結</li>
+      <li><strong>米雇用統計</strong> — アメリカで雇用が増えたか。毎月第1金曜の夜、世界中の投資家が注目</li>
+      <li><strong>GDP</strong> — 国全体の経済の大きさ。景気の総合成績</li>
+      <li><strong>日銀短観</strong> — 日本企業への「景気どうですか？」アンケート</li>
+    </ul>
+  </div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris-yorokobi"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>「CPIが強くて利上げ観測が高まり、株安・円高に」……あっ、今の私、このニュースが訳せます！</p></div>
+  </div>
+</section>
+
+<!-- ================= 9時間目 配当と優待 ================= -->
+<section class="page">
+  <div class="chapter-banner c-pink"><span class="no">9時間目</span>配当と株主優待 — 「権利確定日」のしくみ</div>
+  <p class="lesson-lead">1日ちがいでもらえない！？</p>
+  <h2 class="lesson-title">配当をもらえるかは「名簿にのる日」で決まる</h2>
+  <div class="do-line"><span>この授業でわかること</span><span class="arrow">▶▶</span><span>権利確定日・権利落ち日と、配当だけ狙いのワナ</span></div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>配当や優待は「その日に株主名簿にのっている人」に配られる。名簿にのる基準の日が<strong>権利確定日</strong>じゃ。ただし株は買ってから名簿にのるまで<strong>2営業日</strong>かかるでの、実際には<span class="marker">「権利付き最終日」までに買っておく</span>必要がある。ここはカレンダーで見るのがいちばん早い。</p></div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 250" width="660" role="img" aria-label="権利確定日カレンダーの図。権利付き最終日に買えば配当がもらえ、翌日の権利落ち日に買っても間に合わない">
+      <text x="330" y="26" font-size="15" font-weight="bold" fill="#4a3626" text-anchor="middle">3月末が権利確定日の会社の例</text>
+      <g font-size="13" font-weight="bold" text-anchor="middle">
+        <rect x="60"  y="50" width="160" height="120" rx="12" fill="#e3f2e6" stroke="#2f7a4a" stroke-width="3"/>
+        <text x="140" y="78" fill="#256b41">3月27日ごろ</text>
+        <text x="140" y="102" fill="#256b41">権利付き最終日</text>
+        <text x="140" y="130" fill="#4a3626" font-size="12">この日までに買って</text>
+        <text x="140" y="150" fill="#4a3626" font-size="12">持ち続ければOK！</text>
+        <rect x="250" y="50" width="160" height="120" rx="12" fill="#fbe4ec" stroke="#c23a68" stroke-width="3"/>
+        <text x="330" y="78" fill="#a8264f">翌営業日</text>
+        <text x="330" y="102" fill="#a8264f">権利落ち日</text>
+        <text x="330" y="130" fill="#4a3626" font-size="12">この日に買っても</text>
+        <text x="330" y="150" fill="#4a3626" font-size="12">今回の配当はもらえない</text>
+        <rect x="440" y="50" width="160" height="120" rx="12" fill="#fdf3d9" stroke="#b06a10" stroke-width="3"/>
+        <text x="520" y="78" fill="#8a5a07">3月31日</text>
+        <text x="520" y="102" fill="#8a5a07">権利確定日</text>
+        <text x="520" y="130" fill="#4a3626" font-size="12">株主名簿が</text>
+        <text x="520" y="150" fill="#4a3626" font-size="12">確定する日</text>
+      </g>
+      <text x="330" y="204" font-size="13" font-weight="bold" fill="#c9356e" text-anchor="middle">そして権利落ち日には、株価が配当のぶんだけ下がりやすい（配当落ち）</text>
+      <text x="330" y="232" font-size="12.5" fill="#7a6350" text-anchor="middle">「配当の権利だけ取ってすぐ売ればタダ取り！」…とはいかないようにできている</text>
+    </svg>
+  </div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris-odoroki"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>えっ、じゃあ配当をもらった瞬間に株価が下がるなら、意味なくないですか？</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>短期の「タダ取り」には意味がない、が正解じゃ。配当投資の本当の価値は、<strong>業績のよい会社を長く持ち、配当が育っていくのを待つ</strong>ことにある。日本には25年以上増配を続けるような会社もあるし、米国には60年以上増配の会社もある。優待も同じでの、<span class="marker">優待めあてに業績の悪い会社を買うのは本末転倒</span>。おまけはあくまで、おまけじゃよ。</p></div>
+  </div>
+
+  <div class="info green">
+    <div class="info-title">ここがポイント</div>
+    <ul class="point-list" style="margin:0">
+      <li>配当・優待は「権利付き最終日」までに買った人がもらえる</li>
+      <li>権利落ち日には配当ぶん株価が下がりやすい。タダ取りはできない</li>
+      <li>見るべきは目先の利回りより「配当を出し続け、増やし続ける力」</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 10時間目 自社株買い・増資・IPO ================= -->
+<section class="page">
+  <div class="chapter-banner c-pink"><span class="no">10時間目</span>株の数が変わる日 — 自社株買い・増資・IPO</div>
+  <p class="lesson-lead">ピザの切れ数が変わるイベント</p>
+  <h2 class="lesson-title">1株の価値は「株の総数」で変わる</h2>
+  <div class="do-line"><span>この授業でわかること</span><span class="arrow">▶▶</span><span>ニュースの「自社株買いで株価上昇」「増資で株価下落」の理由</span></div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>3時間目の「会社はピザ、株は1切れ」を思い出すんじゃ。会社のイベントには、<strong>ピザの切れ数そのものを変えてしまう</strong>ものがある。切れ数が減れば1切れは大きく、増えれば小さくなる——これだけで、ニュースの意味が読めるようになるで。</p></div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 260" width="660" role="img" aria-label="自社株買いと増資の比較図。自社株買いは株数が減って1株の取り分が増え、増資は株数が増えて1株の取り分が薄まる">
+      <text x="330" y="26" font-size="15" font-weight="bold" fill="#4a3626" text-anchor="middle">同じ大きさの会社（ピザ）でも…</text>
+      <g font-size="13" font-weight="bold" text-anchor="middle">
+        <rect x="40" y="46" width="285" height="180" rx="14" fill="#e3f2e6" stroke="#2f7a4a" stroke-width="2.5"/>
+        <text x="182" y="74" fill="#256b41">自社株買い（株数が減る）</text>
+        <circle cx="130" cy="140" r="42" fill="#f6d488" stroke="#b06a10" stroke-width="2.5"/>
+        <line x1="130" y1="98" x2="130" y2="182" stroke="#b06a10" stroke-width="2.5"/>
+        <line x1="88" y1="140" x2="172" y2="140" stroke="#b06a10" stroke-width="2.5"/>
+        <text x="240" y="120" fill="#4a3626" font-size="12.5">8切れ→4切れに</text>
+        <text x="240" y="144" fill="#256b41">1切れが大きく！</text>
+        <text x="182" y="210" fill="#2f7a4a" font-size="12.5">残った株主の取り分が濃くなる＝株価に追い風</text>
+        <rect x="345" y="46" width="285" height="180" rx="14" fill="#fbe4ec" stroke="#c23a68" stroke-width="2.5"/>
+        <text x="487" y="74" fill="#a8264f">増資（株数が増える）</text>
+        <circle cx="435" cy="140" r="42" fill="#f6d488" stroke="#b06a10" stroke-width="2.5"/>
+        <g stroke="#b06a10" stroke-width="2">
+          <line x1="435" y1="98" x2="435" y2="182"/><line x1="393" y1="140" x2="477" y2="140"/>
+          <line x1="405" y1="110" x2="465" y2="170"/><line x1="465" y1="110" x2="405" y2="170"/>
+        </g>
+        <text x="545" y="120" fill="#4a3626" font-size="12.5">8切れ→16切れに</text>
+        <text x="545" y="144" fill="#a8264f">1切れが薄まる</text>
+        <text x="487" y="210" fill="#c23a68" font-size="12.5">既存株主の取り分が薄まる＝株価に逆風のことが多い</text>
+      </g>
+    </svg>
+    <div class="fig-cap">※ 増資で集めたお金が大きな成長につながるなら、長い目ではプラスになることもあります。「何のための増資か」がカギ。</div>
+  </div>
+
+  <h3 class="bar">あわせて覚える「IPO」</h3>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p><strong>IPO（新規上場）</strong>は、それまで創業者や一部の人しか持てなかった会社の株を、証券取引所で<strong>だれでも売買できるようにするデビューの日</strong>じゃ。上場すると会社は大きなお金を集められ、わしらは応援したい会社の株主になれる。ただし上場直後は値動きがジェットコースターでの、<span class="marker">初心者が飛び乗る場所ではない</span>。「デビュー戦は観客席から」が合言葉じゃよ。</p></div>
+  </div>
+
+  <div class="summary">
+    <div class="stitle">🌰 10時間目のまとめ</div>
+    <ul class="point-list">
+      <li>自社株買い＝株数が減る→1株の価値が濃くなる（株主に追い風）</li>
+      <li>増資＝株数が増える→1株が薄まる（使いみち次第で評価が分かれる）</li>
+      <li>IPO＝株式市場へのデビュー。直後の乱高下には近づかない</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 11時間目 信用取引・インサイダー ================= -->
+<section class="page">
+  <div class="chapter-banner c-pink"><span class="no">11時間目</span>信用取引とインサイダー — 近づく前に知るべき危険</div>
+  <p class="lesson-lead">知識としては必修、実行は非推奨</p>
+  <h2 class="lesson-title">「借りて増やす」は、損も借りて増やすこと</h2>
+  <div class="do-line"><span>この授業でわかること</span><span class="arrow">▶▶</span><span>レバレッジ・空売り・追証、そして法律で捕まる行為</span></div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p><strong>信用取引</strong>とは、証券会社からお金や株を借りて、<span class="marker">自分の元手の約3.3倍まで</span>売買できるしくみじゃ。てこ（レバレッジ）の力での、うまくいけばもうけも3倍。じゃが——ここからが大事——<strong>失敗すれば損も3倍</strong>。元手30万円で100万円分の株を買って3割下がれば、損は30万円。<strong>元手が一瞬でゼロ</strong>じゃ。</p></div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 250" width="660" role="img" aria-label="現物取引と信用取引の比較図。同じ3割の値下がりでも、現物なら損は元手の3割、レバレッジ3.3倍なら元手がほぼ全部消える">
+      <text x="330" y="26" font-size="15" font-weight="bold" fill="#4a3626" text-anchor="middle">同じ「3割の値下がり」でも…（元手30万円）</text>
+      <g font-size="13" font-weight="bold" text-anchor="middle">
+        <rect x="60" y="50" width="250" height="150" rx="14" fill="#e3f2e6" stroke="#2f7a4a" stroke-width="2.5"/>
+        <text x="185" y="78" fill="#256b41">現物取引（自分のお金だけ）</text>
+        <rect x="110" y="94" width="60" height="70" fill="#8fce9f" stroke="#2f7a4a" stroke-width="2.5"/>
+        <rect x="210" y="115" width="60" height="49" fill="#f6d488" stroke="#b06a10" stroke-width="2.5"/>
+        <text x="140" y="184" font-size="12">30万円</text>
+        <text x="240" y="184" font-size="12">→ 21万円</text>
+        <text x="185" y="180" font-size="12" fill="#256b41"> </text>
+        <rect x="350" y="50" width="250" height="150" rx="14" fill="#fbe4ec" stroke="#c23a68" stroke-width="2.5"/>
+        <text x="475" y="78" fill="#a8264f">信用取引（3.3倍のてこ）</text>
+        <rect x="400" y="94" width="60" height="70" fill="#8fce9f" stroke="#2f7a4a" stroke-width="2.5"/>
+        <rect x="500" y="160" width="60" height="4" fill="#ee8f7e" stroke="#c25543" stroke-width="2"/>
+        <text x="430" y="184" font-size="12">30万円</text>
+        <text x="530" y="184" font-size="12">→ ほぼ0円</text>
+      </g>
+      <text x="330" y="232" font-size="12.5" font-weight="bold" fill="#c9356e" text-anchor="middle">足りなくなると「追証（おいしょう）」＝追加のお金を入れろという請求が来る。借金になる入口はここ</text>
+    </svg>
+  </div>
+
+  <h3 class="bar">「空売り」と、絶対にやってはいけないこと</h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th style="width:170px">ことば</th><th>意味と注意</th></tr></thead>
+    <tbody>
+      <tr><th>空売り（からうり）</th><td>株を借りて先に売り、下がったら買い戻してもうける「下げで稼ぐ」技。ただし株価の上昇に上限はないので、<strong>理論上、損失に上限がない</strong>。上級者の道具。</td></tr>
+      <tr class="hl"><th>インサイダー取引</th><td>会社の内部情報（発表前の決算・新製品・合併など）を知る立場の人やそれを聞いた人が、公表前に売買すること。<strong>犯罪です。</strong>懲役や罰金が科される。「友だちのお父さんから聞いた話で買う」もアウトになりうる。</td></tr>
+      <tr><th>風説の流布・相場操縦</th><td>うその情報を流したり、見せかけの注文で値段をつり上げたりする行為。SNS時代でも（だからこそ）<strong>犯罪</strong>。</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>信用取引って、いつかは使うべき「上級テクニック」なんですか？</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>いや、<strong>一生使わなくても、まったく困らん</strong>。長期の資産づくりに、てこは要らんのじゃ。この授業をしたのは、使うためではなく<span class="marker">「うまい話の正体を見抜くため」</span>。SNSで「レバレッジで一発逆転」と誘ってくる者の危険が、これでもう見えるじゃろ？</p></div>
+  </div>
+</section>
+
+<!-- ================= 12時間目 投資家心理 ================= -->
+<section class="page">
+  <div class="chapter-banner c-purple"><span class="no">12時間目</span>投資家心理 — 脳はお金にだまされる</div>
+  <p class="lesson-lead">最大の敵は、市場ではなく自分</p>
+  <h2 class="lesson-title">人間の脳に仕組まれた「投資のバグ」</h2>
+  <div class="do-line"><span>この授業でわかること</span><span class="arrow">▶▶</span><span>行動経済学が見つけた4つのワナと、その対策</span></div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>ここまで学んだ知識があっても、人は投資で失敗する。なぜか。<strong>人間の脳が、そもそも投資向きにできとらん</strong>からじゃ。これを研究する学問が行動経済学（ノーベル賞も出とる分野じゃ）。代表的な「脳のバグ」を知っておくだけで、失敗の半分は防げるで。</p></div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 250" width="660" role="img" aria-label="プロスペクト理論の図。1万円得したうれしさより、1万円損した痛みのほうが約2倍強く感じられる">
+      <text x="330" y="26" font-size="15" font-weight="bold" fill="#4a3626" text-anchor="middle">同じ1万円でも、心の感じ方はちがう（プロスペクト理論）</text>
+      <g font-size="13.5" font-weight="bold" text-anchor="middle">
+        <rect x="90" y="66" width="200" height="60" rx="12" fill="#e3f2e6" stroke="#2f7a4a" stroke-width="2.5"/>
+        <text x="190" y="94" fill="#256b41">1万円もうかった</text>
+        <text x="190" y="116" fill="#4a3626" font-size="12.5">うれしさ：😊</text>
+        <rect x="370" y="66" width="200" height="90" rx="12" fill="#fbe4ec" stroke="#c23a68" stroke-width="2.5"/>
+        <text x="470" y="94" fill="#a8264f">1万円損した</text>
+        <text x="470" y="122" fill="#4a3626" font-size="12.5">痛み：😖😖</text>
+        <text x="470" y="144" fill="#c23a68" font-size="12.5">約2倍強く感じる！</text>
+      </g>
+      <text x="330" y="196" font-size="13" font-weight="bold" fill="#4a3626" text-anchor="middle">この非対称のせいで、人は「利益はすぐ確定、損はずるずる先送り」してしまう</text>
+      <text x="330" y="224" font-size="12.5" fill="#7a6350" text-anchor="middle">＝ 伸びる株を早売りし、ダメな株を塩漬けにする——初心者の典型パターンのできあがり</text>
+    </svg>
+  </div>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th style="width:170px">脳のバグ</th><th>症状</th><th>対策</th></tr></thead>
+    <tbody>
+      <tr><th>損失回避</th><td>損を認めたくなくて、下がった株を持ち続ける（塩漬け）</td><td>買う前に「いくら下がったら売るか」をメモしておく</td></tr>
+      <tr><th>群集心理（FOMO）</th><td>「みんな買ってる、乗り遅れる！」で高値づかみ</td><td>SNSで話題になった時点で、たいてい出遅れと知る</td></tr>
+      <tr><th>アンカリング</th><td>「昔は5,000円だったから今の3,000円は安い」と過去の値段に引きずられる</td><td>過去の株価ではなく、今の業績とモノサシ（5時間目）で見る</td></tr>
+      <tr><th>自信過剰</th><td>数回の成功で「自分は才能がある」と取引が大きく・多くなる</td><td>初心者の利益は実力より相場のおかげ。金額を決めて守る</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku-wink"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>バグは根性では直らん。直せんからこそ、<strong>ルールと仕組みで縛る</strong>んじゃ。積立の自動化、売買前の一晩ルール、金額の上限——『お金の森』本編でやった「淡々と積み立てる」が最強なのは、じつは<span class="marker">脳のバグが入りこむすき間がない</span>からなんじゃよ。</p></div>
+  </div>
+</section>
+
+<!-- ================= 放課後 情報源 ================= -->
+<section class="page">
+  <div class="chapter-banner c-purple"><span class="no">放課後①</span>情報源の歩き方 — どこで調べる？だれを信じる？</div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>調べたいことができたとき、どこを見ればいいんですか？ SNSには情報があふれてるけど、どれが本物やら……。</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>鉄則はひとつ。<strong>一次情報（発信元そのもの）に近いほど信用できる</strong>。会社が自分で出す資料がいちばん川上で、SNSの「だれかの感想」は川下じゃ。川上から順に紹介しよう。</p></div>
+  </div>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th style="width:190px">情報源</th><th>何がわかる？</th></tr></thead>
+    <tbody>
+      <tr><th>会社のIRページ</th><td>決算短信・説明会資料・中期計画。<strong>ぜんぶ無料</strong>。投資家向け（IR＝Investor Relations）に会社が公式発信する一次情報。</td></tr>
+      <tr><th>EDINET／TDnet</th><td>金融庁・取引所の公式開示システム。有価証券報告書などの「原本」が読める。</td></tr>
+      <tr><th>会社四季報</th><td>全上場企業の業績・財務を1冊にまとめた日本名物のデータブック。証券アプリで無料で読めることも多い。</td></tr>
+      <tr><th>証券会社のアプリ・レポート</th><td>株価・チャート・ニュース・アナリストレポート。口座があれば無料。</td></tr>
+      <tr><th>新聞・経済ニュース</th><td>日々の市場の動きと背景。「なぜ動いたか」の解説役。</td></tr>
+      <tr class="hl"><th>SNS・動画・掲示板</th><td>玉石混交の川下。ヒントにはなるが、<strong>「買い推奨」をうのみにしない。とくに『必ず』『限定』『DMします』は詐欺の三点セット</strong>（『お金の森』本編9時間目参照）。</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="info purple">
+    <div class="info-title">情報とのつき合い方 3か条</div>
+    <ul class="point-list" style="margin:0">
+      <li>意見（買うべき！）ではなく<strong>事実（売上・利益・計画）</strong>を集める</li>
+      <li>その情報で<strong>得をするのはだれか</strong>を考える（ポジショントーク検知器）</li>
+      <li>最後の判断は必ず自分。<strong>「人にすすめられたから」は、損した時に何も学べない買い方</strong></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 放課後 Q&A ================= -->
+<section class="page">
+  <div class="chapter-banner c-purple"><span class="no">放課後②</span>フク先生に聞きたい！Q&amp;A 8連発</div>
+
+  <div class="qa">
+    <div class="q"><span class="chip">Q.1</span><span>株で会社が倒産したら、株はどうなるの？</span></div>
+    <div class="a"><p>上場廃止となり、株の価値はほぼゼロになります。ただし株主の責任はそこまで。<strong>出したお金以上に請求されることはありません</strong>（有限責任）。これが分散投資（1社に全額入れない）が大切な理由です。</p></div>
+  </div>
+  <div class="qa">
+    <div class="q"><span class="chip">Q.2</span><span>株はいつ売買できるの？ 夜中でも？</span></div>
+    <div class="a"><p>東京証券取引所の取引時間は平日の9:00〜11:30（前場）と12:30〜15:30（後場）。注文自体は夜でもアプリから予約できます。米国株は日本時間の夜〜早朝が取引時間です。</p></div>
+  </div>
+  <div class="qa">
+    <div class="q"><span class="chip">Q.3</span><span>もうけたら税金はどうなる？ 高校生でも？</span></div>
+    <div class="a"><p>株のもうけ（値上がり益・配当）には約20%の税金がかかります。年齢に関係なくです。証券口座を「特定口座（源泉徴収あり）」にすれば計算も納付も証券会社が代行してくれ、確定申告は原則不要。NISA口座なら非課税です（くわしくは『お金の森』本編へ）。</p></div>
+  </div>
+  <div class="qa">
+    <div class="q"><span class="chip">Q.4</span><span>1つの会社の株を買うのと、投資信託、どっちがいいの？</span></div>
+    <div class="a"><p>役割が違います。<strong>資産づくりの土台はインデックス投資信託</strong>（自動で分散）。個別株は、応援したい会社に「土台とは別のお金」で参加するもの。個別株は良くも悪くも値動きが大きく、1社に集中するリスクを背負います。<strong>土台なしの個別株一本勝負はおすすめしません</strong>。</p></div>
+  </div>
+  <div class="qa">
+    <div class="q"><span class="chip">Q.5</span><span>「テンバガー（10倍株）を探せ」って記事を見たけど？</span></div>
+    <div class="a"><p>10倍になる株は確かに存在しますが、事前に見分けるのはプロでも至難で、候補の多くは10倍どころか半分になります。<strong>夢を見るお金は「なくなってもいい額」まで</strong>。宝くじ売り場のワクワクと同じ棚に置いておきましょう。</p></div>
+  </div>
+  <div class="qa">
+    <div class="q"><span class="chip">Q.6</span><span>景気が悪いニュースばかりの時は、株を買っちゃダメ？</span></div>
+    <div class="a"><p>歴史的には、みんなが悲観的な時期に淡々と買い続けた人が報われてきました（安く仕込めるから）。ただし「底」を当てるのは不可能。だからこそ、時期を選ばない毎月の積立が理にかなっているのです。</p></div>
+  </div>
+  <div class="qa">
+    <div class="q"><span class="chip">Q.7</span><span>持ち株が上場廃止やTOBになるって通知が来たら？</span></div>
+    <div class="a"><p>TOB（株式公開買付け）は「あなたの株を○円で買い取ります」という提案で、多くは市場価格より高い値段が提示されます。通知やニュースの案内に沿って手続きすればOK。あわてて市場で投げ売りする前に、まず提示価格を確認しましょう。</p></div>
+  </div>
+  <div class="qa">
+    <div class="q"><span class="chip">Q.8</span><span>結局この本の内容、ぜんぶ覚えないとダメ？</span></div>
+    <div class="a"><p>暗記は不要です。「そういえばフク先生が言ってたな」と思い出せれば十分。次のページの結論リストだけ、スマホで撮っておいてください。</p></div>
+  </div>
+</section>
+
+<!-- ================= 結論リスト＋おわりに ================= -->
+<section class="page">
+  <div class="chapter-banner c-purple"><span class="no">卒業試験</span>これだけ覚えればOK！結論リスト</div>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th style="width:70px">番号</th><th>おぼえること</th><th>ひとこと</th></tr></thead>
+    <tbody>
+      <tr><th>①</th><td>株＝会社の持ち分。株主はオーナーの一員（責任は出資額まで）</td><td>ギャンブル札ではない</td></tr>
+      <tr><th>②</th><td>株価は短期＝人気投票、長期＝実力（業績）。ニュースは「予想との差」で効く</td><td>織り込み済みに注意</td></tr>
+      <tr><th>③</th><td>会社の大きさは株価でなく時価総額（株価×株数）で見る</td><td>株価はピザ1切れの値段</td></tr>
+      <tr><th>④</th><td>決算は3か月ごとの通知表。売上・営業利益・来期見通しをチェック</td><td>決算日をカレンダーに</td></tr>
+      <tr><th>⑤</th><td>PER＝もうけの何年分か。モノサシは同業種・過去と比べて使う</td><td>安いには理由がある</td></tr>
+      <tr><th>⑥</th><td>金利は株の重力、為替は円の値札。利上げ・円高円安で追い風の会社と逆風の会社がいる</td><td>ニュースが翻訳できる</td></tr>
+      <tr><th>⑦</th><td>配当・優待は権利付き最終日までに保有。タダ取りはできない</td><td>配当落ちを知っておく</td></tr>
+      <tr><th>⑧</th><td>自社株買い＝1株が濃くなる、増資＝薄まる、IPO直後は観客席から</td><td>ピザの切れ数で考える</td></tr>
+      <tr><th>⑨</th><td>信用取引・レバレッジは一生使わなくていい。インサイダー取引は犯罪</td><td>知識は防具として持つ</td></tr>
+      <tr><th>⑩</th><td>最大の敵は自分の脳。ルールと自動化でバグを封じる</td><td>淡々が最強</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+</section>
+
+<section class="page">
+  <div class="chapter-banner c-purple"><span class="no">おわりに</span>ニュースが「自分の物語」になる日</div>
+  <p>この本を読む前のあなたにとって、「日銀利上げ」「円安進行」「決算発表」は、遠い世界の呪文だったかもしれません。</p>
+  <p>でも、いまはどうでしょう。金利はお金のレンタル料。為替は円の値札。決算は会社の通知表。株はだれかの挑戦への出資。——ぜんぶ、人間の営みの話でした。そしてあなたが将来働く会社も、買い物をするお店も、この同じしくみの中で生きています。</p>
+  <p><strong>株のしくみを学ぶことは、社会のしくみを学ぶこと。</strong>この知識は、投資をする・しないにかかわらず、あなたの一生の道具になります。</p>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris-yorokobi"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>先生、今夜の経済ニュース、はじめて「予習してから見るテレビ番組」みたいに楽しみです！</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku-wink"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>それでこそじゃ。しくみを知る者は、あおられず、だまされず、あわてない。<strong>学びこそ、いちばん利回りのいい投資</strong>じゃよ。</p></div>
+  </div>
+
+  <div class="fig" style="margin-top:26px">
+    <svg viewBox="0 0 400 130" width="340" role="img" aria-label="会社のビルの前にならぶフク先生とコリスくん">
+      <ellipse cx="200" cy="120" rx="190" ry="18" fill="#b9aede"/>
+      <use href="#build" x="40" y="34" width="80" height="80"/>
+      <use href="#kabuken" x="118" y="66" width="52" height="38"/>
+      <use href="#fuku" x="170" y="24" width="90" height="90"/>
+      <use href="#koris" x="256" y="42" width="74" height="74"/>
+      <use href="#coin" x="336" y="86" width="24" height="24"/>
+    </svg>
+  </div>
+
+  <div class="colophon" style="margin-top:22px;padding-top:16px;border-top:2px dashed #c9b8a5;text-align:center">
+    <p><strong>お金の森 番外編②　株のしくみ教室 〜高校生からわかる、株と経済のつながり〜</strong>　もりの経済教室・刊</p>
+    <p>本書は一般的な情報提供を目的としたものであり、特定の金融商品の売買をすすめるものではありません。<br>
+    登場する会社・数値はすべて説明のための架空の例です。制度・税率などは2026年7月時点の一般的な内容にもとづきます。<br>
+    投資は元本保証がなく、最終判断はご自身（未成年の方は保護者と一緒に）の責任でお願いします。</p>
+  </div>
+</section>
+
+</main>
