@@ -1,0 +1,1114 @@
+<title>お金の森 〜フク先生と学ぶ、一生モノの投資入門〜</title>
+<style>
+/* ============================================================
+   お金の森 — 実用マネー本スタイル
+   紙の本の世界観（クリーム紙×パステル）に固定した意図的な単一テーマ。
+   ダークモード時は「机」(外周背景)だけ暗くし、紙面は紙のまま。
+   ============================================================ */
+:root{
+  --desk:#cfe3e6;          /* 机＝ページ外背景（淡い青緑） */
+  --paper:#fffdf5;         /* 紙面 */
+  --ink:#4a3626;           /* 本文の焦げ茶 */
+  --ink-soft:#7a6350;
+  --title:#c9356e;         /* 見出しの紅色 */
+  --accent:#f0a63c;        /* オレンジ */
+  --green:#7bbf8e;
+  --green-pale:#e3f2e6;
+  --blue:#7eb8d9;
+  --blue-pale:#e2f0f7;
+  --pink-pale:#fbe4ec;
+  --cream:#fdf3d9;
+  --line:#5b4636;
+  --bubble-t:#fdf0dc;      /* 先生の吹き出し */
+  --bubble-s:#eef5ea;      /* 生徒の吹き出し */
+  --shadow:0 4px 14px rgba(74,54,38,.10);
+}
+@media (prefers-color-scheme: dark){
+  :root{ --desk:#22333b; --shadow:0 4px 14px rgba(0,0,0,.35); }
+}
+:root[data-theme="dark"]{ --desk:#22333b; --shadow:0 4px 14px rgba(0,0,0,.35); }
+:root[data-theme="light"]{ --desk:#cfe3e6; --shadow:0 4px 14px rgba(74,54,38,.10); }
+
+*{ box-sizing:border-box; }
+body{
+  margin:0; background:var(--desk); color:var(--ink);
+  font-family:"Hiragino Maru Gothic ProN","Hiragino Kaku Gothic ProN","BIZ UDPGothic","Yu Gothic UI","Meiryo",sans-serif;
+  line-height:1.9; font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+main{ max-width:900px; margin:0 auto; padding:28px 14px 60px; }
+
+/* ---------- 紙面パネル ---------- */
+.page{
+  background:var(--paper); border-radius:18px; box-shadow:var(--shadow);
+  padding:34px 34px 40px; margin:0 0 28px;
+}
+@media (max-width:640px){ .page{ padding:22px 16px 28px; } }
+p{ margin:0 0 1em; }
+strong{ color:#a8264f; }
+.marker{ background:linear-gradient(transparent 60%, #c8ecc0 60%); font-weight:700; }
+.small{ font-size:.82em; color:var(--ink-soft); }
+ul,ol{ padding-left:1.4em; margin:0 0 1em; }
+li{ margin:.25em 0; }
+
+/* ---------- 表紙 ---------- */
+.cover{
+  position:relative; overflow:hidden; text-align:center;
+  background:
+    repeating-conic-gradient(from 0deg at 50% 42%, #ffe9a8 0deg 12deg, #fff6d8 12deg 24deg);
+  border-radius:18px; box-shadow:var(--shadow); margin-bottom:28px;
+  padding:48px 20px 0;
+}
+.cover .band{
+  display:inline-block; background:#4a7c59; color:#fff; border-radius:999px;
+  padding:6px 22px; font-weight:700; letter-spacing:.1em; margin-bottom:14px;
+  box-shadow:0 3px 0 rgba(74,54,38,.25);
+}
+.cover h1{
+  margin:.1em 0 .2em; font-size:clamp(44px,9vw,84px); line-height:1.15;
+  color:var(--title); letter-spacing:.04em; text-wrap:balance; font-weight:900;
+  text-shadow:3px 3px 0 #fff, -3px 3px 0 #fff, 3px -3px 0 #fff, -3px -3px 0 #fff, 0 6px 0 rgba(201,53,110,.18);
+}
+.cover .subtitle{ font-size:clamp(15px,2.6vw,20px); font-weight:700; color:var(--ink); margin-bottom:6px; }
+.cover .author{ font-weight:700; color:var(--ink-soft); margin-bottom:8px; }
+.cover .bottom{
+  background:#bfe0ee; margin:26px -20px 0; padding:22px 20px 26px;
+}
+.cover .powers{
+  display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:12px;
+}
+.cover .power{
+  background:#fff; border:2px solid var(--line); border-radius:14px;
+  padding:8px 14px; font-weight:700; font-size:14px; min-width:130px;
+}
+.cover .power b{ display:block; font-size:16px; }
+.p1 b{color:#2f8f5b}.p2 b{color:#d9822b}.p3 b{color:#c9356e}.p4 b{color:#3d7fb5}
+.cover .catch{ font-size:clamp(18px,3.4vw,26px); font-weight:900; color:#7a4a12; margin:0; }
+
+/* ---------- 章バナー ---------- */
+.chapter-banner{
+  display:flex; align-items:center; gap:14px;
+  border-radius:14px; padding:12px 18px; margin:0 0 22px;
+  color:#fff; font-weight:900; font-size:clamp(18px,3vw,23px); letter-spacing:.02em;
+}
+.chapter-banner .no{
+  background:rgba(255,255,255,.92); color:inherit; border-radius:10px;
+  padding:2px 12px; font-size:.75em; line-height:1.6; white-space:nowrap;
+}
+.c-green{ background:#63a877; } .c-green .no{ color:#2f7a4a; }
+.c-orange{ background:#e89a3c; } .c-orange .no{ color:#b06a10; }
+.c-pink{ background:#e0698f; } .c-pink .no{ color:#c23a68; }
+.c-blue{ background:#6da9cc; } .c-blue .no{ color:#3d7fb5; }
+.c-purple{ background:#9b8ec4; } .c-purple .no{ color:#6f5fa8; }
+
+h2.lesson-title{
+  font-size:clamp(20px,3.6vw,27px); color:var(--ink); margin:0 0 4px; font-weight:900;
+  text-wrap:balance;
+}
+.lesson-lead{ color:var(--title); font-weight:700; font-size:14px; margin-bottom:2px; }
+.do-line{
+  display:flex; align-items:center; gap:10px; background:var(--pink-pale);
+  border-radius:999px; padding:8px 18px; font-weight:900; color:#a8264f;
+  margin:14px 0 22px; font-size:15px;
+}
+.do-line .arrow{ color:#e0698f; }
+
+/* ---------- 小見出しバー ---------- */
+h3.bar{
+  display:flex; align-items:center; gap:10px;
+  background:linear-gradient(#f6c9d8,#f1b3c9); color:#8c1d46;
+  border-radius:999px; padding:8px 20px; font-size:17px; margin:34px 0 16px;
+  font-weight:900;
+}
+h3.bar.g{ background:linear-gradient(#cde9d4,#b5dec1); color:#256b41; }
+h3.bar.b{ background:linear-gradient(#cfe6f4,#b7d9ee); color:#2c6b96; }
+h3.bar.y{ background:linear-gradient(#fbe3ae,#f6d488); color:#8a5a07; }
+h4{ color:#a8264f; font-size:16px; margin:1.4em 0 .5em; }
+
+/* ---------- 会話 ---------- */
+.talk{ display:flex; gap:12px; margin:14px 0; align-items:flex-start; }
+.talk .face{
+  flex:0 0 64px; width:64px; height:64px; border-radius:50%;
+  background:#fff; border:2.5px solid var(--line); overflow:hidden;
+}
+.talk .face svg{ width:100%; height:100%; display:block; }
+.talk .bubble{
+  position:relative; border-radius:16px; padding:12px 18px; max-width:640px;
+  font-weight:600;
+}
+.talk.t .bubble{ background:var(--bubble-t); }
+.talk.s{ flex-direction:row-reverse; }
+.talk.s .bubble{ background:var(--bubble-s); }
+.talk.t .bubble::before{
+  content:""; position:absolute; left:-9px; top:22px;
+  border:9px solid transparent; border-right-color:var(--bubble-t); border-left:0;
+}
+.talk.s .bubble::before{
+  content:""; position:absolute; right:-9px; top:22px;
+  border:9px solid transparent; border-left-color:var(--bubble-s); border-right:0;
+}
+.talk .bubble p:last-child{ margin-bottom:0; }
+.name-tag{ font-size:11px; font-weight:900; color:var(--ink-soft); text-align:center; margin-top:2px; }
+
+/* ---------- 図解ボックス・表 ---------- */
+.info{
+  background:var(--cream); border-radius:14px; padding:18px 20px; margin:18px 0;
+}
+.info.green{ background:var(--green-pale); }
+.info.blue{ background:var(--blue-pale); }
+.info-title{
+  display:inline-block; background:#fff; border:2px solid var(--accent);
+  color:#b06a10; border-radius:999px; padding:2px 16px; font-weight:900;
+  font-size:14px; margin-bottom:10px;
+}
+.table-wrap{ overflow-x:auto; margin:16px 0; }
+table{
+  border-collapse:collapse; width:100%; min-width:520px; background:#fff;
+  font-size:14.5px; border:2px solid var(--line); border-radius:8px;
+}
+th,td{ border:1.5px solid #c9b8a5; padding:9px 12px; text-align:left; vertical-align:top; }
+thead th{ background:#8c6f52; color:#fff; font-weight:900; }
+tbody th{ background:var(--cream); font-weight:900; white-space:nowrap; }
+td.num{ text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+tr.hl td, tr.hl th{ background:#fdeaf1; }
+
+.point-list{ list-style:none; padding:0; margin:0 0 1em; }
+.point-list li{
+  position:relative; padding-left:34px; margin:.6em 0; font-weight:700;
+}
+.point-list li::before{
+  content:"✔"; position:absolute; left:0; top:0;
+  width:24px; height:24px; border-radius:50%; background:var(--green); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-size:13px;
+}
+.warn-list li::before{ content:"！"; background:#e06060; }
+
+.fig{ margin:20px 0; text-align:center; }
+.fig svg{ max-width:100%; height:auto; }
+.fig-cap{ font-size:12.5px; color:var(--ink-soft); margin-top:6px; }
+
+/* ---------- まとめ・Q&A ---------- */
+.summary{
+  background:var(--green-pale); border:2.5px dashed var(--green);
+  border-radius:14px; padding:16px 20px; margin:26px 0 4px;
+}
+.summary .stitle{ font-weight:900; color:#256b41; margin-bottom:6px; }
+.qa{ margin:20px 0; }
+.qa .q{
+  display:flex; gap:10px; align-items:flex-start; font-weight:900; color:#8c1d46;
+  margin-bottom:8px;
+}
+.qa .q .chip{ background:#e0698f; color:#fff; border-radius:8px; padding:1px 10px; font-size:13px; white-space:nowrap; margin-top:3px; }
+.qa .a{
+  background:var(--cream); border-radius:12px; padding:12px 16px; margin-left:12px;
+}
+.qa .a p:last-child{ margin-bottom:0; }
+
+/* ---------- 目次 ---------- */
+.toc-row{
+  display:flex; align-items:baseline; gap:8px; margin:.45em 0; font-weight:700;
+}
+.toc-row .dots{ flex:1; border-bottom:2px dotted #c9b8a5; transform:translateY(-4px); }
+.toc-row .pg{ font-variant-numeric:tabular-nums; color:var(--ink-soft); }
+.toc-step{
+  border-radius:10px; color:#fff; font-weight:900; padding:6px 14px; margin:20px 0 8px;
+}
+footer.colophon{
+  text-align:center; color:var(--ink-soft); font-size:12.5px; padding:8px 20px 30px;
+}
+</style>
+
+<!-- ============ キャラクターSVG定義 ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- フク先生（フクロウ・角帽） -->
+    <g id="fuku-base">
+      <ellipse cx="50" cy="60" rx="34" ry="32" fill="#c08a52" stroke="#5b4636" stroke-width="3"/>
+      <path d="M28 40 Q22 26 32 30 Q36 33 38 38 Z" fill="#c08a52" stroke="#5b4636" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M72 40 Q78 26 68 30 Q64 33 62 38 Z" fill="#c08a52" stroke="#5b4636" stroke-width="3" stroke-linejoin="round"/>
+      <ellipse cx="50" cy="70" rx="22" ry="18" fill="#f6e7c9" stroke="#5b4636" stroke-width="2.5"/>
+      <path d="M18 62 Q10 74 22 82 Q28 74 26 64 Z" fill="#a9743f" stroke="#5b4636" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M82 62 Q90 74 78 82 Q72 74 74 64 Z" fill="#a9743f" stroke="#5b4636" stroke-width="2.5" stroke-linejoin="round"/>
+      <rect x="22" y="16" width="56" height="9" rx="3" fill="#3d3d4d" stroke="#5b4636" stroke-width="2.5"/>
+      <path d="M50 6 L86 18 L50 30 L14 18 Z" fill="#4a4a5e" stroke="#5b4636" stroke-width="2.5" stroke-linejoin="round"/>
+      <line x1="72" y1="20" x2="80" y2="34" stroke="#e0a52f" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="81" cy="37" r="4" fill="#e0a52f"/>
+    </g>
+    <symbol id="fuku" viewBox="0 0 100 100">
+      <use href="#fuku-base"/>
+      <circle cx="40" cy="52" r="10.5" fill="#fff" stroke="#5b4636" stroke-width="2.5"/>
+      <circle cx="60" cy="52" r="10.5" fill="#fff" stroke="#5b4636" stroke-width="2.5"/>
+      <circle cx="41.5" cy="53" r="4.2" fill="#33241a"/>
+      <circle cx="58.5" cy="53" r="4.2" fill="#33241a"/>
+      <circle cx="43" cy="51.4" r="1.4" fill="#fff"/>
+      <circle cx="60" cy="51.4" r="1.4" fill="#fff"/>
+      <path d="M46 64 L54 64 L50 71 Z" fill="#f0a63c" stroke="#5b4636" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M42 76 Q50 81 58 76" fill="none" stroke="#5b4636" stroke-width="2.2" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="fuku-wink" viewBox="0 0 100 100">
+      <use href="#fuku-base"/>
+      <circle cx="40" cy="52" r="10.5" fill="#fff" stroke="#5b4636" stroke-width="2.5"/>
+      <circle cx="60" cy="52" r="10.5" fill="#fff" stroke="#5b4636" stroke-width="2.5"/>
+      <circle cx="41.5" cy="53" r="4.2" fill="#33241a"/>
+      <path d="M54 53 Q60 49 66 53" fill="none" stroke="#33241a" stroke-width="3" stroke-linecap="round"/>
+      <path d="M46 64 L54 64 L50 71 Z" fill="#f0a63c" stroke="#5b4636" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M41 75 Q50 83 59 75" fill="none" stroke="#5b4636" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M84 46 l4 -8 M90 52 l8 -4 M88 60 l9 1" stroke="#e0a52f" stroke-width="2.6" stroke-linecap="round"/>
+    </symbol>
+    <!-- コリスくん（リス・どんぐり） -->
+    <g id="koris-base">
+      <path d="M70 30 Q94 24 92 52 Q91 74 72 80 Q80 62 72 46 Z" fill="#d9813f" stroke="#5b4636" stroke-width="3" stroke-linejoin="round"/>
+      <circle cx="46" cy="56" r="32" fill="#e8a25e" stroke="#5b4636" stroke-width="3"/>
+      <path d="M26 32 Q20 16 36 24 Q40 27 40 32 Z" fill="#e8a25e" stroke="#5b4636" stroke-width="2.8" stroke-linejoin="round"/>
+      <path d="M62 30 Q70 15 74 30 Q70 33 64 34 Z" fill="#e8a25e" stroke="#5b4636" stroke-width="2.8" stroke-linejoin="round"/>
+      <ellipse cx="46" cy="68" rx="19" ry="15" fill="#f9ecd4" stroke="#5b4636" stroke-width="2.4"/>
+    </g>
+    <symbol id="koris" viewBox="0 0 100 100">
+      <use href="#koris-base"/>
+      <circle cx="36" cy="50" r="4" fill="#33241a"/>
+      <circle cx="56" cy="50" r="4" fill="#33241a"/>
+      <circle cx="37.4" cy="48.6" r="1.3" fill="#fff"/>
+      <circle cx="57.4" cy="48.6" r="1.3" fill="#fff"/>
+      <ellipse cx="46" cy="59" rx="3.4" ry="2.6" fill="#5b4636"/>
+      <path d="M40 66 Q46 71 52 66" fill="none" stroke="#5b4636" stroke-width="2.2" stroke-linecap="round"/>
+      <circle cx="30" cy="60" r="4.5" fill="#f3b7a0" opacity=".8"/>
+      <circle cx="62" cy="60" r="4.5" fill="#f3b7a0" opacity=".8"/>
+    </symbol>
+    <symbol id="koris-odoroki" viewBox="0 0 100 100">
+      <use href="#koris-base"/>
+      <circle cx="36" cy="50" r="6" fill="#fff" stroke="#33241a" stroke-width="2.4"/>
+      <circle cx="56" cy="50" r="6" fill="#fff" stroke="#33241a" stroke-width="2.4"/>
+      <circle cx="36" cy="50" r="2.2" fill="#33241a"/>
+      <circle cx="56" cy="50" r="2.2" fill="#33241a"/>
+      <ellipse cx="46" cy="60" rx="3.2" ry="2.4" fill="#5b4636"/>
+      <ellipse cx="46" cy="69" rx="4.5" ry="5.5" fill="#7a4a2a"/>
+      <path d="M74 20 l4 -10 M82 26 l8 -6 M84 38 l10 -2" stroke="#e06060" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="koris-yorokobi" viewBox="0 0 100 100">
+      <use href="#koris-base"/>
+      <path d="M30 50 Q36 44 42 50" fill="none" stroke="#33241a" stroke-width="3" stroke-linecap="round"/>
+      <path d="M50 50 Q56 44 62 50" fill="none" stroke="#33241a" stroke-width="3" stroke-linecap="round"/>
+      <ellipse cx="46" cy="59" rx="3.4" ry="2.6" fill="#5b4636"/>
+      <path d="M38 65 Q46 74 54 65" fill="#7a4a2a" stroke="#5b4636" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="29" cy="61" r="5" fill="#f3b7a0" opacity=".85"/>
+      <circle cx="63" cy="61" r="5" fill="#f3b7a0" opacity=".85"/>
+      <path d="M76 22 l5 -9 M84 30 l9 -4" stroke="#f0a63c" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <!-- どんぐり -->
+    <symbol id="donguri" viewBox="0 0 40 48">
+      <path d="M8 18 Q8 40 20 44 Q32 40 32 18 Z" fill="#c98d4b" stroke="#5b4636" stroke-width="2.4" stroke-linejoin="round"/>
+      <path d="M5 18 Q5 8 20 8 Q35 8 35 18 Q28 21 20 21 Q12 21 5 18 Z" fill="#8a5a2b" stroke="#5b4636" stroke-width="2.4" stroke-linejoin="round"/>
+      <line x1="20" y1="8" x2="20" y2="2" stroke="#5b4636" stroke-width="2.6" stroke-linecap="round"/>
+    </symbol>
+    <!-- 芽・木 -->
+    <symbol id="me" viewBox="0 0 40 48">
+      <line x1="20" y1="46" x2="20" y2="22" stroke="#4a7c59" stroke-width="3.2" stroke-linecap="round"/>
+      <path d="M20 24 Q6 22 8 10 Q22 10 20 24 Z" fill="#8fce9f" stroke="#4a7c59" stroke-width="2.4" stroke-linejoin="round"/>
+      <path d="M20 30 Q34 28 32 16 Q18 16 20 30 Z" fill="#aede7f" stroke="#4a7c59" stroke-width="2.4" stroke-linejoin="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<main>
+
+<!-- ================= 表紙 ================= -->
+<section class="cover">
+  <div class="band">しっかり者のリスになろう</div>
+  <div class="subtitle">コツコツが、いちばん強い。</div>
+  <h1>お金の森</h1>
+  <div class="author">フク先生と学ぶ、一生モノの投資入門　◆　もりの経済教室</div>
+  <svg viewBox="0 0 320 150" width="320" style="max-width:78%" role="img" aria-label="表紙イラスト：フク先生とコリスくん">
+    <ellipse cx="160" cy="150" rx="170" ry="26" fill="#9fd3ab"/>
+    <use href="#fuku-wink" x="60" y="20" width="120" height="120"/>
+    <use href="#koris-yorokobi" x="190" y="52" width="88" height="88"/>
+    <use href="#donguri" x="278" y="96" width="26" height="31"/>
+    <use href="#me" x="24" y="100" width="30" height="36"/>
+  </svg>
+  <div class="bottom">
+    <p class="catch">預けて眠らせる時代は、終わった。<br>「育てるお金」の授業、はじまるよ！</p>
+    <div class="powers">
+      <div class="power p1"><b>そなえる</b>くらしの土台をつくる力</div>
+      <div class="power p2"><b>ふやす</b>資産を育てる力</div>
+      <div class="power p3"><b>つづける</b>相場に振り回されない力</div>
+      <div class="power p4"><b>まもる</b>ワナからお金を守る力</div>
+    </div>
+    <p style="margin:14px 0 0;font-weight:700;font-size:14px">インフレ・金利のある世界を生きぬく、実践型・投資ガイドブック</p>
+  </div>
+</section>
+
+<!-- ================= はじめに ================= -->
+<section class="page">
+  <h2 class="lesson-title">はじめに 〜お金の森へようこそ〜</h2>
+  <p>「まじめに働いて、まじめに銀行に預けてきたのに、なんだか毎年くらしが苦しくなっていく」</p>
+  <p>もしそう感じているなら、それはあなたの努力が足りないからではありません。<strong>ゲームのルールが変わった</strong>からです。</p>
+  <p>長いあいだ日本は「モノの値段が上がらない国」でした。物価が上がらないなら、現金をそのまま持っているだけで大きくは困りません。ところが今は、物価が毎年じわじわ上がる<span class="marker">「インフレのある世界」</span>に戻りました。日銀は約30年ぶりの水準まで政策金利を引き上げ、預金にもわずかに利息がつくようになりましたが、<strong>物価の上がるスピードには、まったく追いついていません</strong>。</p>
+  <p>つまり——何もしない人のお金は、金額はそのままでも、<strong>買えるものが毎年少しずつ減っていく</strong>のです。</p>
+  <p>この本は、そんな時代を生きるための「育てるお金」の教科書です。舞台は、どんぐりの実る大きな森。物知りなフクロウの<strong>フク先生</strong>が、貯めこむことしか知らなかったリスの<strong>コリスくん</strong>に、投資のはじめ方から続け方、やめ方（出口）までを、ぜんぶ順番に教えていきます。</p>
+
+  <h3 class="bar y">とうじょうじんぶつ</h3>
+  <div style="display:flex;flex-wrap:wrap;gap:18px;justify-content:center;margin:10px 0 6px">
+    <div style="text-align:center;max-width:250px">
+      <svg width="110" height="110" viewBox="0 0 100 100" role="img" aria-label="フク先生"><use href="#fuku"/></svg>
+      <div style="font-weight:900;color:#a8264f">フク先生</div>
+      <p class="small" style="text-align:left">森の経済教室の先生。若いころ「一発逆転」を狙って森じゅうのどんぐりを失いかけた過去を持つ。以来、王道の長期投資ひとすじ40年。口ぐせは「急がば、積み立てじゃ」。</p>
+    </div>
+    <div style="text-align:center;max-width:250px">
+      <svg width="110" height="110" viewBox="0 0 100 100" role="img" aria-label="コリスくん"><use href="#koris"/></svg>
+      <div style="font-weight:900;color:#256b41">コリスくん</div>
+      <p class="small" style="text-align:left">働きはじめて3年目の若リス。まじめな貯金派で、稼いだどんぐりはぜんぶ巣あなに保管。最近「どんぐりで買えるきのこの量が減った」ことに気づき、フク先生の教室の戸をたたいた。</p>
+    </div>
+  </div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>先生、ぼく5年間ずっと節約して貯めてきたのに、ぜんぜん豊かになった気がしないんです……。</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>よく気づいたのう。貯める力は立派じゃ。ただ、今の時代は<strong>「貯める」と「育てる」の両方</strong>がそろって、はじめてお金に強くなれる。この教室で、順番にぜんぶ教えよう。<strong>今日はじめる人が、いちばん得をする</strong>んじゃよ。</p></div>
+  </div>
+</section>
+
+<!-- ================= 目次 ================= -->
+<section class="page">
+  <h2 class="lesson-title">目次 -Contents-</h2>
+  <div class="toc-step c-green chapter-banner" style="margin-top:18px"><span class="no">1時間目</span>そなえる</div>
+  <div class="toc-row"><span>銀行預金だけでは守れない時代 — インフレという「静かな値下げ」</span><span class="dots"></span></div>
+  <div class="toc-row"><span>投資の前の土台づくり — 生活防衛資金と固定費</span><span class="dots"></span></div>
+  <div class="toc-step c-orange chapter-banner"><span class="no">2時間目</span>ふやす</div>
+  <div class="toc-row"><span>複利 — 時間を味方につける魔法</span><span class="dots"></span></div>
+  <div class="toc-row"><span>インデックス投資 — 森ぜんぶを買う発想</span><span class="dots"></span></div>
+  <div class="toc-row"><span>NISA — 利益に税金がかからない「非課税の温室」</span><span class="dots"></span></div>
+  <div class="toc-row"><span>iDeCo — 老後専用・節税の最終兵器（2027年に大幅パワーアップ）</span><span class="dots"></span></div>
+  <div class="toc-step c-pink chapter-banner"><span class="no">3時間目</span>つづける</div>
+  <div class="toc-row"><span>ドルコスト平均法 — 「いつ買うか」に悩まない技術</span><span class="dots"></span></div>
+  <div class="toc-row"><span>暴落サバイバル — 売らないリスがいちばん強い</span><span class="dots"></span></div>
+  <div class="toc-row"><span>分散 — 卵とどんぐりは、ひとつのカゴに盛らない</span><span class="dots"></span></div>
+  <div class="toc-step c-blue chapter-banner"><span class="no">4時間目</span>まもる</div>
+  <div class="toc-row"><span>泥棒ギツネのワナ — 投資詐欺の見分け方</span><span class="dots"></span></div>
+  <div class="toc-row"><span>出口戦略 — 育てた木の実の食べ方（4%ルール）</span><span class="dots"></span></div>
+  <div class="toc-step c-purple chapter-banner"><span class="no">放課後</span>Q&amp;Aと結論リスト</div>
+  <div class="toc-row"><span>フク先生に聞きたい！Q&amp;A 8連発／これだけやればOK！結論リスト</span><span class="dots"></span></div>
+</section>
+
+<!-- ================= 1時間目-1 インフレ ================= -->
+<section class="page">
+  <div class="chapter-banner c-green"><span class="no">1時間目</span>そなえる 〜くらしの土台をつくろう〜</div>
+  <p class="lesson-lead">なぜ、いま投資なのか？</p>
+  <h2 class="lesson-title">銀行預金だけでは守れない時代</h2>
+  <div class="do-line"><span>この授業でわかること</span><span class="arrow">▶▶</span><span>「現金だけ」が実は安全ではない理由</span></div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>投資ってこわくないですか？ 銀行に預けておけば、減ることは絶対ないですよね？</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p><strong>「金額」は減らん。でも「価値」は減る</strong>んじゃ。これがインフレの正体での。去年100どんぐりで買えたきのこが、今年は103どんぐり出さんと買えん。同じ財布の中身で、買えるものが減っていく。<span class="marker">静かな値下げ</span>が、毎年あなたの現金に起きておるんじゃよ。</p></div>
+  </div>
+
+  <h3 class="bar g">現金の「実質的な価値」はこう減る</h3>
+  <p>物価が年2％ずつ上がる世界で、タンス預金の100万円が「実質いくら分の買い物ができるか」を見てみましょう。</p>
+  <div class="fig">
+    <svg viewBox="0 0 640 260" width="640" role="img" aria-label="インフレ率2%が続いた場合の現金100万円の実質価値の推移。10年後に約82万円、20年後に約67万円、30年後に約55万円相当まで目減りする棒グラフ">
+      <text x="20" y="24" font-size="15" font-weight="bold" fill="#4a3626">100万円の現金、買える量はどれだけ残る？（物価上昇 年2%）</text>
+      <line x1="60" y1="210" x2="620" y2="210" stroke="#8c6f52" stroke-width="2"/>
+      <g font-size="13" fill="#4a3626" text-anchor="middle" font-weight="bold">
+        <rect x="80"  y="60"  width="80" height="150" rx="6" fill="#8fce9f" stroke="#4a7c59" stroke-width="2"/>
+        <text x="120" y="52">100万円分</text><text x="120" y="230">今</text>
+        <rect x="220" y="87"  width="80" height="123" rx="6" fill="#f6d488" stroke="#c99a2e" stroke-width="2"/>
+        <text x="260" y="79">約82万円分</text><text x="260" y="230">10年後</text>
+        <rect x="360" y="110" width="80" height="100" rx="6" fill="#f2b46c" stroke="#c9802e" stroke-width="2"/>
+        <text x="400" y="102">約67万円分</text><text x="400" y="230">20年後</text>
+        <rect x="500" y="128" width="80" height="82" rx="6" fill="#ee8f7e" stroke="#c25543" stroke-width="2"/>
+        <text x="540" y="120">約55万円分</text><text x="540" y="230">30年後</text>
+      </g>
+      <path d="M130 66 Q330 30 528 122" fill="none" stroke="#c9356e" stroke-width="3" stroke-dasharray="7 6"/>
+      <text x="330" y="150" font-size="13" fill="#c9356e" font-weight="bold" text-anchor="middle">金額は100万円のまま。でも買える量は…</text>
+    </svg>
+    <div class="fig-cap">※ 年2%の物価上昇が続いた場合の概算。1.02のn乗で割った購買力の目安です。</div>
+  </div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris-odoroki"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>30年で半分近く！？ ぼくの巣あなの貯金、置いてるだけで溶けてるじゃないですか！</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>そういうことじゃ。しかも日本は2022年ごろから物価上昇が続き、日銀もついに利上げを重ねて、<strong>政策金利は約30年ぶりの水準</strong>まで戻った。銀行の普通預金にも0.2〜0.3%ほどの利息がつく時代になったがの、物価の上がり方（近年は2〜3%前後）には遠く及ばん。<strong>「預金だけ」はもはやノーガード戦法</strong>なんじゃよ。</p></div>
+  </div>
+
+  <div class="info green">
+    <div class="info-title">ここがポイント</div>
+    <ul class="point-list">
+      <li>インフレの世界では、現金は「金額そのまま・価値は目減り」する</li>
+      <li>預金金利は上がったが、物価上昇率にはまったく届かない</li>
+      <li>物価に負けないためには、経済の成長に乗る「資産」を持つ必要がある</li>
+      <li>だからこそ、世界中の企業に少しずつ出資する「投資」が効いてくる</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 1時間目-2 土台 ================= -->
+<section class="page">
+  <div class="chapter-banner c-green"><span class="no">1時間目</span>そなえる 〜くらしの土台をつくろう〜</div>
+  <p class="lesson-lead">あわてて始めるとケガをする！</p>
+  <h2 class="lesson-title">投資の前の「土台」づくり</h2>
+  <div class="do-line"><span>実践すると</span><span class="arrow">▶▶</span><span>暴落が来ても、生活も投資も守れる体になる</span></div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris-yorokobi"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>わかりました！ じゃあ貯金ぜんぶ、今すぐ投資します！</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>こらこら、それがいちばん危ない（笑）。投資は<strong>余裕資金でやるもの</strong>じゃ。生活費まで注ぎこむと、値下がりした時に生活のために売るしかなくなる。まずは<span class="marker">生活防衛資金</span>——何があっても手をつけない現金を、先に確保するんじゃよ。</p></div>
+  </div>
+
+  <h3 class="bar g">投資をはじめる前の3ステップ</h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th style="width:110px">ステップ</th><th>やること</th><th>目安</th></tr></thead>
+    <tbody>
+      <tr><th>STEP 1</th><td><strong>生活防衛資金</strong>を普通預金で確保する。病気・失業・引っ越しなど、人生の「まさか」に備える現金。</td><td>会社員は生活費の<strong>6か月分</strong>、フリーランスは<strong>1年分</strong></td></tr>
+      <tr><th>STEP 2</th><td><strong>固定費を1回だけ見直す</strong>。スマホを格安プランに、使っていないサブスクと保険を解約。浮いたお金が毎月の投資の弾になる。</td><td>月5,000円〜3万円の削減も珍しくない</td></tr>
+      <tr><th>STEP 3</th><td><strong>高い金利の借金を先に返す</strong>。リボ払い（年15%前後）を抱えたまま年5%を狙う投資をするのは、穴のあいたバケツで水くみをするようなもの。</td><td>リボ・カードローンは投資より先に完済</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku-wink"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>節約のコツはひとつだけ。<strong>毎日ガマンする節約より、1回の手続きでずっと効く固定費の削減</strong>じゃ。がんばらない節約こそ、長続きするんじゃよ。</p></div>
+  </div>
+
+  <div class="summary">
+    <div class="stitle">🌰 1時間目のまとめ</div>
+    <ul class="point-list">
+      <li>現金だけではインフレに負ける。でも現金ゼロもダメ</li>
+      <li>生活防衛資金（生活費6か月〜1年分）を最初に確保</li>
+      <li>固定費の見直しとリボ完済が、投資より先</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 2時間目-1 複利 ================= -->
+<section class="page">
+  <div class="chapter-banner c-orange"><span class="no">2時間目</span>ふやす 〜資産を育てよう〜</div>
+  <p class="lesson-lead">アインシュタインが「人類最大の発明」と呼んだ（とされる）力</p>
+  <h2 class="lesson-title">複利 — 時間を味方につける魔法</h2>
+  <div class="do-line"><span>実践すると</span><span class="arrow">▶▶</span><span>「利益が利益を生む」雪だるまが転がりはじめる</span></div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>投資の世界には<strong>単利</strong>と<strong>複利</strong>がある。単利は「元本にだけ利息がつく」。複利は「<span class="marker">利息にも利息がつく</span>」。どんぐりで言えばの、実ったどんぐりを食べずに植え直すと、そのどんぐりからも木が生えて、また実をつける——これが複利じゃ。</p></div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 640 200" width="640" role="img" aria-label="複利のイメージ。どんぐりが芽になり木になり、実ったどんぐりをまた植えると木が増えていく様子">
+      <ellipse cx="320" cy="180" rx="300" ry="16" fill="#cdeccd"/>
+      <use href="#donguri" x="40" y="120" width="34" height="41"/>
+      <text x="57" y="112" font-size="13" text-anchor="middle" font-weight="bold" fill="#4a3626">元本</text>
+      <text x="105" y="120" font-size="22" fill="#c9356e" font-weight="bold">▶</text>
+      <use href="#me" x="140" y="108" width="44" height="53"/>
+      <text x="162" y="100" font-size="13" text-anchor="middle" font-weight="bold" fill="#4a3626">育つ</text>
+      <text x="210" y="120" font-size="22" fill="#c9356e" font-weight="bold">▶</text>
+      <g>
+        <line x1="285" y1="168" x2="285" y2="98" stroke="#7a5230" stroke-width="7" stroke-linecap="round"/>
+        <circle cx="285" cy="78" r="34" fill="#8fce9f" stroke="#4a7c59" stroke-width="3"/>
+        <use href="#donguri" x="262" y="62" width="16" height="19"/>
+        <use href="#donguri" x="292" y="56" width="16" height="19"/>
+        <use href="#donguri" x="279" y="82" width="16" height="19"/>
+      </g>
+      <text x="285" y="34" font-size="13" text-anchor="middle" font-weight="bold" fill="#4a3626">実がなる（利益）</text>
+      <text x="345" y="120" font-size="22" fill="#c9356e" font-weight="bold">▶</text>
+      <g>
+        <line x1="430" y1="168" x2="430" y2="92" stroke="#7a5230" stroke-width="8" stroke-linecap="round"/>
+        <circle cx="430" cy="70" r="40" fill="#8fce9f" stroke="#4a7c59" stroke-width="3"/>
+        <use href="#donguri" x="404" y="52" width="16" height="19"/>
+        <use href="#donguri" x="436" y="46" width="16" height="19"/>
+        <use href="#donguri" x="420" y="74" width="16" height="19"/>
+        <use href="#donguri" x="446" y="72" width="16" height="19"/>
+        <line x1="520" y1="168" x2="520" y2="120" stroke="#7a5230" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="520" cy="106" r="24" fill="#aede7f" stroke="#4a7c59" stroke-width="3"/>
+        <line x1="580" y1="168" x2="580" y2="136" stroke="#7a5230" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="580" cy="126" r="16" fill="#aede7f" stroke="#4a7c59" stroke-width="2.6"/>
+      </g>
+      <text x="500" y="24" font-size="13" text-anchor="middle" font-weight="bold" fill="#c9356e">実を植え直すと、木が増えていく！</text>
+    </svg>
+    <div class="fig-cap">利益を受け取らず再投資する。これだけで増え方が「足し算」から「かけ算」に変わります。</div>
+  </div>
+
+  <h3 class="bar y">毎月3万円を年5%で積み立てたら？</h3>
+  <div class="fig">
+    <svg viewBox="0 0 640 300" width="640" role="img" aria-label="毎月3万円を年利5%で積み立てた場合の推移。10年で約466万円、20年で約1,233万円、30年で約2,497万円。元本部分と運用益部分を色分けした棒グラフ">
+      <text x="20" y="24" font-size="15" font-weight="bold" fill="#4a3626">毎月3万円 × 年5%（複利・概算）</text>
+      <line x1="70" y1="250" x2="620" y2="250" stroke="#8c6f52" stroke-width="2"/>
+      <g font-size="13" font-weight="bold" text-anchor="middle">
+        <rect x="110" y="216" width="90" height="27" fill="#a9d9b5" stroke="#4a7c59" stroke-width="2"/>
+        <rect x="110" y="208" width="90" height="8"  fill="#f6c46a" stroke="#c99a2e" stroke-width="2"/>
+        <text x="155" y="200" fill="#4a3626">約466万円</text>
+        <text x="155" y="270" fill="#4a3626">10年</text>
+        <rect x="290" y="196" width="90" height="47" fill="#a9d9b5" stroke="#4a7c59" stroke-width="2"/>
+        <rect x="290" y="162" width="90" height="34" fill="#f6c46a" stroke="#c99a2e" stroke-width="2"/>
+        <text x="335" y="152" fill="#4a3626">約1,233万円</text>
+        <text x="335" y="270" fill="#4a3626">20年</text>
+        <rect x="470" y="179" width="90" height="64" fill="#a9d9b5" stroke="#4a7c59" stroke-width="2"/>
+        <rect x="470" y="86"  width="90" height="93" fill="#f6c46a" stroke="#c99a2e" stroke-width="2"/>
+        <text x="515" y="76" fill="#c9356e" font-size="15">約2,497万円</text>
+        <text x="515" y="270" fill="#4a3626">30年</text>
+      </g>
+      <g font-size="12.5" font-weight="bold">
+        <rect x="70" y="40" width="16" height="16" fill="#a9d9b5" stroke="#4a7c59" stroke-width="2"/>
+        <text x="92" y="53" fill="#4a3626">積み立てた元本</text>
+        <rect x="210" y="40" width="16" height="16" fill="#f6c46a" stroke="#c99a2e" stroke-width="2"/>
+        <text x="232" y="53" fill="#4a3626">運用で増えた分（複利の力）</text>
+      </g>
+      <text x="515" y="205" font-size="12" text-anchor="middle" fill="#7a4a12">益 約1,417万</text>
+      <text x="515" y="232" font-size="12" text-anchor="middle" fill="#2f5c3d">元本1,080万</text>
+    </svg>
+    <div class="fig-cap">※ 税金・手数料を考慮しない概算シミュレーション。年5%は全世界株式の長期平均リターン（おおむね5〜9%）を参考にした仮定で、将来を保証するものではありません。</div>
+  </div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris-odoroki"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>30年目、増えた分（約1,417万円）が元本（1,080万円）を追い越してる……！</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku-wink"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>それが複利の本性じゃ。<strong>最初の10年は退屈、20年目からが本番</strong>。だから複利のエンジンは「金額」より<span class="marker">「時間」</span>で回る。若いうちの少額は、年をとってからの大金に勝つことがある。<strong>今日が、人生でいちばん複利に有利な日</strong>なんじゃよ。</p></div>
+  </div>
+
+  <div class="info">
+    <div class="info-title">おまけ：72の法則</div>
+    <p style="margin:0"><strong>72 ÷ 年利（%）＝ お金が2倍になるおよその年数</strong>。年5%なら 72÷5 ＝ <strong>約14.4年</strong>で2倍。年0.3%の預金なら……240年。じっくり比べてみてください。</p>
+  </div>
+</section>
+
+<!-- ================= 2時間目-2 インデックス ================= -->
+<section class="page">
+  <div class="chapter-banner c-orange"><span class="no">2時間目</span>ふやす 〜資産を育てよう〜</div>
+  <p class="lesson-lead">プロの多くがコレに勝てない！？</p>
+  <h2 class="lesson-title">インデックス投資 — 森ぜんぶを買う発想</h2>
+  <div class="do-line"><span>実践すると</span><span class="arrow">▶▶</span><span>銘柄選びに悩まず、世界経済の成長に丸ごと乗れる</span></div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>投資って、上がる会社の株を当てるゲームですよね？ ぼく、目利きには自信ないなあ……。</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>当てにいかんでええ。<strong>「どの木が一番育つか」を当てる代わりに、森を丸ごと買う</strong>——それがインデックス投資じゃ。日経平均やS&amp;P500のような<span class="marker">株価指数（インデックス）</span>にまるっと連動する投資信託を買えば、1本で何百・何千という会社に自動で分散投資できる。</p></div>
+  </div>
+
+  <h3 class="bar y">1本の投資信託の中身（全世界株式型のイメージ）</h3>
+  <div class="fig">
+    <svg viewBox="0 0 640 250" width="640" role="img" aria-label="全世界株式インデックスファンドの国別構成イメージの円グラフ。米国が約6割、日本約5%、その他先進国・新興国が続く">
+      <g transform="translate(160,130)">
+        <circle r="92" fill="#f6d488" stroke="#5b4636" stroke-width="2.5"/>
+        <path d="M0 0 L0 -92 A92 92 0 0 1 54 74.4 Z" transform="rotate(0)" fill="#f2a25c" stroke="#5b4636" stroke-width="2"/>
+        <path d="M0 0 L54 74.4 A92 92 0 0 1 -33 85.9 Z" fill="#8fce9f" stroke="#5b4636" stroke-width="2"/>
+        <path d="M0 0 L-33 85.9 A92 92 0 0 1 -75.5 52.6 Z" fill="#9cc4e4" stroke="#5b4636" stroke-width="2"/>
+        <path d="M0 0 L-75.5 52.6 A92 92 0 0 1 -91.8 5.5 Z" fill="#e6a1b9" stroke="#5b4636" stroke-width="2"/>
+        <circle r="34" fill="#fffdf5" stroke="#5b4636" stroke-width="2"/>
+        <text y="-2" text-anchor="middle" font-size="12" font-weight="bold" fill="#4a3626">世界の株を</text>
+        <text y="14" text-anchor="middle" font-size="12" font-weight="bold" fill="#4a3626">まるごと1本</text>
+      </g>
+      <g font-size="13.5" font-weight="bold" fill="#4a3626">
+        <rect x="330" y="46" width="15" height="15" fill="#f2a25c" stroke="#5b4636" stroke-width="1.6"/><text x="353" y="59">アメリカ　約60%</text>
+        <rect x="330" y="76" width="15" height="15" fill="#8fce9f" stroke="#5b4636" stroke-width="1.6"/><text x="353" y="89">その他先進国（欧州など）　約20%</text>
+        <rect x="330" y="106" width="15" height="15" fill="#9cc4e4" stroke="#5b4636" stroke-width="1.6"/><text x="353" y="119">新興国（インドなど）　約10%</text>
+        <rect x="330" y="136" width="15" height="15" fill="#e6a1b9" stroke="#5b4636" stroke-width="1.6"/><text x="353" y="149">日本　約5%</text>
+        <rect x="330" y="166" width="15" height="15" fill="#f6d488" stroke="#5b4636" stroke-width="1.6"/><text x="353" y="179">その他</text>
+      </g>
+      <text x="330" y="215" font-size="12" fill="#7a6350">約50か国・数千社に、100円からでも分散投資できる</text>
+    </svg>
+    <div class="fig-cap">※ 全世界株式インデックス（MSCI ACWIなど）の国別構成のおおよそのイメージ。構成比は時価総額に応じて自動で入れ替わります。</div>
+  </div>
+
+  <h3 class="bar">インデックスファンドが最初の1本にふさわしい理由</h3>
+  <ul class="point-list">
+    <li><strong>勝手に分散</strong> — 1本で数百〜数千社。1社が倒産しても致命傷にならない</li>
+    <li><strong>勝手に新陳代謝</strong> — 伸びる会社の比率が自動で増え、衰えた会社は自動で減る</li>
+    <li><strong>手数料が激安</strong> — 人気の低コスト投信は信託報酬が年0.05〜0.1%程度。100万円持っても年600〜1,000円ほど</li>
+    <li><strong>プロ泣かせの実績</strong> — 長期では、手数料の高いアクティブファンドの多数がインデックスに勝てないという調査が繰り返し出ている</li>
+  </ul>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>タイプ</th><th>代表的な指数</th><th>特徴</th></tr></thead>
+    <tbody>
+      <tr class="hl"><th>全世界株式<br>（オルカン型）</th><td>MSCI ACWI など</td><td>米国6割＋世界中に分散。<strong>「どの国が勝つか」すら当てにいかない</strong>王道。迷ったらコレ。</td></tr>
+      <tr><th>米国株式</th><td>S&amp;P500</td><td>米国の代表500社。過去の成長は圧巻だが、米国一国に集中する分、米国不調時は道連れ。</td></tr>
+      <tr><th>日本株式</th><td>TOPIX・日経平均</td><td>為替リスクが小さい。ただし自分の給料も年金も日本頼みの人は、集中しすぎに注意。</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku-wink"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>選ぶ基準は3つだけ。<strong>①指数に連動する ②信託報酬が安い（年0.2%以下が目安） ③純資産がしっかり大きい</strong>。この条件を満たす低コスト投信を、ネット証券で積み立てる。それが結論じゃ。窓口でおすすめされる「テーマ型」や毎月分配型には近寄らんでよろしい。</p></div>
+  </div>
+</section>
+
+<!-- ================= 2時間目-3 NISA ================= -->
+<section class="page">
+  <div class="chapter-banner c-orange"><span class="no">2時間目</span>ふやす 〜資産を育てよう〜</div>
+  <p class="lesson-lead">使わない理由が見つからない！</p>
+  <h2 class="lesson-title">NISA — 利益に税金ゼロの「非課税の温室」</h2>
+  <div class="do-line"><span>実践すると</span><span class="arrow">▶▶</span><span>本来約2割引かれる税金が、まるまる手元に残る</span></div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>投資で出た利益には、ふつう<strong>約20%の税金</strong>がかかる。100万円もうかったら、約20万円が税金じゃ。ところが<span class="marker">NISA口座</span>の中で買ったぶんは、この税金が<strong>まるごとゼロ</strong>になる。国が「自分で資産をつくる人」を応援するための制度なんじゃよ。</p></div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 640 240" width="640" role="img" aria-label="課税口座とNISA口座の比較イラスト。100万円の利益が出た場合、課税口座では約20万円引かれ約80万円、NISAでは100万円まるまる残る">
+      <text x="320" y="26" font-size="15" font-weight="bold" fill="#4a3626" text-anchor="middle">利益100万円が出たら、手元にいくら残る？</text>
+      <g>
+        <rect x="40" y="48" width="260" height="160" rx="14" fill="#eee6da" stroke="#8c6f52" stroke-width="2.5"/>
+        <text x="170" y="76" font-size="14.5" font-weight="bold" text-anchor="middle" fill="#4a3626">ふつうの課税口座</text>
+        <rect x="70" y="94" width="200" height="34" rx="8" fill="#a9d9b5" stroke="#4a7c59" stroke-width="2"/>
+        <text x="170" y="117" font-size="13.5" font-weight="bold" text-anchor="middle" fill="#2f5c3d">手取り 約80万円</text>
+        <rect x="70" y="138" width="200" height="26" rx="8" fill="#ee8f7e" stroke="#c25543" stroke-width="2"/>
+        <text x="170" y="156" font-size="13" font-weight="bold" text-anchor="middle" fill="#7a2113">税金 約20万円（約20%）</text>
+        <text x="170" y="192" font-size="12" text-anchor="middle" fill="#7a6350">がんばった利益の2割がサヨナラ…</text>
+      </g>
+      <g>
+        <rect x="340" y="48" width="260" height="160" rx="14" fill="#fdeef5" stroke="#c9356e" stroke-width="3"/>
+        <text x="470" y="76" font-size="14.5" font-weight="bold" text-anchor="middle" fill="#a8264f">NISA口座（非課税の温室）</text>
+        <rect x="370" y="94" width="200" height="70" rx="8" fill="#f6c46a" stroke="#c99a2e" stroke-width="2"/>
+        <text x="470" y="126" font-size="15" font-weight="bold" text-anchor="middle" fill="#7a4a12">手取り 100万円！</text>
+        <text x="470" y="148" font-size="12.5" font-weight="bold" text-anchor="middle" fill="#7a4a12">税金 0円</text>
+        <text x="470" y="192" font-size="12" text-anchor="middle" fill="#a8264f">まるまる再投資 → 複利がさらに加速</text>
+      </g>
+    </svg>
+  </div>
+
+  <h3 class="bar">NISAのしくみ、ポイントは4つだけ</h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th style="width:170px">項目</th><th>内容</th></tr></thead>
+    <tbody>
+      <tr><th>非課税で持てる総額</th><td><strong>生涯1,800万円</strong>（買った値段ベース）。増えた分は青天井で非課税。</td></tr>
+      <tr><th>年間に買える上限</th><td>合計<strong>360万円</strong>（つみたて投資枠120万円＋成長投資枠240万円）。</td></tr>
+      <tr><th>非課税の期間</th><td><strong>無期限</strong>。一生モノ。</td></tr>
+      <tr><th>売ったら？</th><td>いつでも売却OK。売った分の枠（買値ベース）は<strong>翌年に復活</strong>する。</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>「つみたて投資枠」と「成長投資枠」、どっちを使えばいいんですか？ 名前からして難しそう……。</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku-wink"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>安心せい、<strong>どっちの枠でも同じ低コストのインデックスファンドを買えばよい</strong>。枠の名前は気にせんでいい。つまりNISA活用の結論は——<span class="marker">「ネット証券でNISA口座を開き、低コストの全世界株型か米国株型を、無理のない額で毎月積み立てて、売らずに持ち続ける」</span>。これだけじゃ。</p></div>
+  </div>
+
+  <div class="info">
+    <div class="info-title">つまずき防止メモ</div>
+    <ul class="warn-list point-list" style="margin:0">
+      <li>NISAは「口座」であって「商品」ではない。温室（口座）の中に何の苗（商品）を植えるかは自分で選ぶ</li>
+      <li>銀行や証券の窓口ではなく、品ぞろえが多く手数料の安い<strong>ネット証券</strong>で開くのが定石</li>
+      <li>NISAの損失は他の利益と相殺（損益通算）できない。だからこそ、値動きの荒い個別株より、長期のインデックス積立と相性がよい</li>
+      <li>「月100円」からでも始められる。満額を埋める必要はまったくない</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 2時間目-4 iDeCo ================= -->
+<section class="page">
+  <div class="chapter-banner c-orange"><span class="no">2時間目</span>ふやす 〜資産を育てよう〜</div>
+  <p class="lesson-lead">2027年に大幅パワーアップ！</p>
+  <h2 class="lesson-title">iDeCo — 老後専用・節税の最終兵器</h2>
+  <div class="do-line"><span>実践すると</span><span class="arrow">▶▶</span><span>積み立てるだけで、毎年の所得税・住民税まで安くなる</span></div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>iDeCo（イデコ）は<strong>自分でつくる年金</strong>じゃ。NISAとの最大の違いは2つ。①<span class="marker">掛金が全額所得控除</span>——つまり積み立てた分だけ、その年の税金が安くなる。②原則<strong>60歳まで引き出せない</strong>。老後資金に「カギ」をかける制度なんじゃよ。</p></div>
+  </div>
+
+  <div class="info blue">
+    <div class="info-title">節税効果のイメージ</div>
+    <p style="margin:0">課税所得400万円の会社員（税率が所得税20%＋住民税10%の場合）が月2.3万円（年27.6万円）を拠出すると、<strong>年間 約8.3万円の税負担が軽くなる</strong>計算。積み立てた時点で、いわば「確定リターン」を先取りできるのが iDeCo の強みです。</p>
+  </div>
+
+  <h3 class="bar b">2027年1月から、掛けられる額がこう変わる</h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>働き方</th><th>現在の上限（月額）</th><th>2027年1月〜（月額）</th></tr></thead>
+    <tbody>
+      <tr><th>自営業・フリーランス（第1号）</th><td class="num">6.8万円</td><td class="num"><strong>7.5万円</strong></td></tr>
+      <tr class="hl"><th>会社員（企業年金なし・第2号）</th><td class="num">2.3万円</td><td class="num"><strong>6.2万円</strong>（約2.7倍！）</td></tr>
+      <tr><th>会社員（企業年金あり）・公務員</th><td class="num">2万円</td><td class="num">企業年金と合算で<strong>6.2万円</strong>まで</td></tr>
+      <tr><th>専業主婦・主夫（第3号）</th><td class="num">2.3万円</td><td class="num">2.3万円（変更なし）</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="small">※ 2026年12月施行の法改正により、2027年1月の掛金分から適用予定。加入できる年齢も70歳未満まで拡大されます。（2026年7月時点の情報）</p>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>NISAとiDeCo、どっちを先にやればいいんですか？</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>基本は<strong>「自由に引き出せるNISAが先、余裕があればiDeCoも」</strong>。iDeCoは節税の威力が大きいぶん、60歳までカギがかかる。結婚や住宅などライフイベントを控えた若い人は、まずNISAで柔軟性を確保。<strong>税率の高い中堅以上の会社員や、退職金のない自営業者ほどiDeCoの旨みが増す</strong>と覚えておくとええ。</p></div>
+  </div>
+
+  <div class="summary">
+    <div class="stitle">🌰 2時間目のまとめ</div>
+    <ul class="point-list">
+      <li>複利は「時間×再投資」で爆発する。始めるのは早いほど有利</li>
+      <li>最初の1本は、低コストの全世界株型 or 米国株型インデックスファンド</li>
+      <li>置き場所はまずNISA（非課税・いつでも引き出せる）</li>
+      <li>余裕とご縁があればiDeCoで節税を上乗せ（2027年から大幅拡充）</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 3時間目-1 ドルコスト ================= -->
+<section class="page">
+  <div class="chapter-banner c-pink"><span class="no">3時間目</span>つづける 〜相場に振り回されない〜</div>
+  <p class="lesson-lead">「いつ買えばいいの？」への最終回答</p>
+  <h2 class="lesson-title">ドルコスト平均法 — 悩まない技術</h2>
+  <div class="do-line"><span>実践すると</span><span class="arrow">▶▶</span><span>高値づかみの恐怖から解放され、下落すら味方になる</span></div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>買った次の日に値下がりしたらイヤだなあ。いちばん安い日に買いたいんですけど、いつですか？</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>それが分かったらワシは今ごろ森一番の大富豪じゃ（笑）。プロでも当てられん。だから発想を変える。<strong>「いつ」を当てるのをやめて、毎月同じ日に同じ金額を機械的に買う</strong>——これが<span class="marker">ドルコスト平均法</span>。安い月には自動的にたくさん買え、高い月には少ししか買わん。結果、平均の買値がじょうずにならされるんじゃ。</p></div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 640 300" width="640" role="img" aria-label="ドルコスト平均法の説明図。毎月1万円ずつ買うと、基準価額が安い月は多くの口数、高い月は少ない口数を買うことになり、平均取得単価がならされる">
+      <text x="20" y="24" font-size="15" font-weight="bold" fill="#4a3626">毎月1万円ずつ買うと…（価格が波打つ例）</text>
+      <line x1="60" y1="230" x2="600" y2="230" stroke="#8c6f52" stroke-width="2"/>
+      <polyline points="90,120 190,180 290,90 390,200 490,140 570,110" fill="none" stroke="#c9356e" stroke-width="3.5" stroke-linejoin="round"/>
+      <g stroke="#5b4636" stroke-width="2">
+        <circle cx="90"  cy="120" r="7" fill="#f6d488"/>
+        <circle cx="190" cy="180" r="7" fill="#8fce9f"/>
+        <circle cx="290" cy="90"  r="7" fill="#f6d488"/>
+        <circle cx="390" cy="200" r="7" fill="#8fce9f"/>
+        <circle cx="490" cy="140" r="7" fill="#f6d488"/>
+      </g>
+      <g font-size="12.5" font-weight="bold" text-anchor="middle" fill="#4a3626">
+        <text x="90"  y="105">価格 高め</text>
+        <text x="190" y="205">安い→多く買える</text>
+        <text x="290" y="75">高い→少しだけ</text>
+        <text x="390" y="225">激安→どっさり</text>
+        <text x="90" y="250">1月</text><text x="190" y="250">2月</text><text x="290" y="250">3月</text><text x="390" y="250">4月</text><text x="490" y="250">5月</text>
+      </g>
+      <line x1="60" y1="148" x2="600" y2="148" stroke="#3d7fb5" stroke-width="2.5" stroke-dasharray="8 6"/>
+      <text x="598" y="168" font-size="13" font-weight="bold" fill="#3d7fb5" text-anchor="end">平均取得単価は自動的にならされる</text>
+      <text x="320" y="285" font-size="12.5" fill="#7a6350" text-anchor="middle">感情ゼロ・手間ゼロ。証券口座の「自動積立設定」で仕組み化すれば、あとは寝ていてOK</text>
+    </svg>
+  </div>
+
+  <div class="info green">
+    <div class="info-title">ここがポイント</div>
+    <ul class="point-list" style="margin:0">
+      <li>底値当ては不可能。「時間の分散」でリスクをならすのが積立の本質</li>
+      <li>下落局面は「安売りセール」。同じ1万円で多くの口数を仕込める</li>
+      <li>一度自動設定したら、口座は毎日見ない。<strong>見ない技術も投資の実力</strong></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 3時間目-2 暴落 ================= -->
+<section class="page">
+  <div class="chapter-banner c-pink"><span class="no">3時間目</span>つづける 〜相場に振り回されない〜</div>
+  <p class="lesson-lead">必ず来る。でも、必ず終わってきた。</p>
+  <h2 class="lesson-title">暴落サバイバル — 売らないリスが勝つ</h2>
+  <div class="do-line"><span>実践すると</span><span class="arrow">▶▶</span><span>ニュースが真っ赤な日でも、ぐっすり眠れる</span></div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris-odoroki"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>先生！ もし積み立て中に大暴落が来たら、どうすれば！？</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>まず知っておくことじゃ。<strong>暴落は「もし」ではなく「いつ」の話</strong>。ITバブル崩壊、リーマン・ショック、コロナ・ショック——世界の株式市場は何度も3割、5割と下げてきた。そして<span class="marker">そのたびに回復し、高値を更新してきた</span>。長期投資家の仕事は、下げを避けることではなく、<strong>下げの間も退場しないこと</strong>じゃよ。</p></div>
+  </div>
+
+  <h3 class="bar">暴落が来た日の「やること・やらないこと」</h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th style="width:50%">やること ○</th><th>やらないこと ×</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>
+          ・<strong>何もしない</strong>（積立設定はそのまま）<br>
+          ・生活防衛資金があることを確認して深呼吸<br>
+          ・余力があれば、いつも通り淡々と買い増し<br>
+          ・チャートではなく、自分の入金力（本業）を磨く
+        </td>
+        <td>
+          ・恐怖で<strong>全部売る</strong>（損失の確定）<br>
+          ・「底で買い直そう」と積立を止める<br>
+          ・一発逆転を狙ってレバレッジをかける<br>
+          ・SNSの悲観論を1日中あびる
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku-wink"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>ワシからの処方箋はこれじゃ。<strong>①リスク資産と現金の割合をあらかじめ決めておく</strong>（例：投資6割・現金4割）。<strong>②「資産が一時的に3割減っても夜眠れるか？」で積立額を決める</strong>。眠れん額は、あなたには多すぎる額じゃ。<strong>③暴落時に見るのは、株価ではなく自分のルール</strong>。この3つを守れるリスは、森でいちばん強い。</p></div>
+  </div>
+</section>
+
+<!-- ================= 3時間目-3 分散 ================= -->
+<section class="page">
+  <div class="chapter-banner c-pink"><span class="no">3時間目</span>つづける 〜相場に振り回されない〜</div>
+  <p class="lesson-lead">ステップアップ編</p>
+  <h2 class="lesson-title">分散 — 卵とどんぐりは、ひとつのカゴに盛らない</h2>
+  <div class="do-line"><span>実践すると</span><span class="arrow">▶▶</span><span>値動きがマイルドになり、長く続けやすくなる</span></div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>「株式インデックス＋現金」だけでも立派な分散じゃが、資産が育ってきたら<strong>性格の違う資産</strong>を混ぜる手もある。株が転ぶ日に、いっしょに転ばない相棒を持つ、という発想じゃな。</p></div>
+  </div>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th>資産</th><th>期待できる役割</th><th>気をつけること</th></tr></thead>
+    <tbody>
+      <tr><th>株式<br>（インデックス）</th><td>資産形成の<strong>主役</strong>。長期のリターン源。</td><td>短期では大きく上下する。</td></tr>
+      <tr><th>債券</th><td>値動きが穏やかで、株の下落時のクッション役。金利のある世界では利息も。</td><td>リターンは控えめ。金利上昇局面では価格が下がる。</td></tr>
+      <tr><th>金（ゴールド）</th><td>「有事の金」。通貨やインフレへの保険として少量。</td><td>利息も配当も生まない。持ちすぎ注意（目安は資産の1割まで）。</td></tr>
+      <tr><th>REIT<br>（不動産投信）</th><td>家賃収入がベースの分配金。株とやや違う値動き。</td><td>金利と景気の影響を受けやすい。</td></tr>
+      <tr><th>高配当株</th><td>年3〜4%程度の配当という<strong>「今使える現金」</strong>が育つ。心の支えになりやすい。</td><td>高利回りには「減配・株価下落のワナ」も。業績と配当の歴史を必ず確認。</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>インデックスで増やすのと、高配当で配当をもらうの、どっちが正解なんですか？</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>目的が違うんじゃ。<strong>資産の最大化ならインデックス</strong>（配当を自動再投資でき、税金の面でも効率的）。<strong>今の生活を配当で豊かにしたいなら高配当株</strong>。両方少しずつでも構わん。大事なのは流行ではなく、<span class="marker">自分がどう生きたいかに合わせて選ぶ</span>ことじゃよ。</p></div>
+  </div>
+
+  <div class="summary">
+    <div class="stitle">🌰 3時間目のまとめ</div>
+    <ul class="point-list">
+      <li>買うタイミングは当てない。毎月定額の自動積立で「時間分散」</li>
+      <li>暴落は必ず来る。売らずに続けた人が報われてきたのが市場の歴史</li>
+      <li>眠れる金額・眠れる配分が、あなたの正しいリスクの取り方</li>
+      <li>債券・金・REIT・高配当株は、目的に応じた「わき役」として活用</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 4時間目-1 詐欺 ================= -->
+<section class="page">
+  <div class="chapter-banner c-blue"><span class="no">4時間目</span>まもる 〜ワナからお金を守ろう〜</div>
+  <p class="lesson-lead">増やす力より先に、失わない力</p>
+  <h2 class="lesson-title">泥棒ギツネのワナ — 投資詐欺の見分け方</h2>
+  <div class="do-line"><span>実践すると</span><span class="arrow">▶▶</span><span>一撃で全財産を失う事故を、確実に避けられる</span></div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>投資を始めると、必ず甘い話が寄ってくる。SNSの「必ず儲かる」広告、有名人をかたる投資グループ、マッチングアプリから始まる勧誘……。近年、<strong>SNS型投資詐欺の被害は年間数百億円規模</strong>で報告されておる。手口は変わっても、<span class="marker">見分けるモノサシはずっと同じ</span>じゃ。</p></div>
+  </div>
+
+  <h3 class="bar b">これが出たら即・撤退！危険ワードすごろく</h3>
+  <ul class="warn-list point-list">
+    <li><strong>「元本保証で月利3%」</strong> — 月利3%は年利約43%。世界一の投資家でも年20%程度。あり得ない数字は、それだけで詐欺の証明</li>
+    <li><strong>「必ず」「絶対」「あなただけ」</strong> — 投資に絶対はない。確実性を売る人は、確実にウソをついている</li>
+    <li><strong>「今日中に決めて」</strong> — 急がせるのは、考える時間を奪うため。良い投資は明日も買える</li>
+    <li><strong>「紹介すれば報酬」</strong> — 運用益ではなく新規参加者のお金で配当を回すポンジ・スキームの典型</li>
+    <li><strong>「特別なアプリ・海外口座に送金」</strong> — 画面の中の利益は数字の演出。出金しようとした瞬間に音信不通に</li>
+  </ul>
+
+  <div class="fig">
+    <svg viewBox="0 0 640 210" width="640" role="img" aria-label="ポンジ・スキームの仕組み図。新しい参加者のお金が古い参加者への配当に回されるだけで、運用は行われていない">
+      <text x="320" y="26" font-size="15" font-weight="bold" fill="#4a3626" text-anchor="middle">ポンジ・スキームのからくり（運用なんてしていない）</text>
+      <rect x="250" y="60" width="140" height="60" rx="12" fill="#f2b46c" stroke="#5b4636" stroke-width="2.5"/>
+      <text x="320" y="86" font-size="13.5" font-weight="bold" text-anchor="middle" fill="#5b3305">泥棒ギツネの</text>
+      <text x="320" y="104" font-size="13.5" font-weight="bold" text-anchor="middle" fill="#5b3305">「うまい話ファンド」</text>
+      <g font-size="13" font-weight="bold" fill="#4a3626" text-anchor="middle">
+        <rect x="40" y="70" width="120" height="40" rx="10" fill="#cfe6f4" stroke="#5b4636" stroke-width="2"/>
+        <text x="100" y="95">新しい参加者</text>
+        <rect x="480" y="70" width="120" height="40" rx="10" fill="#cde9d4" stroke="#5b4636" stroke-width="2"/>
+        <text x="540" y="95">古い参加者</text>
+      </g>
+      <path d="M164 90 L244 90" stroke="#c9356e" stroke-width="3.5" marker-end="url(#arr)"/>
+      <path d="M394 90 L474 90" stroke="#c9356e" stroke-width="3.5" marker-end="url(#arr)"/>
+      <defs><marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#c9356e"/></marker></defs>
+      <text x="204" y="76" font-size="12" font-weight="bold" fill="#c9356e" text-anchor="middle">出資金</text>
+      <text x="434" y="76" font-size="12" font-weight="bold" fill="#c9356e" text-anchor="middle">「配当」のフリ</text>
+      <text x="320" y="150" font-size="13" font-weight="bold" fill="#c25543" text-anchor="middle">右から左に流しているだけ。新規が止まった瞬間、全員分のお金が消える</text>
+      <text x="320" y="180" font-size="12.5" fill="#7a6350" text-anchor="middle">✔ 対策：金融庁に登録のある業者か「免許・許可・登録等を受けている業者一覧」で必ず確認する</text>
+    </svg>
+  </div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>でも、友だちに誘われたら断りにくいなあ……。</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>合言葉を教えよう。<strong>「そんなに儲かるなら、人に教えずに自分と銀行のお金で黙ってやるはず」</strong>。わざわざ他人のお金を集めに来る時点で答えは出とる。断る勇気は、何年分の積立にも勝る「まもる力」じゃよ。</p></div>
+  </div>
+</section>
+
+<!-- ================= 4時間目-2 出口戦略 ================= -->
+<section class="page">
+  <div class="chapter-banner c-blue"><span class="no">4時間目</span>まもる 〜ワナからお金を守ろう〜</div>
+  <p class="lesson-lead">育てっぱなしでは意味がない！</p>
+  <h2 class="lesson-title">出口戦略 — 育てた木の実の食べ方</h2>
+  <div class="do-line"><span>実践すると</span><span class="arrow">▶▶</span><span>資産を長持ちさせながら、人生のために使える</span></div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>そういえば、育てた資産って、いつ・どうやって使えばいいんですか？ 一生売っちゃダメとか……？</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>とんでもない。<strong>お金は使ってこそ価値がある</strong>。有名な目安が<span class="marker">「4%ルール」</span>じゃ。米国の研究（トリニティ・スタディ）で、株式と債券に分散した資産を<strong>毎年4%ずつ取り崩しても、30年間で資産が尽きなかったケースが大半だった</strong>という結果が知られておる。つまり、生活費の25倍の資産が、経済的自由のひとつの目安になるんじゃ。</p></div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 640 240" width="640" role="img" aria-label="4%ルールの図。大きな木から毎年、実の4%だけを収穫すれば、木は育ち続けるイメージと、生活費ごとの必要資産の目安">
+      <ellipse cx="150" cy="210" rx="130" ry="16" fill="#cdeccd"/>
+      <line x1="150" y1="210" x2="150" y2="96" stroke="#7a5230" stroke-width="12" stroke-linecap="round"/>
+      <circle cx="150" cy="76" r="58" fill="#8fce9f" stroke="#4a7c59" stroke-width="3.5"/>
+      <use href="#donguri" x="112" y="52" width="20" height="24"/>
+      <use href="#donguri" x="152" y="40" width="20" height="24"/>
+      <use href="#donguri" x="172" y="76" width="20" height="24"/>
+      <use href="#donguri" x="128" y="88" width="20" height="24"/>
+      <path d="M216 108 Q262 130 258 168" fill="none" stroke="#c9356e" stroke-width="3.5" stroke-dasharray="6 5" marker-end="url(#arr)"/>
+      <use href="#donguri" x="248" y="168" width="22" height="26"/>
+      <text x="286" y="140" font-size="13.5" font-weight="bold" fill="#c9356e">毎年4%だけ収穫</text>
+      <text x="286" y="160" font-size="12.5" fill="#7a6350">残りは木にまかせて育て続ける</text>
+      <g font-size="13.5" font-weight="bold" fill="#4a3626">
+        <text x="360" y="46">生活費の25倍が「自由」の目安</text>
+        <text x="360" y="76" font-size="13">月20万円で暮らす → 6,000万円</text>
+        <text x="360" y="100" font-size="13">月15万円で暮らす → 4,500万円</text>
+        <text x="360" y="124" font-size="13">月10万円ぶん賄う → 3,000万円</text>
+      </g>
+      <text x="360" y="196" font-size="12.5" fill="#7a6350">「全部を投資でまかなう」必要はない。年金＋α として</text>
+      <text x="360" y="215" font-size="12.5" fill="#7a6350">月5万円の取り崩しでも、老後の景色は大きく変わる。</text>
+    </svg>
+    <div class="fig-cap">※ 4%ルールは米国市場の過去データに基づく研究であり、将来の保証ではありません。定率での取り崩しなど、柔軟な運用が現実的です。</div>
+  </div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku-wink"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>覚えておいてほしいのは、<strong>投資はゴールから逆算する</strong>ということ。「何歳ごろ、月いくらあれば安心か」を先に決めれば、毎月の積立額も、取るべきリスクも、自然と決まる。お金は目的ではなく、<span class="marker">自由な時間と選択肢を買うための道具</span>なんじゃからな。</p></div>
+  </div>
+
+  <div class="summary">
+    <div class="stitle">🌰 4時間目のまとめ</div>
+    <ul class="point-list">
+      <li>「あり得ない利回り＋急かし＋紹介報酬」は詐欺の三点セット</li>
+      <li>業者は金融庁の登録一覧で確認。迷ったら消費者ホットライン188へ</li>
+      <li>取り崩しの目安は年4%。生活費の25倍が自由へのマイルストーン</li>
+      <li>お金の最終目的は、増やすことではなく「良く生きる」こと</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 放課後 Q&A ================= -->
+<section class="page">
+  <div class="chapter-banner c-purple"><span class="no">放課後</span>フク先生に聞きたい！Q&amp;A 8連発</div>
+
+  <div class="qa">
+    <div class="q"><span class="chip">Q.1</span><span>いくらから始めればいい？ お金持ちの遊びでは？</span></div>
+    <div class="a"><p>ネット証券なら<strong>月100円から</strong>積立設定できます。最初は「月5,000円〜3万円」など、なくなっても生活が揺らがない額で十分。金額より、<strong>始めて・続けて・相場に慣れる</strong>ことに価値があります。</p></div>
+  </div>
+  <div class="qa">
+    <div class="q"><span class="chip">Q.2</span><span>40代・50代からでは、もう遅い？</span></div>
+    <div class="a"><p>遅くありません。50歳から月5万円を年5%で15年積み立てれば約1,336万円（元本900万円）。人生100年時代、<strong>50歳の人にも数十年の運用期間があります</strong>。ただし年齢が上がるほど、現金や債券の比率を厚めにして値動きを抑えるのが定石です。</p></div>
+  </div>
+  <div class="qa">
+    <div class="q"><span class="chip">Q.3</span><span>全世界株とS&amp;P500、結局どっち？</span></div>
+    <div class="a"><p>どちらも王道で、<strong>大差がつかない可能性が高い</strong>質問です（全世界株の6割は米国株）。米国の一強がずっと続くと信じ切れないなら全世界株、シンプルに米国の成長に賭けるならS&amp;P500。<strong>迷って始めないのが一番の損</strong>です。</p></div>
+  </div>
+  <div class="qa">
+    <div class="q"><span class="chip">Q.4</span><span>まとまった退職金がある。一括で投資すべき？</span></div>
+    <div class="a"><p>理論上は早く入れるほど期待値は高いのですが、直後の暴落に心が耐えられないのが人間です。<strong>1〜2年に分けて分割投資</strong>する、リスク資産の上限を先に決める、など「後悔しにくい形」を優先しましょう。退職金を狙う金融機関の「特別プラン」営業には特に注意。</p></div>
+  </div>
+  <div class="qa">
+    <div class="q"><span class="chip">Q.5</span><span>毎日価格をチェックしちゃって疲れます……</span></div>
+    <div class="a"><p>チェックをやめても、あなたの資産の成長速度は1ミリも変わりません（笑）。通知を切り、<strong>確認は月1回や年1回と決める</strong>のがおすすめ。長期投資の主戦場は画面の中ではなく、あなたの本業と健康です。</p></div>
+  </div>
+  <div class="qa">
+    <div class="q"><span class="chip">Q.6</span><span>暗号資産（ビットコインなど）はどうですか？</span></div>
+    <div class="a"><p>値動きが株の数倍激しく、利益は原則、税率の高い雑所得扱い（NISA対象外）。<strong>資産形成の土台にはなりません</strong>。どうしても触りたいなら「なくなってもいい額」を上限に、趣味・勉強代の枠でどうぞ。</p></div>
+  </div>
+  <div class="qa">
+    <div class="q"><span class="chip">Q.7</span><span>子どもにお金の教育をしたい。何から？</span></div>
+    <div class="a"><p>おこづかいを「使う・貯める・ふやす・ゆずる」に分ける練習が入口として優秀です。そして最強の教材は<strong>親が積み立てている姿</strong>。家庭の口座画面を一緒に見ながら「複利ってね」と話せたら、それはもう立派な金融教育です。</p></div>
+  </div>
+  <div class="qa">
+    <div class="q"><span class="chip">Q.8</span><span>結局、この本でいちばん大事なページは？</span></div>
+    <div class="a"><p>次の「結論リスト」です。ぜんぶ忘れても、あれだけやれば大丈夫。<strong>知識は行動に変えて、はじめて資産になります</strong>。</p></div>
+  </div>
+</section>
+
+<!-- ================= 結論リスト＋おわりに ================= -->
+<section class="page">
+  <div class="chapter-banner c-purple"><span class="no">卒業試験</span>これだけやればOK！結論リスト</div>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th style="width:70px">順番</th><th>アクション</th><th>ひとこと</th></tr></thead>
+    <tbody>
+      <tr><th>①</th><td>生活防衛資金（生活費6か月〜1年分）を普通預金に確保</td><td>これが投資の免許証</td></tr>
+      <tr><th>②</th><td>スマホ・サブスク・保険の固定費を1回見直す。リボ払いは完済</td><td>毎月の投資弾を生む</td></tr>
+      <tr><th>③</th><td>ネット証券で「NISA口座」を開設</td><td>窓口より品ぞろえ・コスト有利</td></tr>
+      <tr><th>④</th><td>低コストの全世界株型 or 米国株型インデックスファンドを1本選ぶ</td><td>信託報酬 年0.2%以下が目安</td></tr>
+      <tr><th>⑤</th><td>毎月定額の自動積立を設定（月100円〜。無理のない額で）</td><td>ドルコスト平均法が自動で働く</td></tr>
+      <tr><th>⑥</th><td>暴落が来ても売らない・止めない。確認は月1回まで</td><td>続けた人だけが複利を味わえる</td></tr>
+      <tr><th>⑦</th><td>余裕が出たらiDeCoで節税を上乗せ（2027年から枠が大幅拡大）</td><td>老後資金にカギと節税を</td></tr>
+      <tr><th>⑧</th><td>「うまい話」は金融庁の登録を確認。迷ったら188へ相談</td><td>まもる力が資産の天井を決める</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3 class="bar y">おわりに 〜どんぐりを植える日〜</h3>
+  <p>「木を植えるのに最も良かった日は20年前。次に良い日は今日」——森に古くから伝わることわざです。</p>
+  <p>この本で紹介したことは、派手さのない、退屈なくらい地味な方法ばかりです。ですが、<strong>再現性のある方法とは、たいてい地味なもの</strong>です。特別な才能も、大金も、毎日の相場チェックもいりません。必要なのは、最初の設定と、やめない心だけ。</p>
+  <p>あなたの毎月の積立は、小さなどんぐりです。10年後、20年後、それは思いがけない大きさの木になって、あなたと、あなたの大切な人に木陰をつくります。</p>
+  <p style="font-weight:900;color:#a8264f">さあ、今日、最初のどんぐりを植えましょう。</p>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris-yorokobi"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>先生、ぼく、さっそくNISA口座を申し込みました！ 月1万円からスタートします！</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku-wink"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>上出来じゃ。あとは森の四季と同じ。嵐の日も、日照りの日も、木は黙って育っておる。<strong>急がば、積み立てじゃよ。</strong></p></div>
+  </div>
+
+  <div class="fig" style="margin-top:26px">
+    <svg viewBox="0 0 400 130" width="340" role="img" aria-label="夕暮れの丘でならんで座るフク先生とコリスくん">
+      <ellipse cx="200" cy="120" rx="190" ry="18" fill="#9fd3ab"/>
+      <use href="#fuku" x="120" y="24" width="90" height="90"/>
+      <use href="#koris" x="210" y="40" width="74" height="74"/>
+      <use href="#me" x="70" y="76" width="30" height="36"/>
+      <use href="#donguri" x="292" y="88" width="20" height="24"/>
+      <use href="#donguri" x="318" y="94" width="16" height="19"/>
+    </svg>
+  </div>
+</section>
+
+</main>
+
+<footer class="colophon">
+  <p><strong>お金の森 〜フク先生と学ぶ、一生モノの投資入門〜</strong>　もりの経済教室・刊</p>
+  <p>本書は一般的な情報提供を目的としたものであり、特定の金融商品の勧誘・推奨ではありません。<br>
+  数値・制度は2026年7月時点の調査に基づく概算・予定を含みます。投資は元本保証がなく、最終判断はご自身の責任でお願いします。</p>
+</footer>
