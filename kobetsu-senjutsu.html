@@ -1,0 +1,925 @@
+<title>お金の森 個別株の戦術教室 〜勝ち方より、負けない方法〜</title>
+<style>
+/* ============================================================
+   お金の森 個別株の戦術教室 — 実用マネー本スタイル
+   紙の本の世界観（クリーム紙×パステル）に固定した意図的な単一テーマ。
+   ダークモード時は「机」(外周背景)だけ暗くし、紙面は紙のまま。
+   ============================================================ */
+:root{
+  --desk:#ecdcd2;          /* 机＝ページ外背景（淡い杏色） */
+  --paper:#fffdf5;         /* 紙面 */
+  --ink:#4a3626;           /* 本文の焦げ茶 */
+  --ink-soft:#7a6350;
+  --title:#c9356e;         /* 見出しの紅色 */
+  --accent:#f0a63c;        /* オレンジ */
+  --green:#7bbf8e;
+  --green-pale:#e3f2e6;
+  --blue:#7eb8d9;
+  --blue-pale:#e2f0f7;
+  --pink-pale:#fbe4ec;
+  --purple-pale:#ece7f6;
+  --cream:#fdf3d9;
+  --line:#5b4636;
+  --bubble-t:#fdf0dc;      /* 先生の吹き出し */
+  --bubble-s:#eef5ea;      /* 生徒の吹き出し */
+  --shadow:0 4px 14px rgba(74,54,38,.10);
+}
+@media (prefers-color-scheme: dark){
+  :root{ --desk:#332a26; --shadow:0 4px 14px rgba(0,0,0,.35); }
+}
+:root[data-theme="dark"]{ --desk:#332a26; --shadow:0 4px 14px rgba(0,0,0,.35); }
+:root[data-theme="light"]{ --desk:#ecdcd2; --shadow:0 4px 14px rgba(74,54,38,.10); }
+
+*{ box-sizing:border-box; }
+body{
+  margin:0; background:var(--desk); color:var(--ink);
+  font-family:"Hiragino Maru Gothic ProN","Hiragino Kaku Gothic ProN","BIZ UDPGothic","Yu Gothic UI","Meiryo",sans-serif;
+  line-height:1.9; font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+main{ max-width:900px; margin:0 auto; padding:28px 14px 60px; }
+
+.page{
+  background:var(--paper); border-radius:18px; box-shadow:var(--shadow);
+  padding:34px 34px 40px; margin:0 0 28px;
+}
+@media (max-width:640px){ .page{ padding:22px 16px 28px; } }
+p{ margin:0 0 1em; }
+strong{ color:#a8264f; }
+.marker{ background:linear-gradient(transparent 60%, #c8ecc0 60%); font-weight:700; }
+.small{ font-size:.82em; color:var(--ink-soft); }
+ul,ol{ padding-left:1.4em; margin:0 0 1em; }
+li{ margin:.25em 0; }
+
+/* ---------- 表紙 ---------- */
+.cover{
+  position:relative; overflow:hidden; text-align:center;
+  background:
+    repeating-conic-gradient(from 0deg at 50% 42%, #fbdfc4 0deg 12deg, #fdf2e3 12deg 24deg);
+  border-radius:18px; box-shadow:var(--shadow); margin-bottom:28px;
+  padding:48px 20px 0;
+}
+.cover .band{
+  display:inline-block; background:#c25543; color:#fff; border-radius:999px;
+  padding:6px 22px; font-weight:700; letter-spacing:.1em; margin-bottom:14px;
+  box-shadow:0 3px 0 rgba(74,54,38,.25);
+}
+.cover h1{
+  margin:.1em 0 .1em; font-size:clamp(34px,7vw,64px); line-height:1.2;
+  color:var(--title); letter-spacing:.03em; text-wrap:balance; font-weight:900;
+  text-shadow:3px 3px 0 #fff, -3px 3px 0 #fff, 3px -3px 0 #fff, -3px -3px 0 #fff, 0 6px 0 rgba(201,53,110,.18);
+}
+.cover .series{ font-size:clamp(15px,2.6vw,20px); font-weight:900; color:#b06a10; margin-bottom:4px; letter-spacing:.14em; }
+.cover .subtitle{ font-size:clamp(14px,2.4vw,19px); font-weight:700; color:var(--ink); margin-bottom:6px; }
+.cover .author{ font-weight:700; color:var(--ink-soft); margin-bottom:8px; }
+.cover .bottom{ background:#d9e8cf; margin:26px -20px 0; padding:22px 20px 26px; }
+.cover .powers{ display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:12px; }
+.cover .power{
+  background:#fff; border:2px solid var(--line); border-radius:14px;
+  padding:8px 14px; font-weight:700; font-size:14px; min-width:130px;
+}
+.cover .power b{ display:block; font-size:16px; }
+.p1 b{color:#2f8f5b}.p2 b{color:#c9356e}.p3 b{color:#3d7fb5}.p4 b{color:#b06a10}
+.cover .catch{ font-size:clamp(17px,3.2vw,25px); font-weight:900; color:#7a4a12; margin:0; }
+
+/* ---------- 章バナー ---------- */
+.chapter-banner{
+  display:flex; align-items:center; gap:14px;
+  border-radius:14px; padding:12px 18px; margin:0 0 22px;
+  color:#fff; font-weight:900; font-size:clamp(18px,3vw,23px); letter-spacing:.02em;
+}
+.chapter-banner .no{
+  background:rgba(255,255,255,.92); color:inherit; border-radius:10px;
+  padding:2px 12px; font-size:.75em; line-height:1.6; white-space:nowrap;
+}
+.c-green{ background:#63a877; } .c-green .no{ color:#2f7a4a; }
+.c-orange{ background:#e89a3c; } .c-orange .no{ color:#b06a10; }
+.c-pink{ background:#e0698f; } .c-pink .no{ color:#c23a68; }
+.c-blue{ background:#6da9cc; } .c-blue .no{ color:#3d7fb5; }
+.c-purple{ background:#9b8ec4; } .c-purple .no{ color:#6f5fa8; }
+.c-red{ background:#cf6a5a; } .c-red .no{ color:#b04a38; }
+
+h2.lesson-title{
+  font-size:clamp(20px,3.6vw,27px); color:var(--ink); margin:0 0 4px; font-weight:900;
+  text-wrap:balance;
+}
+.lesson-lead{ color:var(--title); font-weight:700; font-size:14px; margin-bottom:2px; }
+.do-line{
+  display:flex; align-items:center; gap:10px; background:var(--pink-pale);
+  border-radius:999px; padding:8px 18px; font-weight:900; color:#a8264f;
+  margin:14px 0 22px; font-size:15px;
+}
+.do-line .arrow{ color:#e0698f; }
+
+h3.bar{
+  display:flex; align-items:center; gap:10px;
+  background:linear-gradient(#f6c9d8,#f1b3c9); color:#8c1d46;
+  border-radius:999px; padding:8px 20px; font-size:17px; margin:34px 0 16px;
+  font-weight:900;
+}
+h3.bar.g{ background:linear-gradient(#cde9d4,#b5dec1); color:#256b41; }
+h3.bar.b{ background:linear-gradient(#cfe6f4,#b7d9ee); color:#2c6b96; }
+h3.bar.y{ background:linear-gradient(#fbe3ae,#f6d488); color:#8a5a07; }
+h4{ color:#a8264f; font-size:16px; margin:1.4em 0 .5em; }
+
+/* ---------- 会話 ---------- */
+.talk{ display:flex; gap:12px; margin:14px 0; align-items:flex-start; }
+.talk .face{
+  flex:0 0 64px; width:64px; height:64px; border-radius:50%;
+  background:#fff; border:2.5px solid var(--line); overflow:hidden;
+}
+.talk .face svg{ width:100%; height:100%; display:block; }
+.talk .bubble{
+  position:relative; border-radius:16px; padding:12px 18px; max-width:640px;
+  font-weight:600;
+}
+.talk.t .bubble{ background:var(--bubble-t); }
+.talk.s{ flex-direction:row-reverse; }
+.talk.s .bubble{ background:var(--bubble-s); }
+.talk.t .bubble::before{
+  content:""; position:absolute; left:-9px; top:22px;
+  border:9px solid transparent; border-right-color:var(--bubble-t); border-left:0;
+}
+.talk.s .bubble::before{
+  content:""; position:absolute; right:-9px; top:22px;
+  border:9px solid transparent; border-left-color:var(--bubble-s); border-right:0;
+}
+.talk .bubble p:last-child{ margin-bottom:0; }
+.name-tag{ font-size:11px; font-weight:900; color:var(--ink-soft); text-align:center; margin-top:2px; }
+
+/* ---------- 図解ボックス・表 ---------- */
+.info{ background:var(--cream); border-radius:14px; padding:18px 20px; margin:18px 0; }
+.info.green{ background:var(--green-pale); }
+.info.blue{ background:var(--blue-pale); }
+.info-title{
+  display:inline-block; background:#fff; border:2px solid var(--accent);
+  color:#b06a10; border-radius:999px; padding:2px 16px; font-weight:900;
+  font-size:14px; margin-bottom:10px;
+}
+.table-wrap{ overflow-x:auto; margin:16px 0; }
+table{
+  border-collapse:collapse; width:100%; min-width:520px; background:#fff;
+  font-size:14.5px; border:2px solid var(--line); border-radius:8px;
+}
+th,td{ border:1.5px solid #c9b8a5; padding:9px 12px; text-align:left; vertical-align:top; }
+thead th{ background:#8c6f52; color:#fff; font-weight:900; }
+tbody th{ background:var(--cream); font-weight:900; white-space:nowrap; }
+td.num{ text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap; }
+tr.hl td, tr.hl th{ background:#fdeaf1; }
+
+.point-list{ list-style:none; padding:0; margin:0 0 1em; }
+.point-list li{ position:relative; padding-left:34px; margin:.6em 0; font-weight:700; }
+.point-list li::before{
+  content:"✔"; position:absolute; left:0; top:0;
+  width:24px; height:24px; border-radius:50%; background:var(--green); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-size:13px;
+}
+.warn-list li::before{ content:"！"; background:#e06060; }
+
+.fig{ margin:20px 0; text-align:center; }
+.fig svg{ max-width:100%; height:auto; }
+.fig-cap{ font-size:12.5px; color:var(--ink-soft); margin-top:6px; }
+
+.summary{
+  background:var(--green-pale); border:2.5px dashed var(--green);
+  border-radius:14px; padding:16px 20px; margin:26px 0 4px;
+}
+.summary .stitle{ font-weight:900; color:#256b41; margin-bottom:6px; }
+.qa{ margin:20px 0; }
+.qa .q{
+  display:flex; gap:10px; align-items:flex-start; font-weight:900; color:#8c1d46;
+  margin-bottom:8px;
+}
+.qa .q .chip{ background:#e0698f; color:#fff; border-radius:8px; padding:1px 10px; font-size:13px; white-space:nowrap; margin-top:3px; }
+.qa .a{ background:var(--cream); border-radius:12px; padding:12px 16px; margin-left:12px; }
+.qa .a p:last-child{ margin-bottom:0; }
+
+.toc-row{ display:flex; align-items:baseline; gap:8px; margin:.45em 0; font-weight:700; }
+.toc-row .dots{ flex:1; border-bottom:2px dotted #c9b8a5; transform:translateY(-4px); }
+.toc-step{ border-radius:10px; color:#fff; font-weight:900; padding:6px 14px; margin:20px 0 8px; }
+.colophon{ color:var(--ink-soft); font-size:12.5px; }
+.colophon p{ margin:0 0 .5em; }
+</style>
+
+<!-- ============ キャラクターSVG定義 ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <!-- フク先生（フクロウ・角帽） -->
+    <g id="fuku-base">
+      <ellipse cx="50" cy="60" rx="34" ry="32" fill="#c08a52" stroke="#5b4636" stroke-width="3"/>
+      <path d="M28 40 Q22 26 32 30 Q36 33 38 38 Z" fill="#c08a52" stroke="#5b4636" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M72 40 Q78 26 68 30 Q64 33 62 38 Z" fill="#c08a52" stroke="#5b4636" stroke-width="3" stroke-linejoin="round"/>
+      <ellipse cx="50" cy="70" rx="22" ry="18" fill="#f6e7c9" stroke="#5b4636" stroke-width="2.5"/>
+      <path d="M18 62 Q10 74 22 82 Q28 74 26 64 Z" fill="#a9743f" stroke="#5b4636" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M82 62 Q90 74 78 82 Q72 74 74 64 Z" fill="#a9743f" stroke="#5b4636" stroke-width="2.5" stroke-linejoin="round"/>
+      <rect x="22" y="16" width="56" height="9" rx="3" fill="#3d3d4d" stroke="#5b4636" stroke-width="2.5"/>
+      <path d="M50 6 L86 18 L50 30 L14 18 Z" fill="#4a4a5e" stroke="#5b4636" stroke-width="2.5" stroke-linejoin="round"/>
+      <line x1="72" y1="20" x2="80" y2="34" stroke="#e0a52f" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="81" cy="37" r="4" fill="#e0a52f"/>
+    </g>
+    <symbol id="fuku" viewBox="0 0 100 100">
+      <use href="#fuku-base"/>
+      <circle cx="40" cy="52" r="10.5" fill="#fff" stroke="#5b4636" stroke-width="2.5"/>
+      <circle cx="60" cy="52" r="10.5" fill="#fff" stroke="#5b4636" stroke-width="2.5"/>
+      <circle cx="41.5" cy="53" r="4.2" fill="#33241a"/>
+      <circle cx="58.5" cy="53" r="4.2" fill="#33241a"/>
+      <circle cx="43" cy="51.4" r="1.4" fill="#fff"/>
+      <circle cx="60" cy="51.4" r="1.4" fill="#fff"/>
+      <path d="M46 64 L54 64 L50 71 Z" fill="#f0a63c" stroke="#5b4636" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M42 76 Q50 81 58 76" fill="none" stroke="#5b4636" stroke-width="2.2" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="fuku-wink" viewBox="0 0 100 100">
+      <use href="#fuku-base"/>
+      <circle cx="40" cy="52" r="10.5" fill="#fff" stroke="#5b4636" stroke-width="2.5"/>
+      <circle cx="60" cy="52" r="10.5" fill="#fff" stroke="#5b4636" stroke-width="2.5"/>
+      <circle cx="41.5" cy="53" r="4.2" fill="#33241a"/>
+      <path d="M54 53 Q60 49 66 53" fill="none" stroke="#33241a" stroke-width="3" stroke-linecap="round"/>
+      <path d="M46 64 L54 64 L50 71 Z" fill="#f0a63c" stroke="#5b4636" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M41 75 Q50 83 59 75" fill="none" stroke="#5b4636" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M84 46 l4 -8 M90 52 l8 -4 M88 60 l9 1" stroke="#e0a52f" stroke-width="2.6" stroke-linecap="round"/>
+    </symbol>
+    <!-- コリスくん（リス） -->
+    <g id="koris-base">
+      <path d="M70 30 Q94 24 92 52 Q91 74 72 80 Q80 62 72 46 Z" fill="#d9813f" stroke="#5b4636" stroke-width="3" stroke-linejoin="round"/>
+      <circle cx="46" cy="56" r="32" fill="#e8a25e" stroke="#5b4636" stroke-width="3"/>
+      <path d="M26 32 Q20 16 36 24 Q40 27 40 32 Z" fill="#e8a25e" stroke="#5b4636" stroke-width="2.8" stroke-linejoin="round"/>
+      <path d="M62 30 Q70 15 74 30 Q70 33 64 34 Z" fill="#e8a25e" stroke="#5b4636" stroke-width="2.8" stroke-linejoin="round"/>
+      <ellipse cx="46" cy="68" rx="19" ry="15" fill="#f9ecd4" stroke="#5b4636" stroke-width="2.4"/>
+    </g>
+    <symbol id="koris" viewBox="0 0 100 100">
+      <use href="#koris-base"/>
+      <circle cx="36" cy="50" r="4" fill="#33241a"/>
+      <circle cx="56" cy="50" r="4" fill="#33241a"/>
+      <circle cx="37.4" cy="48.6" r="1.3" fill="#fff"/>
+      <circle cx="57.4" cy="48.6" r="1.3" fill="#fff"/>
+      <ellipse cx="46" cy="59" rx="3.4" ry="2.6" fill="#5b4636"/>
+      <path d="M40 66 Q46 71 52 66" fill="none" stroke="#5b4636" stroke-width="2.2" stroke-linecap="round"/>
+      <circle cx="30" cy="60" r="4.5" fill="#f3b7a0" opacity=".8"/>
+      <circle cx="62" cy="60" r="4.5" fill="#f3b7a0" opacity=".8"/>
+    </symbol>
+    <symbol id="koris-odoroki" viewBox="0 0 100 100">
+      <use href="#koris-base"/>
+      <circle cx="36" cy="50" r="6" fill="#fff" stroke="#33241a" stroke-width="2.4"/>
+      <circle cx="56" cy="50" r="6" fill="#fff" stroke="#33241a" stroke-width="2.4"/>
+      <circle cx="36" cy="50" r="2.2" fill="#33241a"/>
+      <circle cx="56" cy="50" r="2.2" fill="#33241a"/>
+      <ellipse cx="46" cy="60" rx="3.2" ry="2.4" fill="#5b4636"/>
+      <ellipse cx="46" cy="69" rx="4.5" ry="5.5" fill="#7a4a2a"/>
+      <path d="M74 20 l4 -10 M82 26 l8 -6 M84 38 l10 -2" stroke="#e06060" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="koris-yorokobi" viewBox="0 0 100 100">
+      <use href="#koris-base"/>
+      <path d="M30 50 Q36 44 42 50" fill="none" stroke="#33241a" stroke-width="3" stroke-linecap="round"/>
+      <path d="M50 50 Q56 44 62 50" fill="none" stroke="#33241a" stroke-width="3" stroke-linecap="round"/>
+      <ellipse cx="46" cy="59" rx="3.4" ry="2.6" fill="#5b4636"/>
+      <path d="M38 65 Q46 74 54 65" fill="#7a4a2a" stroke="#5b4636" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="29" cy="61" r="5" fill="#f3b7a0" opacity=".85"/>
+      <circle cx="63" cy="61" r="5" fill="#f3b7a0" opacity=".85"/>
+      <path d="M76 22 l5 -9 M84 30 l9 -4" stroke="#f0a63c" stroke-width="3" stroke-linecap="round"/>
+    </symbol>
+    <!-- 小物 -->
+    <symbol id="donguri" viewBox="0 0 40 48">
+      <path d="M8 18 Q8 40 20 44 Q32 40 32 18 Z" fill="#c98d4b" stroke="#5b4636" stroke-width="2.4" stroke-linejoin="round"/>
+      <path d="M5 18 Q5 8 20 8 Q35 8 35 18 Q28 21 20 21 Q12 21 5 18 Z" fill="#8a5a2b" stroke="#5b4636" stroke-width="2.4" stroke-linejoin="round"/>
+      <line x1="20" y1="8" x2="20" y2="2" stroke="#5b4636" stroke-width="2.6" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="tate" viewBox="0 0 60 70">
+      <path d="M30 4 L54 12 Q54 44 30 64 Q6 44 6 12 Z" fill="#9cc4e4" stroke="#2c5f8f" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M30 12 L46 17 Q46 40 30 54 Q14 40 14 17 Z" fill="#cfe6f4" stroke="#2c5f8f" stroke-width="2"/>
+      <text x="30" y="42" font-size="20" font-weight="bold" fill="#2c5f8f" text-anchor="middle">守</text>
+    </symbol>
+    <symbol id="hata" viewBox="0 0 50 70">
+      <line x1="10" y1="4" x2="10" y2="66" stroke="#7a5230" stroke-width="4" stroke-linecap="round"/>
+      <path d="M12 8 L46 14 L12 28 Z" fill="#e0698f" stroke="#c23a68" stroke-width="2.4" stroke-linejoin="round"/>
+    </symbol>
+    <symbol id="note" viewBox="0 0 60 70">
+      <rect x="6" y="6" width="48" height="58" rx="6" fill="#fdf3d9" stroke="#5b4636" stroke-width="2.8"/>
+      <line x1="16" y1="22" x2="44" y2="22" stroke="#c9356e" stroke-width="2.4" stroke-linecap="round"/>
+      <line x1="16" y1="34" x2="44" y2="34" stroke="#c9b8a5" stroke-width="2.2" stroke-linecap="round"/>
+      <line x1="16" y1="44" x2="44" y2="44" stroke="#c9b8a5" stroke-width="2.2" stroke-linecap="round"/>
+      <line x1="16" y1="54" x2="36" y2="54" stroke="#c9b8a5" stroke-width="2.2" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<main>
+
+<!-- ================= 表紙 ================= -->
+<section class="cover">
+  <div class="band">攻めより先に、守りを覚える</div>
+  <div class="series">お金の森　番外編③</div>
+  <h1>個別株の戦術教室</h1>
+  <div class="subtitle">高校生からわかる、リスクの取り方と基本戦術</div>
+  <div class="author">フク先生と学ぶ　◆　もりの経済教室</div>
+  <svg viewBox="0 0 340 150" width="330" style="max-width:80%" role="img" aria-label="表紙イラスト：盾と旗を持つフク先生とコリスくん">
+    <ellipse cx="170" cy="150" rx="180" ry="24" fill="#e4c49a"/>
+    <use href="#tate" x="36" y="46" width="76" height="88"/>
+    <use href="#hata" x="112" y="52" width="56" height="80"/>
+    <use href="#fuku-wink" x="160" y="26" width="106" height="106"/>
+    <use href="#koris-yorokobi" x="252" y="60" width="84" height="84"/>
+  </svg>
+  <div class="bottom">
+    <p class="catch">「必勝法」はこの世にない。<br>でも「負けにくい型」なら、ちゃんとある。</p>
+    <div class="powers">
+      <div class="power p1"><b>くばる</b>資金配分のルール</div>
+      <div class="power p2"><b>えらぶ</b>強い会社の見つけ方</div>
+      <div class="power p3"><b>しかける</b>買い方・売り方の型</div>
+      <div class="power p4"><b>ふりかえる</b>記録と検証の習慣</div>
+    </div>
+    <p style="margin:14px 0 0;font-weight:700;font-size:14px">『株のしくみ教室』の知識を、実戦の「型」に変える1冊</p>
+  </div>
+</section>
+
+<!-- ================= はじめに ================= -->
+<section class="page">
+  <h2 class="lesson-title">はじめに 〜「勝ち方」を売る人には気をつけて〜</h2>
+  <p>最初に、この本でいちばん正直な話をします。</p>
+  <p style="text-align:center;font-weight:900;font-size:1.1em">個別株投資に、「必ず勝てる方法」は存在しません。</p>
+  <p>もし存在したら、それを知る人は黙って使い続けるだけで世界一の大富豪になれます。だから「必勝法を教えます」という人は、投資ではなく<strong>あなたから受講料をもらうこと</strong>で稼いでいるのです。</p>
+  <p>では、この本は何を教えるのか。プロと素人の差がもっとも出るのは、じつは「どの株を当てるか」ではありません。<span class="marker">「1回の失敗で退場しないためのリスクの取り方」と「感情に流されないための型（戦術）」</span>です。ここは才能ではなく、覚えれば誰でも身につく技術。負けにくい型を身につけた人だけが、市場に長く残り、長く残った人だけが複利と経験の恩恵を受け取れます。</p>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>先生、しくみの勉強は終わったので、そろそろ「爆益の出し方」を教えてください！</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>ほっほ、来たな（笑）。ならば剣術道場と同じ順番で教えよう。<strong>最初に習うのは斬り方ではなく、受け身じゃ</strong>。受け身を知らん者から、ケガをして辞めていく。個別株もまったく同じなんじゃよ。</p></div>
+  </div>
+
+  <h3 class="bar y">目次 -Contents-</h3>
+  <div class="toc-step c-green chapter-banner" style="margin-top:14px"><span class="no">1限〜2限</span>くばる（資金配分）編</div>
+  <div class="toc-row"><span>1時間目　コア・サテライト — 個別株は「挑戦のお金」でやる</span><span class="dots"></span></div>
+  <div class="toc-row"><span>2時間目　ポジションサイジング — 1銘柄にいくらまで？</span><span class="dots"></span></div>
+  <div class="toc-step c-orange chapter-banner"><span class="no">3限</span>えらぶ（銘柄選び）編</div>
+  <div class="toc-row"><span>3時間目　強い会社の見つけ方 — 身近な「なんか流行ってる」は宝の山</span><span class="dots"></span></div>
+  <div class="toc-step c-pink chapter-banner"><span class="no">4限〜6限</span>しかける（売買の型）編</div>
+  <div class="toc-row"><span>4時間目　買いの戦術 — 一括で買わない「分割買い」</span><span class="dots"></span></div>
+  <div class="toc-row"><span>5時間目　売りの戦術 — 損切りは「保険料」、利確は「分割」</span><span class="dots"></span></div>
+  <div class="toc-row"><span>6時間目　順張り・逆張り・ナンピン — 3つの型と使ってよい条件</span><span class="dots"></span></div>
+  <div class="toc-step c-blue chapter-banner"><span class="no">7限〜8限</span>スタイル編</div>
+  <div class="toc-row"><span>7時間目　配当株戦術と成長株戦術 — 自分はどっち向き？</span><span class="dots"></span></div>
+  <div class="toc-row"><span>8時間目　投資ノート — 負けを「授業料」に変える技術</span><span class="dots"></span></div>
+  <div class="toc-step c-purple chapter-banner"><span class="no">放課後</span>やってはいけない集／Q&amp;A／結論リスト</div>
+</section>
+
+<!-- ================= 1時間目 コアサテライト ================= -->
+<section class="page">
+  <div class="chapter-banner c-green"><span class="no">1時間目</span>コア・サテライト — 個別株は「挑戦のお金」でやる</div>
+  <p class="lesson-lead">戦う前に、陣形を決める</p>
+  <h2 class="lesson-title">土台8割、挑戦2割の陣形を組む</h2>
+  <div class="do-line"><span>実践すると</span><span class="arrow">▶▶</span><span>個別株で失敗しても、人生の資産計画が壊れなくなる</span></div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>プロの世界に<strong>コア・サテライト戦略</strong>という陣形がある。資産の中心（コア）は、負けにくいインデックス積立などでどっしり固める。そして<span class="marker">資産の1〜2割だけ</span>を衛星（サテライト）として、個別株などの挑戦に使う。攻めるのは、あくまで「はみ出した部分」だけじゃ。</p></div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 270" width="660" role="img" aria-label="コア・サテライト戦略の図。中心の大きな円がインデックス積立などのコア8割、まわりの小さな円が個別株などのサテライト2割">
+      <text x="330" y="26" font-size="15" font-weight="bold" fill="#4a3626" text-anchor="middle">コア・サテライトの陣形</text>
+      <circle cx="240" cy="150" r="86" fill="#8fce9f" stroke="#2f7a4a" stroke-width="3.5"/>
+      <text x="240" y="138" font-size="15" font-weight="900" fill="#1e4d30" text-anchor="middle">コア（8〜9割）</text>
+      <text x="240" y="162" font-size="12.5" font-weight="bold" fill="#2f5c3d" text-anchor="middle">インデックス積立・現金</text>
+      <text x="240" y="184" font-size="12.5" font-weight="bold" fill="#2f5c3d" text-anchor="middle">＝人生の土台。動かさない</text>
+      <g>
+        <circle cx="435" cy="80" r="34" fill="#f6c46a" stroke="#b06a10" stroke-width="3"/>
+        <text x="435" y="76" font-size="12" font-weight="bold" fill="#7a4a12" text-anchor="middle">個別株A</text>
+        <text x="435" y="94" font-size="11" fill="#7a4a12" text-anchor="middle">応援したい会社</text>
+        <circle cx="490" cy="170" r="30" fill="#f4a0b2" stroke="#c23a68" stroke-width="3"/>
+        <text x="490" y="166" font-size="12" font-weight="bold" fill="#8c1d46" text-anchor="middle">個別株B</text>
+        <text x="490" y="184" font-size="11" fill="#8c1d46" text-anchor="middle">成長に期待</text>
+        <circle cx="420" cy="232" r="24" fill="#9cc4e4" stroke="#2c5f8f" stroke-width="3"/>
+        <text x="420" y="236" font-size="11.5" font-weight="bold" fill="#2c5f8f" text-anchor="middle">高配当株</text>
+      </g>
+      <path d="M320 110 Q360 84 398 80" fill="none" stroke="#b06a10" stroke-width="2.5" stroke-dasharray="6 5"/>
+      <path d="M326 168 Q400 180 458 172" fill="none" stroke="#c23a68" stroke-width="2.5" stroke-dasharray="6 5"/>
+      <text x="560" y="248" font-size="12.5" font-weight="bold" fill="#4a3626" text-anchor="end">← サテライト（1〜2割）＝挑戦のお金</text>
+    </svg>
+    <div class="fig-cap">サテライトが全滅しても、人生の計画（コア）は無傷——これが「安心して挑戦する」ための陣形です。</div>
+  </div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>えー、2割だけ？ 全力で挑戦したほうが、増えるのも速いのに……。</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>逆なんじゃ。個別株がインデックスより難しい理由を思い出すんじゃぞ。インデックスは市場全体ゆえ「ゼロ」にはならんが、<strong>個別株は1社の運命に乗るゆえ、半値もゼロもありうる</strong>。全力で挑んで一度退場したら、複利の授業（本編2時間目）で学んだ「時間」を失う。<span class="marker">挑戦を続けるために、挑戦を小さくする</span>。これが第一の戦術じゃ。</p></div>
+  </div>
+
+  <div class="info green">
+    <div class="info-title">ここがポイント</div>
+    <ul class="point-list" style="margin:0">
+      <li>資産の土台（コア）はインデックス積立と現金で固める</li>
+      <li>個別株はサテライト＝<strong>資産の1〜2割まで</strong>と上限を先に決める</li>
+      <li>「なくなっても人生設計が変わらない額」がサテライトの定義</li>
+      <li>初心者はまず単元未満株（1株）で小さく場数を踏むのが近道</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 2時間目 ポジションサイジング ================= -->
+<section class="page">
+  <div class="chapter-banner c-green"><span class="no">2時間目</span>ポジションサイジング — 1銘柄にいくらまで？</div>
+  <p class="lesson-lead">プロが最初に計算するのは「もうけ」ではなく「損」</p>
+  <h2 class="lesson-title">損の大きさから逆算して、買う量を決める</h2>
+  <div class="do-line"><span>実践すると</span><span class="arrow">▶▶</span><span>「1回の失敗が致命傷」という事故が起きなくなる</span></div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>素人は「いくら儲かるか」から考え、プロは<strong>「いくら失うか」から考える</strong>。有名な目安が<span class="marker">2%ルール</span>じゃ。——<strong>1回の取引で失ってよいのは、投資資金全体の2%まで</strong>。この上限から逆算して、買う株数を決めるんじゃよ。</p></div>
+  </div>
+
+  <div class="info">
+    <div class="info-title">2%ルールの計算例（投資資金50万円の場合）</div>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>手順</th><th>計算</th><th>結果</th></tr></thead>
+      <tbody>
+        <tr><th>① 許せる損失額</th><td>50万円 × 2%</td><td class="num"><strong>1万円まで</strong></td></tr>
+        <tr><th>② 損切りラインを決める</th><td>買値から −10%で売ると決める</td><td class="num">−10%</td></tr>
+        <tr><th>③ 買ってよい金額</th><td>1万円 ÷ 10%</td><td class="num"><strong>10万円まで</strong></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="small" style="margin:6px 0 0">つまりこの人が1銘柄に投じてよいのは10万円まで。これなら10連敗しても資金の8割が残り、再挑戦できます。</p>
+  </div>
+
+</section>
+
+<section class="page">
+  <div class="chapter-banner c-green"><span class="no">2時間目 つづき</span>なぜそこまで損を嫌うのか</div>
+  <h3 class="bar g" style="margin-top:0">「戻すのは、減らすより難しい」という数学</h3>
+  <div class="fig">
+    <svg viewBox="0 0 660 260" width="660" role="img" aria-label="損失と回復の非対称性の図。10%の損は11%で戻るが、30%の損は43%、50%の損は100%の上昇がないと戻らない">
+      <text x="330" y="26" font-size="15" font-weight="bold" fill="#4a3626" text-anchor="middle">下がった分を取り返すには、もっと大きな上昇が必要</text>
+      <g font-size="13.5" font-weight="bold" text-anchor="middle">
+        <rect x="60"  y="60" width="160" height="52" rx="10" fill="#fbe4ec" stroke="#c23a68" stroke-width="2.5"/>
+        <text x="140" y="92" fill="#a8264f">−10% の損</text>
+        <rect x="60"  y="130" width="160" height="52" rx="10" fill="#e3f2e6" stroke="#2f7a4a" stroke-width="2.5"/>
+        <text x="140" y="162" fill="#256b41">＋11% で回復</text>
+        <rect x="250" y="60" width="160" height="52" rx="10" fill="#fbe4ec" stroke="#c23a68" stroke-width="2.5"/>
+        <text x="330" y="92" fill="#a8264f">−30% の損</text>
+        <rect x="250" y="130" width="160" height="52" rx="10" fill="#e3f2e6" stroke="#2f7a4a" stroke-width="2.5"/>
+        <text x="330" y="162" fill="#256b41">＋43% で回復</text>
+        <rect x="440" y="60" width="160" height="52" rx="10" fill="#fbe4ec" stroke="#c23a68" stroke-width="3.5"/>
+        <text x="520" y="92" fill="#a8264f">−50% の損</text>
+        <rect x="440" y="130" width="160" height="52" rx="10" fill="#e3f2e6" stroke="#2f7a4a" stroke-width="3.5"/>
+        <text x="520" y="162" fill="#256b41">＋100% で回復！</text>
+      </g>
+      <g stroke="#8c6f52" stroke-width="2.5">
+        <path d="M140 116 L140 126" marker-end="url(#arrS)"/>
+        <path d="M330 116 L330 126" marker-end="url(#arrS)"/>
+        <path d="M520 116 L520 126" marker-end="url(#arrS)"/>
+      </g>
+      <defs><marker id="arrS" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8 Z" fill="#8c6f52"/></marker></defs>
+      <text x="330" y="222" font-size="13" font-weight="bold" fill="#c9356e" text-anchor="middle">100万円が50万円になったら、2倍にしないと戻らない。だから「深い傷を負わない」が最優先</text>
+      <text x="330" y="248" font-size="12.5" fill="#7a6350" text-anchor="middle">浅い傷（−10%前後）のうちに手当てする——これが次の授業「損切り」につながる</text>
+    </svg>
+  </div>
+
+  <h3 class="bar g">銘柄の数と散らし方</h3>
+  <ul class="point-list">
+    <li>サテライト資金は<strong>3〜5銘柄以上</strong>に分ける（1銘柄集中は事故のもと）</li>
+    <li><strong>業種も散らす</strong>。半導体3銘柄は「分散したつもり」——同じ波で一緒に沈む</li>
+    <li>買う時期も散らす（4時間目の分割買いへつづく）</li>
+  </ul>
+
+  <div class="summary">
+    <div class="stitle">🌰 2時間目のまとめ</div>
+    <ul class="point-list">
+      <li>1回の取引の損失は資金全体の2%まで。そこから買う量を逆算</li>
+      <li>深い損は取り返しが利かない（−50%は＋100%でやっと元通り）</li>
+      <li>銘柄数は3〜5以上、業種と時期も散らす</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 3時間目 銘柄選び ================= -->
+<section class="page">
+  <div class="chapter-banner c-orange"><span class="no">3時間目</span>強い会社の見つけ方 — 身近な「なんか流行ってる」は宝の山</div>
+  <p class="lesson-lead">伝説の投資家も使った探し方</p>
+  <h2 class="lesson-title">「生活の中の発見」を「数字の確認」につなぐ</h2>
+  <div class="do-line"><span>実践すると</span><span class="arrow">▶▶</span><span>SNSの「おすすめ銘柄」に頼らず、自分で候補を見つけられる</span></div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>伝説のファンドマネージャー、ピーター・リンチはこう言った。<strong>「あなたが知っているものに投資せよ」</strong>。学校で流行っているアプリ、行列のできる店、家族がリピ買いする商品——生活者の観察眼は、プロが持たん武器なんじゃ。ただし大事なのはここから。<span class="marker">「好き・流行ってる」は入口にすぎん。必ず数字で裏を取る</span>。</p></div>
+  </div>
+
+  <h3 class="bar y">候補を絞る「強い会社チェックリスト」</h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th style="width:210px">チェック項目</th><th>見るところ（『株のしくみ教室』の復習）</th></tr></thead>
+    <tbody>
+      <tr><th>□ 売上と利益が伸びている</th><td>過去3〜5年、右肩上がりか。1年だけの急伸は出来すぎの可能性も（四季報・IRページ）。</td></tr>
+      <tr><th>□ 本業でもうけている</th><td>営業利益がプラスで成長中か。売上だけ伸びて利益が出ない会社は要注意。</td></tr>
+      <tr><th>□ 財務が健全</th><td>自己資本比率（借金に頼らない度合い）が目安40%以上だと倒産リスクが低め。業種で差はある。</td></tr>
+      <tr><th>□ もうけの効率がよい</th><td>ROE（自己資本利益率）が目安8〜10%以上。株主のお金を上手に増やせる会社か。</td></tr>
+      <tr><th>□ 「堀」がある</th><td>他社がマネしにくい強み——ブランド、特許、シェア、乗り換えにくさ。<strong>「なぜこの会社から買うの？」に一言で答えられるか</strong>。</td></tr>
+      <tr><th>□ 値段が高すぎない</th><td>PERを同業や自社の過去と比較。良い会社でも「高すぎる値段」で買えば良い投資にならない。</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>6個も調べるの、大変そう……近道はないんですか？</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku-wink"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>近道を探す人から順に、カモになるんじゃ（笑）。とはいえ安心せい、証券アプリのスクリーニング（条件検索）を使えば、数字の項目は数分で確認できる。それにの、<strong>6個ぜんぶ調べても、買わない判断になったら大成功</strong>。プロの世界では「見送り」も立派な戦術なんじゃよ。1つだけ約束——<span class="marker">「買う理由を、家族に30秒で説明できない株は買わない」</span>。これだけで銘柄選びの事故は激減するで。</p></div>
+  </div>
+
+  <div class="info">
+    <div class="info-title">こんな会社は初心者のうちは見送り</div>
+    <ul class="warn-list point-list" style="margin:0">
+      <li>赤字続きで「夢」だけが語られている（夢は数字になってから買っても遅くない）</li>
+      <li>SNSで急に話題になり、株価がすでに急騰している（6時間目のイナゴの話へ）</li>
+      <li>何をしている会社か、調べても自分に説明できない</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 4時間目 買いの戦術 ================= -->
+<section class="page">
+  <div class="chapter-banner c-pink"><span class="no">4時間目</span>買いの戦術 — 一括で買わない「分割買い」</div>
+  <p class="lesson-lead">エントリーは3回に分ける</p>
+  <h2 class="lesson-title">「打診買い→確認→買い増し」の三段構え</h2>
+  <div class="do-line"><span>実践すると</span><span class="arrow">▶▶</span><span>高値づかみのダメージが減り、下がっても冷静でいられる</span></div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>「これだ！」という会社を見つけたら、予算ぜんぶで一気に買えばいいんですよね？</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>それを<strong>「全ツッパ」</strong>と言うての、初心者がいちばんやられる型じゃ。どんなに調べても、買った直後に下がることは普通にある。じゃから予算を3回に分ける。<span class="marker">①まず3分の1だけ買う（打診買い）→ ②読み通りか様子を見る → ③シナリオ通りなら買い増す</span>。読みが外れたら、浅い傷のうちに撤退できるじゃろ。</p></div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 280" width="660" role="img" aria-label="分割買いの図。予算30万円を10万円ずつ3回に分け、打診買いのあと様子を見て買い増していく">
+      <text x="330" y="26" font-size="15" font-weight="bold" fill="#4a3626" text-anchor="middle">予算30万円なら、10万円 × 3回に分ける</text>
+      <line x1="50" y1="220" x2="620" y2="220" stroke="#8c6f52" stroke-width="2.5"/>
+      <polyline points="70,150 150,170 230,140 310,155 390,110 470,125 550,80"
+        fill="none" stroke="#c9356e" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+      <g stroke="#5b4636" stroke-width="2.5">
+        <circle cx="150" cy="170" r="9" fill="#f6c46a"/>
+        <circle cx="310" cy="155" r="9" fill="#f6c46a"/>
+        <circle cx="470" cy="125" r="9" fill="#f6c46a"/>
+      </g>
+      <g font-size="12.5" font-weight="bold" fill="#4a3626" text-anchor="middle">
+        <text x="150" y="200">① 打診買い 10万円</text>
+        <text x="310" y="185">② 決算◎を確認して10万円</text>
+        <text x="470" y="155">③ シナリオ通り。最後の10万円</text>
+      </g>
+      <text x="330" y="250" font-size="12.5" font-weight="bold" fill="#c9356e" text-anchor="middle">①のあと読みが外れて下がったら？ → ②③を見送るだけ。傷は予算の3分の1×下落分ですむ</text>
+      <text x="330" y="272" font-size="12" fill="#7a6350" text-anchor="middle">「全部は買えなかった」はOKな失敗。「全部を高値で買った」が痛い失敗</text>
+    </svg>
+  </div>
+
+  <h3 class="bar">買うタイミングの作法 3か条</h3>
+  <ul class="point-list">
+    <li><strong>急騰の真っ最中に飛び乗らない</strong>。良い会社は逃げない。過熱が冷めるのを待つ（押し目）</li>
+    <li><strong>決算発表の直前に新しく買わない</strong>。結果は運まかせのギャンブルになる。発表を見てからでも遅くない</li>
+    <li><strong>指値を使う</strong>。「この値段まで来たら買う」を先に決めて注文を置く。板の授業（番外編①）の実践じゃ</li>
+  </ul>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku-wink"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>買い方の極意は、かっこよく当てることではなく、<strong>「間違えたときに安く済む形」で入る</strong>こと。ワシら長期投資家には、時間はたっぷりあるんじゃからな。</p></div>
+  </div>
+</section>
+
+<!-- ================= 5時間目 売りの戦術 ================= -->
+<section class="page">
+  <div class="chapter-banner c-pink"><span class="no">5時間目</span>売りの戦術 — 損切りは「保険料」、利確は「分割」</div>
+  <p class="lesson-lead">買いより100倍むずかしい「売り」を型にする</p>
+  <h2 class="lesson-title">売る条件は、買う前に決めておく</h2>
+  <div class="do-line"><span>実践すると</span><span class="arrow">▶▶</span><span>塩漬け株と「あの時売っていれば」が激減する</span></div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>『株のしくみ教室』12時間目で学んだの——人間の脳は<strong>損を認められず、利益は早く確定したがる</strong>。つまり売りの判断は、感情に任せたら必ず間違える設計なんじゃ。対策はただひとつ。<span class="marker">買う前に「売る条件」を紙に書いておき、あとは執行するだけ</span>にする。売りは考えるものではなく、あらかじめ決めておくものじゃよ。</p></div>
+  </div>
+
+  <h3 class="bar">損切り — 小さく負けて、市場に残る</h3>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th style="width:190px">ルール</th><th>内容</th></tr></thead>
+    <tbody>
+      <tr class="hl"><th>値段のルール</th><td>買値から<strong>−8〜−10%で機械的に売る</strong>（2時間目の2%ルールとセット）。伝説の成長株投資家ウィリアム・オニールも「−7〜8%で必ず切る」を鉄則にした。</td></tr>
+      <tr><th>理由のルール</th><td><strong>買った理由が崩れたら売る</strong>。「成長を期待して買った→成長が止まった」なら、株価がいくらでも売り。逆に、業績が無傷で市場全体につられて下げただけなら、持ち続ける選択もある。</td></tr>
+      <tr><th>禁じ手</th><td>「戻ったら売ろう」と損切りラインをずるずる下げること。それは戦術ではなく<strong>祈り</strong>じゃ。</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris-odoroki"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>でも損切りって、負けを自分で確定させるんですよね……くやしくないですか？</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>とらえ方を変えるんじゃ。損切りは負けではなく、<strong>「大負けを防ぐための保険料」</strong>。火災保険に入って家が燃えんかったら「保険料損した！」とは思わんじゃろ？ 10回の投資のうち4回損切りになっても、残り6回と資金が守られておれば、トータルでは十分勝てる。<span class="marker">勝率ではなく、勝ったときの大きさ×負けたときの小ささで勝負は決まる</span>んじゃよ。</p></div>
+  </div>
+
+</section>
+
+<section class="page">
+  <div class="chapter-banner c-pink"><span class="no">5時間目 つづき</span>利益確定 — 欲張りと臆病のあいだの「半分売り」</div>
+  <div class="fig">
+    <svg viewBox="0 0 660 240" width="660" role="img" aria-label="半分売りの図。株価が目標に達したら半分を売って利益を確保し、残り半分は伸ばす">
+      <text x="330" y="26" font-size="15" font-weight="bold" fill="#4a3626" text-anchor="middle">迷ったら「半分だけ売る」という第3の選択肢</text>
+      <line x1="50" y1="190" x2="620" y2="190" stroke="#8c6f52" stroke-width="2.5"/>
+      <polyline points="70,160 170,130 270,100 370,70 470,90 570,50"
+        fill="none" stroke="#c9356e" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+      <circle cx="370" cy="70" r="10" fill="#f6c46a" stroke="#5b4636" stroke-width="2.5"/>
+      <g font-size="12.5" font-weight="bold" text-anchor="middle">
+        <text x="370" y="46" fill="#b06a10">目標の＋30%に到達！ → 半分を売って利益を確保</text>
+        <text x="530" y="130" fill="#2f7a4a">残り半分はルール付きで伸ばす</text>
+        <text x="530" y="150" fill="#2f7a4a" font-size="11.5">（例：買値まで下がったら全部売る）</text>
+      </g>
+      <text x="330" y="222" font-size="12.5" fill="#7a6350" text-anchor="middle">全部売って伸び続けたら悔しい、持ち続けて崩れたら怖い——半分売りはどちらの後悔も半分にする知恵</text>
+    </svg>
+  </div>
+
+  <div class="summary">
+    <div class="stitle">🌰 5時間目のまとめ</div>
+    <ul class="point-list">
+      <li>売る条件（損切りライン・利確目標）は買う前に書いて決める</li>
+      <li>損切りは保険料。−8〜10%か「買った理由が崩れた時」に機械的に</li>
+      <li>利確に迷ったら半分売り。後悔を設計で小さくする</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 6時間目 順張り逆張りナンピン ================= -->
+<section class="page">
+  <div class="chapter-banner c-pink"><span class="no">6時間目</span>順張り・逆張り・ナンピン — 3つの型と使ってよい条件</div>
+  <p class="lesson-lead">型には「向き・不向き」と「資格」がある</p>
+  <h2 class="lesson-title">流れに乗るか、逆らうか、買い下がるか</h2>
+  <div class="do-line"><span>この授業でわかること</span><span class="arrow">▶▶</span><span>ナンピンが「毒にも薬にもなる」理由</span></div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 250" width="660" role="img" aria-label="順張りと逆張りの図。順張りは上昇トレンドに乗って買う。逆張りは下落したところを買う">
+      <g>
+        <text x="170" y="26" font-size="14.5" font-weight="bold" fill="#c23a68" text-anchor="middle">順張り（トレンドフォロー）</text>
+        <line x1="40" y1="200" x2="300" y2="200" stroke="#8c6f52" stroke-width="2"/>
+        <polyline points="55,170 105,140 155,155 205,110 255,125 290,85" fill="none" stroke="#c9356e" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+        <circle cx="205" cy="110" r="9" fill="#f6c46a" stroke="#5b4636" stroke-width="2.5"/>
+        <text x="205" y="90" font-size="12" font-weight="bold" fill="#b06a10" text-anchor="middle">上がっている流れに乗る</text>
+        <text x="170" y="232" font-size="12" font-weight="bold" fill="#4a3626" text-anchor="middle">強みː流れが味方　弱みː高値づかみの危険</text>
+      </g>
+      <g>
+        <text x="490" y="26" font-size="14.5" font-weight="bold" fill="#2c6b96" text-anchor="middle">逆張り（押し目・暴落買い）</text>
+        <line x1="360" y1="200" x2="620" y2="200" stroke="#8c6f52" stroke-width="2"/>
+        <polyline points="375,80 425,110 475,95 510,150 555,135 605,100" fill="none" stroke="#4f86c6" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+        <circle cx="510" cy="150" r="9" fill="#f6c46a" stroke="#5b4636" stroke-width="2.5"/>
+        <text x="510" y="176" font-size="12" font-weight="bold" fill="#2c5f8f" text-anchor="middle">下がったところを拾う</text>
+        <text x="490" y="232" font-size="12" font-weight="bold" fill="#4a3626" text-anchor="middle">強みː安く買える　弱みː「落ちるナイフ」をつかむ危険</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>どちらが正解、ではなく<strong>性格と準備の問題</strong>じゃ。順張りは「流れが続くうちに素早く逃げる」判断力が、逆張りは「なぜ下がったかを見極める」調査力がいる。初心者はまず、<span class="marker">業績のよい会社が市場全体の下げにつられて安くなった時だけ拾う</span>「質のよい逆張り」から始めるのが取り組みやすいの。</p></div>
+  </div>
+
+  <h3 class="bar">ナンピン — 上級者の薬、初心者の毒</h3>
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>下がったら買い増して平均の買値を下げる「ナンピン」って手があるんですよね？ 賢くないですか？</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>相場の古い格言を教えよう。<strong>「下手なナンピン、スカンピン（一文なし）」</strong>。ナンピンが薬になるのは、<span class="marker">①会社の業績が無傷で、②下げの理由が一時的と説明でき、③あらかじめ「ここまで下がったら追加する」と計画していた</span>場合だけ。いちばん危ないのは、損を認めたくない気持ちのごまかしとして、計画なく買い増すこと。それは4時間目の分割買いとは似て非なるもの——<strong>計画された買い下がりは戦術、感情の買い下がりはただの深追い</strong>じゃ。</p></div>
+  </div>
+
+  <div class="info">
+    <div class="info-title">3つの型・資格チェック</div>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th style="width:110px">型</th><th>使ってよい条件</th><th>やってはいけない例</th></tr></thead>
+      <tbody>
+        <tr><th>順張り</th><td>トレンドの初〜中盤で、損切りラインとセット</td><td>急騰ニュースを見てから飛び乗る</td></tr>
+        <tr><th>逆張り</th><td>業績無傷×市場全体の下げ、と説明できる時</td><td>暴落の理由を調べずに「安いから」で買う</td></tr>
+        <tr><th>ナンピン</th><td>事前計画あり×業績無傷×資金に余裕</td><td>損を認めたくなくて、なし崩しに買い増す</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 7時間目 スタイル ================= -->
+<section class="page">
+  <div class="chapter-banner c-blue"><span class="no">7時間目</span>配当株戦術と成長株戦術 — 自分はどっち向き？</div>
+  <p class="lesson-lead">戦術は「銘柄のタイプ」で変わる</p>
+  <h2 class="lesson-title">もらって嬉しい株と、育って嬉しい株</h2>
+  <div class="do-line"><span>この授業でわかること</span><span class="arrow">▶▶</span><span>タイプ別の狙い・持ち方・やめ時の違い</span></div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>個別株には大きく2つの楽しみ方がある。<strong>配当株</strong>は「持っている間、毎年お小遣いをくれる株」。<strong>成長株</strong>は「配当は出さず、もうけを事業に再投資してぐんぐん育つ株」。狙いが違えば、<span class="marker">買い方も売り方も損切りの考え方も変わる</span>んじゃ。</p></div>
+  </div>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th style="width:120px"></th><th>配当株戦術（守りの型）</th><th>成長株戦術（攻めの型）</th></tr></thead>
+    <tbody>
+      <tr><th>ねらい</th><td>配当という定期収入を積み上げる</td><td>株価そのものの大きな値上がり</td></tr>
+      <tr><th>選び方</th><td>連続増配の実績、配当性向30〜50%（無理なく払えているか）、不況に強い業種</td><td>売上が年10〜20%以上伸びる、独自の強み、市場そのものが拡大中</td></tr>
+      <tr><th>買い方</th><td>下げ相場こそ利回りが上がる買い場。時間分散でコツコツ</td><td>分割買い＋損切りライン必須。決算ごとに成長を確認</td></tr>
+      <tr><th>売り時</th><td>基本は売らない。<strong>減配（配当カット）が売りのサイン</strong></td><td>成長ストーリーが崩れたら即売り。値動きが荒いのは前提</td></tr>
+      <tr><th>向く人</th><td>コツコツ型・値動きで眠れなくなる人</td><td>調査が好きで、含み損に耐える設計ができる人</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="info blue">
+    <div class="info-title">配当株の落とし穴・復習と追加</div>
+    <ul class="warn-list point-list" style="margin:0">
+      <li><strong>利回りだけで選ばない</strong>（『株のしくみ教室』5時間目）。株価急落で利回りが見かけ上高い「ワナ銘柄」がある</li>
+      <li><strong>配当性向100%超え</strong>は黄信号。もうけ以上に配当を払う状態は長続きしない</li>
+      <li>「タコが自分の足を食べる」ようなタコ足配当（資産を取り崩して払う配当）は避ける</li>
+    </ul>
+  </div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris-yorokobi"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>ぼくは値動きでソワソワしちゃうタイプだから、まずは配当株の守りの型から始めて、慣れたら成長株を少し、がよさそう！</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku-wink"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>自分の性格から逆算して型を選ぶ——それができた時点で、もう初心者卒業じゃよ。</p></div>
+  </div>
+</section>
+
+<!-- ================= 8時間目 投資ノート ================= -->
+<section class="page">
+  <div class="chapter-banner c-blue"><span class="no">8時間目</span>投資ノート — 負けを「授業料」に変える技術</div>
+  <p class="lesson-lead">上達がいちばん速くなる習慣</p>
+  <h2 class="lesson-title">書いた人だけが、同じ失敗を2度しない</h2>
+  <div class="do-line"><span>実践すると</span><span class="arrow">▶▶</span><span>1年後、自分の「勝ちパターン」と「負けグセ」が見えてくる</span></div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>スポーツの上達に練習ノートがあるように、投資にも<strong>投資ノート</strong>がある。書くことはたった4つ。これを買う前に埋められん株は、そもそも買ってはいかん、という踏み絵にもなるんじゃ。</p></div>
+  </div>
+
+  <div class="fig">
+    <svg viewBox="0 0 660 300" width="660" role="img" aria-label="投資ノートのテンプレート。買った理由、シナリオ、売る条件、結果と学びの4項目を書くカード">
+      <rect x="90" y="20" width="480" height="264" rx="14" fill="#fdf3d9" stroke="#5b4636" stroke-width="3"/>
+      <rect x="90" y="20" width="480" height="46" rx="14" fill="#e89a3c" stroke="#5b4636" stroke-width="3"/>
+      <text x="330" y="50" font-size="16" font-weight="900" fill="#fff" text-anchor="middle">投資ノート（1銘柄1枚）　銘柄：もりもり食品　買値：1,000円</text>
+      <g font-size="13.5" font-weight="bold" fill="#4a3626">
+        <text x="112" y="96" fill="#b06a10">① 買った理由（30秒で説明）</text>
+        <text x="112" y="118">新商品が大ヒット中。売上3年連続＋15%、PERは同業平均以下。</text>
+        <text x="112" y="152" fill="#b06a10">② 期待するシナリオ</text>
+        <text x="112" y="174">来期も増収増益なら1年で＋30%（1,300円）を目標。</text>
+        <text x="112" y="208" fill="#b06a10">③ 売る条件（先に決める！）</text>
+        <text x="112" y="230">900円（−10%）で損切り／1,300円で半分利確／ヒットが失速したら全売り。</text>
+        <text x="112" y="264" fill="#b06a10">④ 結果と学び（売った後に記入）</text>
+      </g>
+    </svg>
+    <div class="fig-cap">スマホのメモアプリで十分。「④結果と学び」まで書いて、はじめて1回の投資が完了します。</div>
+  </div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>④は、勝った時も書くんですか？</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>勝った時こそ書くんじゃ。<strong>「実力で勝ったのか、たまたま相場が良かっただけか」</strong>を区別せんと、次に大きく張って散る（12時間目の自信過剰バグじゃな）。数か月分たまったノートを読み返すと、自分の負けグセ——「決算前に買いがち」「SNSで見た株に手を出しがち」——が驚くほどはっきり見える。<span class="marker">市場は最高の学校で、ノートは成績表</span>。書く者だけが進級できるんじゃよ。</p></div>
+  </div>
+
+  <div class="summary">
+    <div class="stitle">🌰 8時間目のまとめ</div>
+    <ul class="point-list">
+      <li>買う前に「理由・シナリオ・売る条件」を書く（書けない株は買わない）</li>
+      <li>売った後に「結果と学び」を書いて1セット完了</li>
+      <li>勝ちも負けも記録する。実力と運を区別できる人が上達する</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= 放課後 やってはいけない集 ================= -->
+<section class="page">
+  <div class="chapter-banner c-red"><span class="no">放課後①</span>個別株・やってはいけない5選</div>
+
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>最後に、森の先輩たちが実際に散っていった「典型的な負けの型」を並べておく。<strong>勝ちの形は千差万別じゃが、負けの形はワンパターン</strong>。知っておくだけで避けられるものばかりじゃ。</p></div>
+  </div>
+
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th style="width:200px">負けの型</th><th>何が起きるか</th></tr></thead>
+    <tbody>
+      <tr><th>① イナゴ投資</th><td>SNSで話題の急騰株に飛び乗る。話題のピークは株価のピークになりがちで、あなたが買った株を「先に買っていた人」が売り抜ける。虫の群れ（イナゴ）のように群がって焼かれるのでこの名前。</td></tr>
+      <tr><th>② リベンジトレード</th><td>損を出した直後、取り返そうとして根拠の薄い勝負を倍の金額で挑む。カッとなった脳は最悪の投資家。<strong>損した日は取引アプリを閉じるのが正しい戦術</strong>。</td></tr>
+      <tr><th>③ 全ツッパ＆一点賭け</th><td>1銘柄に資金全部。当たれば爆益、外れれば退場——それは投資ではなく丁半ばくち。2時間目のルールがすべて。</td></tr>
+      <tr><th>④ 祈りの塩漬け</th><td>損切りできず「いつか戻る」と数年放置。お金と時間と心をまとめて拘束される。5時間目の「売る条件を先に決める」で予防。</td></tr>
+      <tr><th>⑤ 借金で株</th><td>信用取引・カードローン・親のお金。負けが人生に直結する。<strong>余裕資金以外で株を買った時点で、戦術以前の敗北</strong>（『株のしくみ教室』11時間目）。</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris-odoroki"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>ぜんぶ「そうなりそうな自分」が想像できて、こわい……。</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku-wink"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>想像できるなら大丈夫じゃ。5つに共通する根っこはひとつ——<strong>「早く・大きく・楽して」の3拍子</strong>。それが顔を出したら、この表を読み返すんじゃぞ。</p></div>
+  </div>
+</section>
+
+<!-- ================= 放課後 Q&A ================= -->
+<section class="page">
+  <div class="chapter-banner c-purple"><span class="no">放課後②</span>フク先生に聞きたい！Q&amp;A 6連発</div>
+
+  <div class="qa">
+    <div class="q"><span class="chip">Q.1</span><span>個別株って、いくらから始められるの？</span></div>
+    <div class="a"><p>単元未満株（1株投資）なら数百円〜数千円から。最初の1年は「授業料」と割り切れる金額で場数を踏むのがおすすめです。金額が小さくても、ノートを書けば学びは本物です。</p></div>
+  </div>
+  <div class="qa">
+    <div class="q"><span class="chip">Q.2</span><span>何銘柄くらい持つのがいいの？</span></div>
+    <div class="a"><p>初心者のサテライトなら3〜5銘柄、慣れても10銘柄程度まで。多すぎると1社ずつの決算を追えなくなります。<strong>「全部の会社の近況を語れる数」が自分の上限</strong>です。</p></div>
+  </div>
+  <div class="qa">
+    <div class="q"><span class="chip">Q.3</span><span>毎日株価をチェックすべき？</span></div>
+    <div class="a"><p>長期の個別株投資なら、毎日の株価より<strong>四半期ごとの決算</strong>が本番です。日々の値動きを見すぎると、12時間目で学んだ脳のバグが暴れ出します。決算日と、月1回の定期点検で十分。</p></div>
+  </div>
+  <div class="qa">
+    <div class="q"><span class="chip">Q.4</span><span>損切りした直後に株価が戻ったら、悔しすぎるんですが！</span></div>
+    <div class="a"><p>あるあるです（笑）。でも思い出してください、損切りは保険料。「保険を使わなかった月」が損でないのと同じで、<strong>ルール通りに実行できた時点でその取引は成功</strong>です。結果ではなく、ルールを守れたかで自分を採点しましょう。</p></div>
+  </div>
+  <div class="qa">
+    <div class="q"><span class="chip">Q.5</span><span>「テンバガー候補」みたいな情報は参考にしていい？</span></div>
+    <div class="a"><p>読み物としては楽しいですが、買う理由にはなりません。他人の推奨で買った株は、下がった時に「持つべきか売るべきか」を自分で判断できないからです。<strong>人の意見は「調べるきっかけ」まで</strong>。買う理由は必ず自分のノートに自分の言葉で。</p></div>
+  </div>
+  <div class="qa">
+    <div class="q"><span class="chip">Q.6</span><span>インデックス積立だけじゃダメなの？ 個別株、やる意味ある？</span></div>
+    <div class="a"><p>資産づくりだけならインデックスで十分です。個別株の価値は、リターン以外のところにもあります——決算が読めるようになる、ニュースが分かる、応援する会社ができる、経済が自分ごとになる。<strong>「学び」と「楽しさ」こそ個別株の配当</strong>。だからこそ、退場しない金額でやるのです。</p></div>
+  </div>
+</section>
+
+<!-- ================= 結論リスト ================= -->
+<section class="page">
+  <div class="chapter-banner c-purple"><span class="no">卒業試験</span>これだけ守ればOK！結論リスト</div>
+  <div class="table-wrap">
+  <table>
+    <thead><tr><th style="width:70px">番号</th><th>守ること</th><th>ひとこと</th></tr></thead>
+    <tbody>
+      <tr><th>①</th><td>個別株は資産の1〜2割のサテライトで。コアはインデックスと現金</td><td>陣形が先、銘柄は後</td></tr>
+      <tr><th>②</th><td>1回の損失は資金の2%まで。損切りラインから買う量を逆算</td><td>プロは損から考える</td></tr>
+      <tr><th>③</th><td>3〜5銘柄以上・業種も時期も散らす</td><td>同じ波に全部乗せない</td></tr>
+      <tr><th>④</th><td>銘柄は「身近な発見→数字で裏取り」。30秒で説明できない株は買わない</td><td>見送りも戦術</td></tr>
+      <tr><th>⑤</th><td>買いは3回に分ける。急騰への飛び乗りと決算直前の新規買いは避ける</td><td>間違えても安く済む形</td></tr>
+      <tr><th>⑥</th><td>売る条件は買う前に書く。−8〜10%か理由崩れで損切り、迷ったら半分売り</td><td>売りは執行、考えない</td></tr>
+      <tr><th>⑦</th><td>ナンピンは「計画・業績無傷・余力」の3条件がそろった時だけ</td><td>下手なナンピンすかんぴん</td></tr>
+      <tr><th>⑧</th><td>投資ノートを書く。勝ちも負けも「結果と学び」まで</td><td>ノートは成績表</td></tr>
+      <tr><th>⑨</th><td>イナゴ・リベンジ・全ツッパ・塩漬け・借金の5大負けパターンを避ける</td><td>負けの形はワンパターン</td></tr>
+      <tr><th>⑩</th><td>ルールを守れたかで自分を採点する。結果は市場が決めること</td><td>残った者が勝つ</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3 class="bar y">おわりに 〜市場に「居続ける」人がいちばん強い〜</h3>
+  <p>個別株の世界で何十年も生き残っている投資家たちは、意外なことを口をそろえて言います。「大勝ちの秘訣は覚えていないが、<strong>大負けしなかった理由なら全部説明できる</strong>」と。</p>
+  <p>華やかな爆益の物語は人を集めますが、市場に長く居続けた人だけが、複利と経験という本物の報酬を受け取ります。あなたがこの本で覚えた「型」は、そのための道具です。</p>
+  <p style="font-weight:900;color:#a8264f">小さく張って、浅く負けて、長く居続ける。それが個別株のいちばん強い戦い方です。</p>
+
+  <div class="talk s">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#koris-yorokobi"/></svg></div><div class="name-tag">コリス</div></div>
+    <div class="bubble"><p>先生、まずは1株から、投資ノートといっしょに始めてみます。目標は「爆益」じゃなくて「退場しないこと」！</p></div>
+  </div>
+  <div class="talk t">
+    <div><div class="face"><svg viewBox="0 0 100 100"><use href="#fuku-wink"/></svg></div><div class="name-tag">フク先生</div></div>
+    <div class="bubble"><p>満点の答えじゃ。受け身を覚えた者から、強くなる。<strong>市場は逃げん。焦らず、欲張らず、退場せず</strong>——いってらっしゃい。</p></div>
+  </div>
+
+  <div class="fig" style="margin-top:26px">
+    <svg viewBox="0 0 400 130" width="340" role="img" aria-label="盾と旗とノートを並べて立つフク先生とコリスくん">
+      <ellipse cx="200" cy="120" rx="190" ry="18" fill="#e4c49a"/>
+      <use href="#tate" x="44" y="52" width="56" height="64"/>
+      <use href="#note" x="104" y="58" width="50" height="58"/>
+      <use href="#fuku" x="164" y="24" width="90" height="90"/>
+      <use href="#koris" x="252" y="42" width="74" height="74"/>
+      <use href="#donguri" x="330" y="90" width="18" height="22"/>
+    </svg>
+  </div>
+
+  <div class="colophon" style="margin-top:22px;padding-top:16px;border-top:2px dashed #c9b8a5;text-align:center">
+    <p><strong>お金の森 番外編③　個別株の戦術教室 〜高校生からわかる、リスクの取り方と基本戦術〜</strong>　もりの経済教室・刊</p>
+    <p>本書は一般的な情報提供を目的としたものであり、特定の金融商品の売買をすすめるものではありません。<br>
+    登場する会社・数値はすべて説明のための架空の例です。紹介した手法・数値基準は利益を保証するものではありません。<br>
+    投資は元本保証がなく、最終判断はご自身（未成年の方は保護者と一緒に）の責任でお願いします。</p>
+  </div>
+</section>
+
+</main>
