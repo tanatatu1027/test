@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#0f1020" />
+  <title>プロフィール | 自己紹介</title>
+  <style>
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body {
+      margin: 0; min-height: 100%;
+      background: #0f1020; color: #e8eaff;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Segoe UI", sans-serif;
+    }
+    .wrap {
+      max-width: 860px; margin: 0 auto;
+      padding: 32px 20px 60px;
+      padding-top: max(32px, env(safe-area-inset-top));
+      display: flex; flex-direction: column; gap: 28px;
+    }
+    a.back {
+      color: #8a8fc0; text-decoration: none; font-size: 14px;
+      align-self: flex-start;
+    }
+    a.back:hover { color: #e8eaff; }
+
+    /* ヒーロー */
+    .hero {
+      text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+    }
+    .avatar {
+      width: 96px; height: 96px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 48px;
+      background: linear-gradient(140deg, #6c7bff, #3aa0ff);
+      box-shadow: 0 8px 30px rgba(108, 123, 255, 0.35);
+    }
+    h1 { font-size: 28px; letter-spacing: 2px; margin: 0; }
+    p.sub { margin: 0; color: #8a8fc0; line-height: 1.7; }
+    .badges {
+      display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+    }
+    .badge {
+      font-size: 13px; padding: 6px 14px; border-radius: 999px;
+      background: #1c1e3a; color: #aab0e8; border: 1px solid #2c2f5a;
+    }
+
+    /* セクション */
+    h2 {
+      font-size: 20px; margin: 0; letter-spacing: 1px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .grid {
+      display: grid; gap: 16px;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+    .card {
+      border-radius: 18px; padding: 22px 20px;
+      background: #181a33; border: 1px solid #262950;
+      display: flex; flex-direction: column; gap: 8px;
+      transition: transform 0.1s;
+    }
+    .card:active { transform: scale(0.98); }
+    .card .emoji { font-size: 34px; }
+    .card .name { font-size: 17px; font-weight: 700; }
+    .card .desc { font-size: 13.5px; color: #9ca2d8; line-height: 1.7; }
+
+    /* 1週間の過ごし方 */
+    .week {
+      border-radius: 18px; background: #181a33; border: 1px solid #262950;
+      overflow: hidden;
+    }
+    .week .row {
+      display: flex; gap: 14px; align-items: flex-start;
+      padding: 16px 20px; border-bottom: 1px solid #232650;
+    }
+    .week .row:last-child { border-bottom: none; }
+    .week .when {
+      flex: 0 0 92px; font-weight: 700; font-size: 14px; color: #7fa8ff;
+      padding-top: 2px;
+    }
+    .week .what { font-size: 14px; color: #c6caf2; line-height: 1.8; }
+
+    footer { color: #5b5f8c; font-size: 12px; text-align: center; }
+
+    @media (min-width: 640px) {
+      h1 { font-size: 34px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="/">← ゲームセレクトにもどる</a>
+
+    <section class="hero">
+      <div class="avatar">💊</div>
+      <h1>自己紹介</h1>
+      <p class="sub">
+        薬剤師3年目。仕事も遊びも全力で、<br />
+        平日の夜も休日もアクティブに動くタイプです。
+      </p>
+      <div class="badges">
+        <span class="badge">💊 薬剤師 3年目</span>
+        <span class="badge">🎾 テニス修行中</span>
+        <span class="badge">🎮 FPSゲーマー</span>
+        <span class="badge">♨️ 温泉好き</span>
+        <span class="badge">📈 NISA積立中</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>🌟 好きなこと・趣味</h2>
+    </section>
+    <div class="grid" style="margin-top: -12px;">
+      <div class="card">
+        <span class="emoji">🎾</span>
+        <span class="name">テニス</span>
+        <span class="desc">仕事終わりにスクールで練習中。休日にも打ちに行くほどハマってます。テニスのあとの温泉が最高のごほうび。</span>
+      </div>
+      <div class="card">
+        <span class="emoji">🎮</span>
+        <span class="name">オンラインゲーム</span>
+        <span class="desc">友達とボイスチャットしながらFPSをプレイするのが定番。連携が決まった瞬間がたまらない。</span>
+      </div>
+      <div class="card">
+        <span class="emoji">🚗</span>
+        <span class="name">旅行・おでかけ</span>
+        <span class="desc">休日にふらっと軽い旅行へ。彼女とのおでかけも大切な時間です。</span>
+      </div>
+      <div class="card">
+        <span class="emoji">🍜</span>
+        <span class="name">グルメ</span>
+        <span class="desc">友達とおいしいご飯を食べに行くのが好き。うまい店の開拓はライフワーク。</span>
+      </div>
+      <div class="card">
+        <span class="emoji">🏃</span>
+        <span class="name">運動</span>
+        <span class="desc">仕事終わりに友達と体を動かしてリフレッシュ。動いた日はよく眠れる。</span>
+      </div>
+      <div class="card">
+        <span class="emoji">🎰</span>
+        <span class="name">パチンコ</span>
+        <span class="desc">友達との息抜きに。ほどほどに楽しむのがモットー。</span>
+      </div>
+      <div class="card">
+        <span class="emoji">📺</span>
+        <span class="name">動画鑑賞</span>
+        <span class="desc">何もない日はぼーっと動画を見てのんびり。オンとオフの切り替えは大事。</span>
+      </div>
+      <div class="card">
+        <span class="emoji">📈</span>
+        <span class="name">資産づくり</span>
+        <span class="desc">最近NISAで積立をスタート。コツコツ将来に向けてがんばってます。</span>
+      </div>
+    </div>
+
+    <section>
+      <h2>📅 とある1週間</h2>
+    </section>
+    <div class="week" style="margin-top: -12px;">
+      <div class="row">
+        <span class="when">平日・昼</span>
+        <span class="what">薬剤師として勤務。3年目、日々レベルアップ中。</span>
+      </div>
+      <div class="row">
+        <span class="when">平日・夜</span>
+        <span class="what">テニススクールで練習したり、友達と運動やパチンコに行ったり。帰宅後はFPSで一戦。</span>
+      </div>
+      <div class="row">
+        <span class="when">休日</span>
+        <span class="what">彼女とおでかけ、友達と遊びやテニス、たまに軽い旅行。テニスのあとは温泉でととのう。</span>
+      </div>
+      <div class="row">
+        <span class="when">何もない日</span>
+        <span class="what">動画をぼーっと見てエネルギーチャージ。</span>
+      </div>
+    </div>
+
+    <footer>Work hard, Play hard. — 薬剤師 × テニス × ゲーム</footer>
+  </div>
+</body>
+</html>
